@@ -1,4 +1,3 @@
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class XorOrTorPiece extends GamePiece
@@ -46,9 +45,6 @@ public class XorOrTorPiece extends GamePiece
         int r, c;
         int count = 0;
         int[][] moves = new int[4][2];
-        int[][] value = {
-          {-1,1},{-2,2}  
-        };
         
         for(int i = -1; i < 2; i++)
         {
