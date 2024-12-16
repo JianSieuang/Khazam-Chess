@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=SettingPage
-comment1.params=parentFrame
-comment1.target=void\ showSetting(javax.swing.JFrame)
-comment2.params=panel
-comment2.target=void\ addSettingTitle(javax.swing.JPanel)
-comment3.params=panel
-comment3.target=void\ addSettingOptions(javax.swing.JPanel)
-numComments=4
