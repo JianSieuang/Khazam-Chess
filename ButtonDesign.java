@@ -19,7 +19,5 @@ public class ButtonDesign {
          panel.addComponentListener(ButtonAction.createPanelResizeListener(button, panel));
  
          return button;
-    }
-
-    
+    }    
 }

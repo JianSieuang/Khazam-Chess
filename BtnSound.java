@@ -11,8 +11,9 @@ public class BtnSound implements ActionListener {
     //  set the action btn sound
     @Override
     public void actionPerformed(ActionEvent e) {
+        // play sound
         if (actionType == "hover"){
-            playSound("sources/hover_btn_sound.wav");//  play sound source
+            playSound("sources/hover_btn_sound.wav");
         } else if (actionType == "click"){
             playSound("sources/click_btn_sound.wav");
         }
@@ -24,8 +25,7 @@ public class BtnSound implements ActionListener {
         if (SettingManager.isEnabledSound()) {
             try {
                 java.io.File soundFile = new java.io.File(filePath);
-                javax.sound.sampled.AudioInputStream audioStream =
-                    javax.sound.sampled.AudioSystem.getAudioInputStream(soundFile);
+                javax.sound.sampled.AudioInputStream audioStream = javax.sound.sampled.AudioSystem.getAudioInputStream(soundFile);
     
                 javax.sound.sampled.Clip clip = javax.sound.sampled.AudioSystem.getClip();
     
