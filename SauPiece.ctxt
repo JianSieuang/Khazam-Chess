@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=SauPiece
+comment1.params=r\ c\ image\ image2
+comment1.target=SauPiece(int,\ int,\ java.lang.String,\ java.lang.String)
+comment2.params=board
+comment2.target=int[][]\ moveable(GamePiece[][])
+comment3.params=board
+comment3.target=int[][]\ capturable(GamePiece[][])
+comment4.params=turn
+comment4.target=void\ flipImage(int)
+numComments=5
