@@ -46,29 +46,9 @@ public class SettingPage {
         JCheckBox soundCheckBox = new JCheckBox("Enable Sound", SettingManager.isEnabledSound()); // use the saved state
         JCheckBox saveSettingCheckBox = new JCheckBox("Save as default", SettingManager.isSaveSettingPermanently()); // default false
 
-        // Add listeners to save state when checkboxes change
-        soundCheckBox.addActionListener(e -> {
-            SettingManager.setEnabledSound(soundCheckBox.isSelected());
-            
-            new BtnSound("click").actionPerformed(null); // play click sound
-            
-            //  if setting save as default "On"
-            if (SettingManager.isSaveSettingPermanently()) {
-                SettingManager.saveSetting();
-            }
-        });
-
-        saveSettingCheckBox.addActionListener(e -> {
-            SettingManager.setSaveSettingPermanently(saveSettingCheckBox.isSelected());
-            
-            //  if save as default checked
-            if (saveSettingCheckBox.isSelected()) {
-                new BtnSound("click").actionPerformed(null); // play click sound
-                SettingManager.saveSetting();
-            } else {
-                SettingManager.deleteSettingFile();
-            }
-        });
+        // use SettingController to attach event listeners
+        soundCheckBox.addActionListener(SettingController.createSoundCheckBoxListener(soundCheckBox));
+        saveSettingCheckBox.addActionListener(SettingController.createSaveSettingCheckBoxListener(saveSettingCheckBox));
 
         // create a panel for sound option to control spacing
         JPanel soundPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // align center
