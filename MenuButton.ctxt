@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=MenuButton
+comment1.params=panel\ frame
+comment1.target=void\ addMenuButtons(javax.swing.JPanel,\ javax.swing.JFrame)
+comment2.params=panel\ frame
+comment2.target=void\ addNewGameButton(javax.swing.JPanel,\ javax.swing.JFrame)
+comment3.params=panel\ frame
+comment3.target=void\ addLoadGameButton(javax.swing.JPanel,\ javax.swing.JFrame)
+comment4.params=panel\ frame
+comment4.target=void\ addSettingButton(javax.swing.JPanel,\ javax.swing.JFrame)
+comment5.params=panel\ frame
+comment5.target=void\ addQuitGameButton(javax.swing.JPanel,\ javax.swing.JFrame)
+numComments=6
