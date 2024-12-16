@@ -9,16 +9,16 @@ public class ButtonDesign {
         button.setBackground(backgroundColor);
         button.setFont(new Font("Arial", Font.BOLD, 17));
 
-        // 动态调整按钮大小：保持 panel 宽度的 40%，高度固定为 50
+        // dynamic change button size
         adjustButtonSize(button, panel);
 
-        // 设置按钮的鼠标事件
+        // set button hover and click effect
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
                 button.setBackground(Color.GRAY);
                 button.setForeground(Color.WHITE);
-                new BtnSound("hover").actionPerformed(null); // 播放 hover 音效
+                new BtnSound("hover").actionPerformed(null); // play sound when hover
             }
 
             @Override
@@ -28,13 +28,13 @@ public class ButtonDesign {
             }
         });
 
-        // 当按钮被点击时
+        // button clicked action
         button.addActionListener(e -> {
-            new BtnSound("click").actionPerformed(null); // 播放点击音效
+            new BtnSound("click").actionPerformed(null); // play click sound
             onClickAction.run();
         });
 
-        // 添加对 panel 大小变化的监听器
+        // dynamic change button size when panel resized
         panel.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentResized(java.awt.event.ComponentEvent e) {
@@ -47,11 +47,11 @@ public class ButtonDesign {
         return button;
     }
 
-    // 调整按钮大小的方法
+    // method to adjust button size based on panel width
     private static void adjustButtonSize(JButton button, JPanel panel) {
         int panelWidth = panel.getWidth();
-        int buttonWidth = (int) (panelWidth * 0.4); // 按钮宽度为 panel 宽度的 40%
-        int buttonHeight = 50; // 固定高度
+        int buttonWidth = (int) (panelWidth * 0.4); // button will be panel 40% width
+        int buttonHeight = 50; // fixed height
         button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         button.setMaximumSize(new Dimension(buttonWidth, buttonHeight));
     }
