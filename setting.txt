@@ -1,2 +1,0 @@
-Sound : On
-Save as default : On
