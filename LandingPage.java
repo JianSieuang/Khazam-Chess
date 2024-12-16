@@ -10,17 +10,21 @@ public class LandingPage {
         // create the main frame
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);    // frame Size
+        frame.setSize(400, 300);    // frame Size
         frame.setLocationRelativeTo(null);
 
         // create the main panel
-        JPanel panel = new JPanel(new GridBagLayout());
+        JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));   // add padding
 
         // inner panel to align content vertically
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
         innerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));  // add padding
+        innerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);//let component align center x
+        innerPanel.setAlignmentY(Component.CENTER_ALIGNMENT);//let component align center y
+
+        innerPanel.add(Box.createVerticalGlue()); // add space at the top
 
         // add title
         addTitle(innerPanel);
@@ -28,8 +32,10 @@ public class LandingPage {
         // add menu buttons use utility class
         MenuButton.addMenuButtons(innerPanel, frame);
 
+        innerPanel.add(Box.createVerticalGlue());// add space on bottom
+
         // add inner panel to the main panel
-        panel.add(innerPanel);
+        panel.add(innerPanel,BorderLayout.CENTER);
 
         // add panel to the frame
         frame.add(panel);

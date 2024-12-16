@@ -27,7 +27,7 @@ public class MenuButton
         Color newGameBtnBgColor = new Color(144, 238, 144); // light green
     
         // new game btn funtion
-        JButton newGameButton = ButtonDesign.createMenuButton("New Game", newGameBtnBgColor, frame, () -> {
+        JButton newGameButton = ButtonDesign.createMenuButton("New Game", newGameBtnBgColor, frame, panel, () -> {
             JOptionPane.showMessageDialog(frame, "Start a new game!");
         });
 
@@ -40,7 +40,7 @@ public class MenuButton
         Color loadGameBtnBgColor = new Color(173, 216, 230);    // light blue
         
         // load game button
-        JButton loadGameButton = ButtonDesign.createMenuButton("Load Game", loadGameBtnBgColor, frame, () -> {
+        JButton loadGameButton = ButtonDesign.createMenuButton("Load Game", loadGameBtnBgColor, frame, panel, () -> {
             JOptionPane.showMessageDialog(frame, "Load an existing game!");
         });
         
@@ -53,7 +53,7 @@ public class MenuButton
         Color settingBtnBgColor = new Color(211, 211, 211); // light gray
         
         // setting button
-        JButton settingButton = ButtonDesign.createMenuButton("Setting", settingBtnBgColor, frame, () -> {
+        JButton settingButton = ButtonDesign.createMenuButton("Setting", settingBtnBgColor, frame, panel, () -> {
             SettingPage.showSetting(frame); // navigate to SettingsPage
         });
 
@@ -66,7 +66,7 @@ public class MenuButton
         Color quitGameBtnBgColor = new Color(240, 128, 128);    // light red
         
         // quit game button
-        JButton quitGameButton = ButtonDesign.createMenuButton("Quit Game", quitGameBtnBgColor, frame, () -> {
+        JButton quitGameButton = ButtonDesign.createMenuButton("Quit Game", quitGameBtnBgColor, frame,  panel,() -> {
             System.exit(0);
         });
 

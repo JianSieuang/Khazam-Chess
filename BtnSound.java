@@ -12,7 +12,7 @@ public class BtnSound implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (actionType == "hover"){
-            playSound("sources/hover_btn_sound.wav");
+            playSound("sources/hover_btn_sound.wav");//  play sound source
         } else if (actionType == "click"){
             playSound("sources/click_btn_sound.wav");
         }
