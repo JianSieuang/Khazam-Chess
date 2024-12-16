@@ -5,8 +5,8 @@ public class SauPiece extends GamePiece
 {
     public SauPiece(int r, int c, String image, String image2)
     {
-        int row = r;
-        int col = c;
+        this.row = r;
+        this.col = c;
         pieceImage[0] = new ImageIcon(image).getImage();
         pieceImage[1] = new ImageIcon(image2).getImage();
         player = r == 7? 0: 1;

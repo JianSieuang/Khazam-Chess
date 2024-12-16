@@ -13,8 +13,6 @@ public class GameController implements ComponentListener, MouseListener , MouseM
     private int selectedCol = -1;
     
     private GamePiece draggedPiece = null;
-    private int dragX = 0;
-    private int dragY = 0;
     
     private int turn = 0;
     
