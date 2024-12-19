@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ButtonDesign {
-
     // inner class to create rounded button
     private static class RoundedButton extends JButton {
         private int cornerRadius;

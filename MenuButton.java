@@ -4,7 +4,6 @@ import java.awt.*;
 public class MenuButton {
     // menu button function
     public static void addMenuButtons(JPanel panel, JFrame frame) {
-
         addNewGameButton(panel, frame);
 
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // spacer

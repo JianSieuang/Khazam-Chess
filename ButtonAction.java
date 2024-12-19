@@ -19,6 +19,7 @@ public class ButtonAction {
             }
         };
     }
+
     public static ActionListener createButtonClickAction(Runnable onClickAction) {
         return e -> {
             new BtnSound("click").actionPerformed(null); // Play click sound
