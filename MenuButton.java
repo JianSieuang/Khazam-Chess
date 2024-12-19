@@ -65,17 +65,17 @@ public class MenuButton {
 
         // quit game button
         JButton quitGameButton = ButtonDesign.createMenuButton("Quit Game", quitGameBtnBgColor, frame, panel, () -> {
-            // create a timer to let it run the btn action first 
+            // create a timer to let it run the btn action first
             new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        // exit the program "0" mean without any error
-                        System.exit(0);
-                    }
-                },
-            // set the delay time to run the process, 1000 = 1 sec, 250 = 0.25 second
-            250);
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            // exit the program "0" mean without any error
+                            System.exit(0);
+                        }
+                    },
+                    // set the delay time to run the process, 1000 = 1 sec, 250 = 0.25 second
+                    250);
         });
 
         panel.add(quitGameButton);
