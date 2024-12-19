@@ -29,7 +29,6 @@ public class MenuButton {
         JButton newGameButton = ButtonDesign.createMenuButton("New Game", newGameBtnBgColor, frame, panel, () -> {
             JOptionPane.showMessageDialog(frame, "Start a new game!");
         });
-
         panel.add(newGameButton);
     }
 

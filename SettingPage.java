@@ -13,7 +13,7 @@ public class SettingPage {
         // create a new frame for the settings page
         JFrame settingsFrame = new JFrame(title);
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        settingsFrame.setSize(400, 400); // Frame Size
+        settingsFrame.setSize(600, 600); // Frame Size
         settingsFrame.setLocationRelativeTo(parentFrame);
 
         // create the main panel for settings

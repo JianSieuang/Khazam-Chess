@@ -10,7 +10,7 @@ public class LandingPage {
         // create the main frame
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);    // frame Size
+        frame.setSize(600, 600);    // frame Size
         frame.setLocationRelativeTo(null);
 
         // create the main panel
@@ -47,10 +47,11 @@ public class LandingPage {
     // title function
     private static void addTitle(JPanel panel) {
         JLabel titleLabel = new JLabel(TITLE);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));   // set font
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 36));   // set font
+        titleLabel.setForeground(new Color(0, 0, 128)); // add color to match theme
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);   // align center
         panel.add(titleLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 20))); // spacer
+        panel.add(Box.createRigidArea(new Dimension(0, 30))); // spacer
     }
     
     public static void main(String[] args) {
