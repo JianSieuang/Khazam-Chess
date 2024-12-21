@@ -1,4 +1,5 @@
 import javax.swing.ImageIcon;
+import java.util.Arrays;
 
 public class SauPiece extends GamePiece
 {
@@ -8,6 +9,7 @@ public class SauPiece extends GamePiece
         this.col = c;
         pieceImage[0] = new ImageIcon(image).getImage();
         pieceImage[1] = new ImageIcon(image2).getImage();
+        showImage = pieceImage[0];
         player = r == 7? 0: 1;
     }
     
@@ -22,7 +24,6 @@ public class SauPiece extends GamePiece
             for(int ii = -1; ii < 2; ii++)
             {
                 if(i == 0 && ii == 0) continue;
-                
                 r = row + i;
                 c = col + ii;
                 
@@ -37,7 +38,7 @@ public class SauPiece extends GamePiece
             }
         }
         
-        return moves;
+        return Arrays.copyOf(moves, count);
     }
     
     public int[][] capturable(GamePiece[][] board)
@@ -64,10 +65,14 @@ public class SauPiece extends GamePiece
                 }
             }
         }
-        return moves;
+        return Arrays.copyOf(moves, count);
     }
-    public void flipImage(int turn)
+    
+    public void updatePosition(int r, int c)
     {
-        flip = turn;
+        this.row = r;
+        this.col = c;
+        showImage = showImage == pieceImage[0]? pieceImage[1]: pieceImage[0];
     }
+    
 }

@@ -1,4 +1,5 @@
 import javax.swing.ImageIcon;
+import java.util.Arrays;
 
 public class XorOrTorPiece extends GamePiece
 {
@@ -8,6 +9,7 @@ public class XorOrTorPiece extends GamePiece
         this.col = c;
         pieceImage[0] = new ImageIcon(image).getImage();
         pieceImage[1] = new ImageIcon(image2).getImage();
+        showImage = pieceImage[0];
         player = r == 7? 0: 1;
     }
     
@@ -26,7 +28,7 @@ public class XorOrTorPiece extends GamePiece
                 r = row + i;
                 c = col + ii;
                 
-                if(r >= 0 && r < 8 && c >= 0 && c < 8)
+                if(r >= 0 && r < 8 && c >= 0 && c < 5)
                 {   
                     if(board[r][c] == null)
                     {
@@ -54,7 +56,7 @@ public class XorOrTorPiece extends GamePiece
                 r = row + i;
                 c = col + ii;
                 
-                if(r >= 0 && r < 8 && c >= 0 && c < 8)
+                if(r >= 0 && r < 8 && c >= 0 && c < 5)
                 {   
                     if(board[r][c] != null && board[r][c].getPlayer() != player)
                     {
@@ -67,8 +69,9 @@ public class XorOrTorPiece extends GamePiece
         return moves;
     }
     
-    public void flipImage(int turn)
+    public void updatePosition(int r, int c)
     {
-        
+        this.row = r;
+        this.col = c;
     }
 }

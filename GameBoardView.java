@@ -7,11 +7,23 @@ public class GameBoardView extends JFrame
     private int width;
     private int height;
     private int cellSize;
-    private int margin;
+    private int offsetX;
+    private int offsetY;
     
-    private GamePiece draggedPiece;
+    private int margin;
+    private int imageSizeX;
+    private int imageSizeY;
+    
+    private GamePiece selectedPiece;
+    
+    private boolean isDragging = false;
     private int dragX;
     private int dragY;
+    
+    private int[][] moveableSteps = new int[0][0];
+    private int[][] capturableSteps = new int[0][0];
+    
+    public CoordinateAdapter adapter;
     
     public GameBoardView(GamePiece[][] board, int w, int h) 
     {
@@ -20,40 +32,60 @@ public class GameBoardView extends JFrame
         this.width = w;
         this.height = h;
         
+        adapter = new CoordinateAdapter();
+        
         setMinimumSize(new Dimension(400, 400));
         setSize(width, height);
         
         GameBoardPanel panel = new GameBoardPanel();
         add(panel);
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        
+        redrawBoard();
     }
     
-    public void redrawBoard(int w, int h)
+    public void redrawBoard()
     {
-        this.width = w;
-        this.height = h;
+        width = getWidth()- getInsets().left - getInsets().right;;
+        height = getHeight() - getInsets().top - getInsets().bottom;
         
-        int heightSize = this.height / board.length;
-        int widthSize = this.width / board[0].length;
+        int widthSize = width / board[0].length;
+        int heightSize = height / board.length;
     
-        this.cellSize = widthSize > heightSize? heightSize: widthSize;
-        this.margin = cellSize / 10;
-    
+        cellSize = widthSize > heightSize? heightSize: widthSize;
+        
+        offsetX = (width - (board[0].length * cellSize)) / 2;
+        offsetY = (height - (board.length * cellSize)) / 2;
+        
+        margin = cellSize / 10;
+        imageSizeX = cellSize - (2 * margin);
+        imageSizeY = cellSize - (2 * margin);
+        
+        adapter.update(cellSize, offsetX, offsetY);
         repaint();
     }
     
-    public void setDraggedPiece(GamePiece p, int x, int y) 
+    public void setPosibleMove (GamePiece p, int [][] m, int[][] c)
     {
-        this.draggedPiece = p;
+        this.selectedPiece = p;
+        moveableSteps = m;
+        capturableSteps = c;
+        repaint();
+    }
+    
+    public void setDraggedPiece(int x, int y) 
+    {
+        isDragging = true;
         this.dragX = x;
         this.dragY = y;
         repaint();
     }
 
-    public void clearDraggedPiece() 
+    public void clear() 
     {
-        this.draggedPiece = null;
+        isDragging = false;
         repaint();
     }
     
@@ -68,48 +100,41 @@ public class GameBoardView extends JFrame
         protected void paintComponent(Graphics g)
         {
             super.paintComponent(g);
-            int offsetX = (getWidth() - (board[0].length * cellSize)) / 2;
-            int offsetY = (getHeight() - (board.length * cellSize)) / 2;
-            
+
             for(int row = 0; row < board.length; row++)
             {
                 for(int col = 0; col < board[0].length; col++)
                 {
-                    g.setColor(Color.BLUE);
                     int positionX = offsetX + col * cellSize;
                     int positionY = offsetY + row * cellSize;
+                    
+                    g.setColor(Color.BLUE);
                     g.drawRect(positionX, positionY, cellSize, cellSize);
                     
                     if(board[row][col] != null)
                     {
-                        int imageSizeX = cellSize - (2 * margin);
-                        int imageSizeY = cellSize - (2 * margin);
                         g.drawImage(board[row][col].getImage(), positionX + margin, positionY + margin, imageSizeX, imageSizeY, this);
                     }
                 }
             }
             
-            if (draggedPiece != null) 
+            if(moveableSteps != null)
             {
-                int imageSizeX = cellSize - (2 * margin);
-                int imageSizeY = cellSize - (2 * margin);
-                g.drawImage(draggedPiece.getImage(), dragX - imageSizeX / 2, dragY - imageSizeY  / 2, imageSizeX, imageSizeY, this);
+                for(int i = 0; i < moveableSteps.length; i++)
+                {
+                    int size = cellSize / 4;
+                    int positionX = offsetX + moveableSteps[i][1] * cellSize + (cellSize - size) / 2;
+                    int positionY = offsetY + moveableSteps[i][0] * cellSize + (cellSize - size) / 2;
+                    
+                    g.setColor(Color.GRAY);
+                    g.fillArc(positionX, positionY, size, size, 0, 360);
+                }
             }
-        }
-        
-        public int getCellSize() 
-        {
-            return cellSize;
-        }
-    
-        public int getOffsetX() 
-        {
-            return (getWidth() - (board[0].length * cellSize)) / 2;
-        }
-    
-        public int getOffsetY() 
-        {
-            return (getHeight() - (board.length * cellSize)) / 2;
+            
+            if (selectedPiece != null && isDragging) 
+            {
+                g.drawImage(selectedPiece.getImage(), dragX - imageSizeX / 2, dragY - imageSizeY  / 2, imageSizeX, imageSizeY, this);
+            }
         }
     }
 }

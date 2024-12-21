@@ -5,16 +5,14 @@ abstract class GamePiece
     protected int row;
     protected int col;
     protected Image[] pieceImage = new Image[2];
-    protected int flip = 0;
+    protected Image showImage;
     protected int player;
     
-    public GamePiece()
-    {
-    }
+    public GamePiece(){}
     
     public Image getImage()
     {
-        return pieceImage[flip];
+        return showImage;
     }
     
     public int getPlayer()
@@ -22,5 +20,7 @@ abstract class GamePiece
         return player;
     }
     
-    public abstract void flipImage(int turn);
+    public abstract int[][] moveable(GamePiece[][] board);
+    public abstract int[][] capturable(GamePiece[][] board);
+    public abstract void updatePosition(int r, int c);
 }
