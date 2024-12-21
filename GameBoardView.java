@@ -137,6 +137,19 @@ public class GameBoardView extends JFrame
                 }
             }
             
+            if(capturableSteps != null && selectedPiece != null)
+            {
+                for(int i = 0; i < capturableSteps.length; i++)
+                {
+                    int positionX = offsetX + capturableSteps[i][1] * cellSize;
+                    int positionY = offsetY + capturableSteps[i][0] * cellSize;
+                    
+                    g.setColor(Color.GRAY);
+                    g.drawArc(positionX, positionY, cellSize, cellSize, 0, 360);
+                }
+            }
+
+            
             if (selectedPiece != null && isDragging) 
             {
                 g.drawImage(selectedPiece.getImage(), dragX - imageSizeX / 2, dragY - imageSizeY  / 2, imageSizeX, imageSizeY, this);

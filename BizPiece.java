@@ -72,17 +72,19 @@ public class BizPiece extends GamePiece
                 {   
                     if(board[r][c] != null && board[r][c].getPlayer() != player)
                     {
+                        System.out.println("Capture this" + r + c);
                         moves[count++] = new int[] {r, c};
                     }
                 }
                 
-                r = row + value[0][i];
-                c = col + value[1][ii];
+                r = row + value[1][i];
+                c = col + value[0][ii];
                 
                 if(r >= 0 && r < 8 && c >= 0 && c < 5)
                 {   
                     if(board[r][c] != null && board[r][c].getPlayer() != player)
                     {
+                        System.out.println("Capture this" + r + c);
                         moves[count++] = new int[] {r, c};
                     }
                 }
