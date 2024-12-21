@@ -12,7 +12,7 @@ public class XorOrTorPiece extends GamePiece
         showImage = pieceImage[0];
         player = r == 7? 0: 1;
     }
-    
+
     public int[][] moveable(GamePiece[][] board)
     {
         int r, c;
@@ -32,14 +32,13 @@ public class XorOrTorPiece extends GamePiece
                 {   
                     if(board[r][c] == null)
                     {
-                        moves[count] = new int[] {r, c};
-                        count++;
+                        moves[count++] = new int[] {r, c};
                     }
                 }
             }
         }
         
-        return moves;
+        return Arrays.copyOf(moves, count);
     }
     
     public int[][] capturable(GamePiece[][] board)
@@ -60,13 +59,12 @@ public class XorOrTorPiece extends GamePiece
                 {   
                     if(board[r][c] != null && board[r][c].getPlayer() != player)
                     {
-                        moves[count] = new int[] {r, c};
-                        count++;
+                        moves[count++] = new int[] {r, c};
                     }
                 }
             }
         }
-        return moves;
+        return Arrays.copyOf(moves, count);
     }
     
     public void updatePosition(int r, int c)

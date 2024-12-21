@@ -62,13 +62,19 @@ public class GameBoard
                 }
             }
         }
+        clearSelectedPieceAndSteps();
     }
     
     public void selectPiece(int r, int c)
     {
         if(r < row && r >= 0 && c < col && c >= 0)
         {
-            if(board[r][c] != null && board[r][c].player == turn)
+            if (selectedPiece != null && selectedRow == r && selectedCol == c) 
+            {
+                clearSelectedPieceAndSteps();
+                return;
+            }
+            else if(board[r][c] != null && board[r][c].player == turn)
             {
                 selectedPiece = board[r][c];
                 selectedRow = r;
@@ -79,10 +85,10 @@ public class GameBoard
         }
     }
     
-    public void putPiece(int r, int c)
+    public boolean putPiece(int r, int c)
     {
         if(selectedPiece == null)
-            return;
+            return false;
         if(r < row && r >= 0 && c < col && c >= 0)
         {
             if(board[r][c] != null)
@@ -95,12 +101,9 @@ public class GameBoard
                         {
                             board[r][c] = selectedPiece;
                             board[selectedRow][selectedCol] = null;
-                            selectedPiece = null;
-                            selectedRow = -1;
-                            selectedCol = -1;
                             turn = turn == 0 ? 1 : 0;
                             turnBoard();
-                            return;
+                            return true;
                         }
                     }
                 }
@@ -115,12 +118,9 @@ public class GameBoard
                         {
                             board[r][c] = selectedPiece;
                             board[selectedRow][selectedCol] = null;
-                            selectedPiece = null;
-                            selectedRow = -1;
-                            selectedCol = -1;
                             turn = turn == 0 ? 1 : 0;
                             turnBoard();
-                            return;
+                            return true;
                         }
                     }
                 }
@@ -128,6 +128,16 @@ public class GameBoard
         }
         
         board[selectedRow][selectedCol] = selectedPiece;
+        return false;
+    }
+    
+    public void clearSelectedPieceAndSteps() 
+    {
+        moveableSteps = new int[0][0];
+        capturableSteps = new int[0][0];
+        selectedPiece = null;
+        selectedRow = -1;
+        selectedCol = -1;
     }
     
     public GamePiece getSelectedPiece()

@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.event.*;
 
 public class GameController implements ComponentListener, MouseListener , MouseMotionListener
@@ -40,8 +39,7 @@ public class GameController implements ComponentListener, MouseListener , MouseM
     public void mouseReleased(MouseEvent e) 
     {
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
-        model.putPiece(coor[0], coor[1]);
-        view.clear();
+        view.clear(model.putPiece(coor[0], coor[1]));
     }
     
     //MouseMotionListener

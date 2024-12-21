@@ -4,7 +4,6 @@ public class RamPiece extends GamePiece
 {
     private boolean moveForward = true;
     
-    
     public RamPiece(int r, int c, String image, String image2)
     {
         this.row = r;
@@ -31,11 +30,11 @@ public class RamPiece extends GamePiece
     
     public int[][] capturable(GamePiece[][] board)
     {
-        int r = row + (moveForward ? 1 : -1);
+        int r = row + (moveForward ? -1: 1);
         
         if(r >= 0 && r < 8)
         {   
-            if(board[r][col] != null && board[r][col].getPlayer() != player)
+            if(board[r][col] != null &&board[r][col].getPlayer() != player)
             {
                 return new int [][] {{r, col}};
             }

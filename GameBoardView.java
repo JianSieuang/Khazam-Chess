@@ -20,8 +20,8 @@ public class GameBoardView extends JFrame
     private int dragX;
     private int dragY;
     
-    private int[][] moveableSteps = new int[0][0];
-    private int[][] capturableSteps = new int[0][0];
+    private int[][] moveableSteps;
+    private int[][] capturableSteps;
     
     public CoordinateAdapter adapter;
     
@@ -70,22 +70,28 @@ public class GameBoardView extends JFrame
     public void setPosibleMove (GamePiece p, int [][] m, int[][] c)
     {
         this.selectedPiece = p;
-        moveableSteps = m;
-        capturableSteps = c;
+        this.moveableSteps = m;
+        this.capturableSteps = c;
         repaint();
     }
     
     public void setDraggedPiece(int x, int y) 
     {
-        isDragging = true;
+        this.isDragging = true;
         this.dragX = x;
         this.dragY = y;
         repaint();
     }
 
-    public void clear() 
+    public void clear(boolean isMoved) 
     {
-        isDragging = false;
+        this.isDragging = false;
+        if(isMoved)
+        {
+            this.selectedPiece = null;
+            this.moveableSteps = new int [0][0];
+            this.capturableSteps = new int [0][0];
+        }
         repaint();
     }
     
@@ -118,7 +124,7 @@ public class GameBoardView extends JFrame
                 }
             }
             
-            if(moveableSteps != null)
+            if(moveableSteps != null && selectedPiece != null)
             {
                 for(int i = 0; i < moveableSteps.length; i++)
                 {

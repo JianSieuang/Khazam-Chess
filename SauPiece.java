@@ -31,8 +31,7 @@ public class SauPiece extends GamePiece
                 {   
                     if(board[r][c] == null)
                     {
-                        moves[count] = new int[] {r, c};
-                        count++;
+                        moves[count++] = new int[] {r, c};
                     }
                 }
             }
@@ -59,8 +58,7 @@ public class SauPiece extends GamePiece
                 {   
                     if(board[r][c] != null && board[r][c].getPlayer() != player)
                     {
-                        moves[count] = new int[] {r, c};
-                        count++;
+                        moves[count++] = new int[] {r, c};
                     }
                 }
             }
