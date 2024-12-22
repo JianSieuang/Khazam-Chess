@@ -1,10 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class LandingPage {
 
     // global variable to store the title
     private static final String TITLE = "Kwazam Chess";
+
+    //for background image(but have some problem)
+    // private static BufferedImage backgroundImage;
+    // static {
+    //     try {
+    //         // Load the background image
+    //         backgroundImage = ImageIO.read(new File("sources/download.jpeg"));
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         System.out.println("Error loading background image. Ensure 'background.jpg' is in the correct directory.");
+    //     }
+    // }
     
     public static void showMenu() {        
         // create the main frame
@@ -12,6 +27,20 @@ public class LandingPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 600);    // frame Size
         frame.setLocationRelativeTo(null);
+
+        // Create the main panel with custom paintComponent to show background image
+        // JPanel backgroundPanel = new JPanel() {
+        //     @Override
+        //     protected void paintComponent(Graphics g) {
+        //         super.paintComponent(g);
+        //         if (backgroundImage != null) {
+        //             // Draw the background image, scaling it to fit the panel
+        //             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        //         }
+        //     }
+        // };
+        // backgroundPanel.setLayout(new BorderLayout()); // Set layout for the background panel
+        // frame.add(backgroundPanel); // Add the background panel to the frame
 
         // create the main panel
         JPanel panel = new JPanel(new BorderLayout());
@@ -25,6 +54,7 @@ public class LandingPage {
         innerPanel.setAlignmentY(Component.CENTER_ALIGNMENT);//let component align center y
 
         innerPanel.add(Box.createVerticalGlue()); // add space at the top
+        // innerPanel.setOpaque(false); // Set transparent to match parent background
 
         // add title
         addTitle(innerPanel);
@@ -53,6 +83,7 @@ public class LandingPage {
         panel.add(titleLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 30))); // spacer
     }
+    
     
     public static void main(String[] args) {
         SettingManager.loadSetting();

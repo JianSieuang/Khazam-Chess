@@ -12,11 +12,16 @@ public class MenuButton {
 
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // spacer
 
-        addSettingButton(panel, frame);
+        // Create a new panel for horizontal alignment of Setting and Quit buttons
+        JPanel horizontalPanel = new JPanel();
+        horizontalPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10)); // horizontal gap = 20, vertical gap = 10
+        horizontalPanel.setOpaque(false); // Set transparent to match parent background
 
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // spacer
+        addSettingButton(horizontalPanel, frame);
+        addQuitGameButton(horizontalPanel, frame);
 
-        addQuitGameButton(panel, frame);
+        // Add horizontal panel to the parent panel
+        panel.add(horizontalPanel);
     }
 
     // new game btn funtion
@@ -63,7 +68,7 @@ public class MenuButton {
         Color quitGameBtnBgColor = new Color(240, 128, 128); // light red
 
         // quit game button
-        JButton quitGameButton = ButtonDesign.createMenuButton("Quit Game", quitGameBtnBgColor, frame, panel, () -> {
+        JButton quitGameButton = ButtonDesign.createMenuButton("Quit", quitGameBtnBgColor, frame, panel, () -> {
             // create a timer to let it run the btn action first
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {

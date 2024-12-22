@@ -31,7 +31,12 @@ public class ButtonAction {
         return new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                adjustButtonSize(button, panel);
+                if ("New Game".equals(button.getText()) || "Load Game".equals(button.getText())) {
+                    adjustButtonSize(button, panel); // new game and load game button size
+                } else if ("Setting".equals(button.getText()) || "Quit".equals(button.getText())) {
+                    adjust_Setting_Quit_ButtonSize(button, panel); // setting and quit button size
+                }
+                //adjustButtonSize(button, panel);
                 button.revalidate();
                 button.repaint();
             }
@@ -45,5 +50,13 @@ public class ButtonAction {
         int buttonHeight = 50; // fixed height
         button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         button.setMaximumSize(new Dimension(buttonWidth, buttonHeight));
+    }
+    // method to adjust button size
+    private static void adjust_Setting_Quit_ButtonSize(JButton button, JPanel panel) {
+        int panelWidth = panel.getWidth();
+        int buttonWidth = Math.min((int) (panelWidth * 0.2), 282); // button will be panelwidth * 20% or 282 max
+        int buttonHeight = 50; // fixed height
+        button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+        button.setMaximumSize(new Dimension(282, buttonHeight));
     }
 }
