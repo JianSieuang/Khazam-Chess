@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Component;
 
 public class ButtonDesign {
     // inner class to create rounded button

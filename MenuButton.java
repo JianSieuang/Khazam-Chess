@@ -12,15 +12,15 @@ public class MenuButton {
 
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // spacer
 
-        // Create a new panel for horizontal alignment of Setting and Quit buttons
+        // create a new panel for horizontal alignment of Setting and Quit buttons
         JPanel horizontalPanel = new JPanel();
         horizontalPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10)); // horizontal gap = 20, vertical gap = 10
-        horizontalPanel.setOpaque(false); // Set transparent to match parent background
+        horizontalPanel.setOpaque(false); // set transparent to match parent background
 
         addSettingButton(horizontalPanel, frame);
         addQuitGameButton(horizontalPanel, frame);
 
-        // Add horizontal panel to the parent panel
+        // add horizontal panel to the parent panel
         panel.add(horizontalPanel);
     }
 
