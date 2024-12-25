@@ -11,6 +11,7 @@ public class LandingPage {
     private static final String TITLE = "Kwazam Chess";
 
     private static BufferedImage backgroundImage;
+
     static {
         try {
             // backgroundImage = ImageIO.read(new File("sources/download.jpeg"));
@@ -32,19 +33,14 @@ public class LandingPage {
         }
     }
 
-    public static void showMenu() {
+    private static void showMenu() {
         // create the main frame
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 600); // frame Size
         frame.setLocationRelativeTo(null);
 
-        // create the main panel
-        // JPanel panel = new JPanel(new BorderLayout());
-        // panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // add
-        // padding
-
-        // Use BackgroundPanel instead of a regular JPanel
+        // sse BackgroundPanel instead of a regular JPanel
         BackgroundPanel panel = new BackgroundPanel();
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -58,7 +54,6 @@ public class LandingPage {
         innerPanel.setOpaque(false); // set transparent
 
         innerPanel.add(Box.createVerticalGlue()); // add space at the top
-        // innerPanel.setOpaque(false); // Set transparent to match parent background
 
         // add title
         addTitle(innerPanel);
@@ -66,7 +61,8 @@ public class LandingPage {
         // add menu buttons use utility class
         MenuButton.addMenuButtons(innerPanel, frame);
 
-        innerPanel.add(Box.createVerticalGlue());// add space on bottom
+        // add space on bottom
+        innerPanel.add(Box.createVerticalGlue());
 
         // add inner panel to the main panel
         panel.add(innerPanel, BorderLayout.CENTER);
@@ -76,6 +72,9 @@ public class LandingPage {
 
         // make the frame visible
         frame.setVisible(true);
+
+        // play background music
+        AudioPlayer.playBackgroundMusic();
     }
 
     // title function

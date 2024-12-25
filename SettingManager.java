@@ -2,15 +2,15 @@ import java.io.*;
 import java.util.Scanner;
 
 public class SettingManager {
-    
-    //  global Varible
+
+    // global Varible
     private static final String setting_file = "setting.txt";
     private static boolean enabledSound = true;
     private static boolean saveSettingPermanently = false;
 
-    //  load setting from the setting.txt file
-    //  if file exist, read and update the setting
-    //  if file not exist, it create a new file with default value
+    // load setting from the setting.txt file
+    // if file exist, read and update the setting
+    // if file not exist, it create a new file with default value
     public static void loadSetting() {
         File file = new File(setting_file);
         if (file.exists()) {
@@ -34,18 +34,18 @@ public class SettingManager {
         }
     }
 
-    //  save current setting to setting.txt when "Save as default" checked
-    //  if setting.txt exist, it will overwrite the setting.txt
+    // save current setting to setting.txt when "Save as default" checked
+    // if setting.txt exist, it will overwrite the setting.txt
     public static void saveSetting() {
         try (PrintWriter writer = new PrintWriter(setting_file)) {
-            //  write sound setting to the setting.txt
+            // write sound setting to the setting.txt
             writer.println("Sound : " + (enabledSound ? "On" : "Off"));
             writer.println("Save as default : " + (saveSettingPermanently ? "On" : "Off"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     // delete setting.txt, if exist
     public static void deleteSettingFile() {
         File file = new File(setting_file);
@@ -63,9 +63,10 @@ public class SettingManager {
     public static boolean isSaveSettingPermanently() {
         return saveSettingPermanently;
     }
-    
+
     public static void setEnabledSound(boolean enabledSound) {
         SettingManager.enabledSound = enabledSound;
+        AudioPlayer.playBackgroundMusic();
     }
 
     public static void setSaveSettingPermanently(boolean saveSettingPermanently) {
