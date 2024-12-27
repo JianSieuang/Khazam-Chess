@@ -9,7 +9,7 @@ public class SettingPage {
     public static void showSetting(JFrame parentFrame) {
         // load settings when showing settings
         SettingManager.loadSetting();
-        
+
         // create a new frame for the settings page
         JFrame settingsFrame = new JFrame(title);
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -41,20 +41,32 @@ public class SettingPage {
     }
 
     private static void addSettingOptions(JPanel panel) {
-        // example settings options
         JLabel soundLabel = new JLabel("Sound:");
-        JCheckBox soundCheckBox = new JCheckBox("Enable Sound", SettingManager.isEnabledSound()); // use the saved state
-        JCheckBox saveSettingCheckBox = new JCheckBox("Save as default", SettingManager.isSaveSettingPermanently()); // default false
+        ButtonDesign.RoundedButton soundButton = new ButtonDesign.RoundedButton(
+                SettingUtils.getOnOffLabel(SettingManager.isEnabledSound()), 20); // set corner radius
+        SettingUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
 
-        // use SettingController to attach event listeners
-        soundCheckBox.addActionListener(SettingController.createSoundCheckBoxListener(soundCheckBox));
-        saveSettingCheckBox.addActionListener(SettingController.createSaveSettingCheckBoxListener(saveSettingCheckBox));
+        JLabel saveAsDefaultLabel = new JLabel("Save as default:");
+        ButtonDesign.RoundedButton saveSettingButton = new ButtonDesign.RoundedButton(
+                SettingUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()), 20); // set corner radius
+        SettingUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
+
+        soundButton.addActionListener(SettingController.createSoundButtonListener(soundButton));
+        saveSettingButton.addActionListener(SettingController.createSaveSettingButtonListener(saveSettingButton));
 
         // create a panel for sound option to control spacing
         JPanel soundPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // align center
+
+        // sound
         soundPanel.add(soundLabel);
-        soundPanel.add(soundCheckBox);
-        soundPanel.add(saveSettingCheckBox); // add the new checkbox
+        soundPanel.add(soundButton);
+
+        // break line next row
+        soundPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // save as default
+        soundPanel.add(saveAsDefaultLabel);
+        soundPanel.add(saveSettingButton);
 
         // add the panel to the main settings panel
         panel.add(soundPanel);

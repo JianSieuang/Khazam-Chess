@@ -1,11 +1,19 @@
-import javax.swing.*;
 import java.awt.event.*;
+
+import javax.swing.JButton;
 
 public class SettingController {
 
-    public static ActionListener createSoundCheckBoxListener(JCheckBox soundCheckBox) {
+    public static ActionListener createSoundButtonListener(JButton soundButton) {
         return e -> {
-            SettingManager.setEnabledSound(soundCheckBox.isSelected());
+            boolean newState = !SettingManager.isEnabledSound();
+            SettingManager.setEnabledSound(newState);
+
+            // update the button text
+            soundButton.setText(SettingUtils.getOnOffLabel(newState));
+
+            // update button background color
+            SettingUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
 
             // play click sound
             new BtnSound("click").actionPerformed(null);
@@ -17,13 +25,21 @@ public class SettingController {
         };
     }
 
-    public static ActionListener createSaveSettingCheckBoxListener(JCheckBox saveSettingCheckBox) {
+    public static ActionListener createSaveSettingButtonListener(JButton saveSettingButton) {
         return e -> {
-            SettingManager.setSaveSettingPermanently(saveSettingCheckBox.isSelected());
+            boolean newState = !SettingManager.isSaveSettingPermanently();
+            SettingManager.setSaveSettingPermanently(newState);
+
+            // update the button text
+            saveSettingButton.setText(SettingUtils.getOnOffLabel(newState));
+
+            // update button background color
+            SettingUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
+
+            new BtnSound("click").actionPerformed(null); // play click sound
 
             // if "Save as default" is checked, save settings
-            if (saveSettingCheckBox.isSelected()) {
-                new BtnSound("click").actionPerformed(null); // play click sound
+            if (newState) {
                 SettingManager.saveSetting();
             } else {
                 SettingManager.deleteSettingFile();

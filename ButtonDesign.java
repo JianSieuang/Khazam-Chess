@@ -4,7 +4,7 @@ import java.awt.Component;
 
 public class ButtonDesign {
     // inner class to create rounded button
-    private static class RoundedButton extends JButton {
+    public static class RoundedButton extends JButton {
         private int cornerRadius;
         private int margin = 5; // set btn margin
 

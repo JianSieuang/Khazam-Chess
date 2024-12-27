@@ -74,8 +74,9 @@ public class MenuButton {
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            // exit the program "0" mean without any error
-                            System.exit(0);
+                            AudioPlayer.stopBackgroundMusic(); // stop the background music
+
+                            System.exit(0); // exit the program "0" mean without any error
                         }
                     },
                     // set the delay time to run the process, 1000 = 1 sec, 250 = 0.25 second
