@@ -1,39 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Component;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 
 public class LandingPage {
 
     // global variable to store the title
     private static final String TITLE = "Kwazam Chess";
     private static JLabel titleLabel;
-    private static BufferedImage backgroundImage;
-    private static int currentImageIndex = 0;
-    private static final String[] imagePaths = {
-        "sources/bg_image_1.jpeg", "sources/bg_image_2.png"
-    };
-
-    static {
-        try {
-            backgroundImage = ImageIO.read(new File(imagePaths[currentImageIndex]));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error loading background image. Ensure 'sources/download.jpeg' is in the correct directory.");
-        }
-    }
-
-    static class BackgroundPanel extends JPanel {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (backgroundImage != null) {
-                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-            }
-        }
-    }
 
     private static void showMenu() {
         // create the main frame
@@ -79,7 +51,7 @@ public class LandingPage {
         AudioPlayer.playBackgroundMusic();
 
         // start background image timer
-        startBackgroundImageTimer(frame);
+        BackgroundImage.startBackgroundImageTimer(frame, titleLabel);
     }
 
     // title function
@@ -90,31 +62,6 @@ public class LandingPage {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // align center
         panel.add(titleLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 30))); // spacer
-    }
-
-    // change background image
-    private static void startBackgroundImageTimer(JFrame frame) {
-        // timer to switch background image
-        Timer timer = new Timer(5000, e -> {
-            // toggle between images
-            currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
-            try {
-                backgroundImage = ImageIO.read(new File(imagePaths[currentImageIndex]));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-
-            // update the frame
-            frame.repaint();
-
-             // change title color based on current image
-            if (currentImageIndex == 0) {
-                titleLabel.setForeground(new Color(0, 0, 128)); // blue for first image
-            } else {
-                titleLabel.setForeground(new Color(255, 215, 0)); // gold for second image
-            }
-        });
-        timer.start();
     }
 
     public static void main(String[] args) {
