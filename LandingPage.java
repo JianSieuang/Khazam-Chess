@@ -14,12 +14,7 @@ public class LandingPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 600); // frame Size
         frame.setLocationRelativeTo(null);
-
-        // sse BackgroundPanel instead of a regular JPanel
-        BackgroundPanel panel = new BackgroundPanel();
-        panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
+        
         // inner panel to align content vertically
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
@@ -39,6 +34,11 @@ public class LandingPage {
         // add space on bottom
         innerPanel.add(Box.createVerticalGlue());
 
+        // set BackgroundPanel instead of a regular JPanel
+        BackgroundPanel panel = new BackgroundPanel(titleLabel);
+        panel.setLayout(new BorderLayout());
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
         // add inner panel to the main panel
         panel.add(innerPanel, BorderLayout.CENTER);
 
@@ -50,9 +50,6 @@ public class LandingPage {
 
         // play background music
         AudioPlayer.playBackgroundMusic();
-
-        // start background image timer
-        BackgroundImage.startBackgroundImageTimer(frame, titleLabel);
     }
 
     // title function
