@@ -29,7 +29,7 @@ public class SettingPage {
         addSettingOptions(innerpanel);
 
         // use BackgroundPanel instead of a regular JPanel
-        BackgroundPanel panel = new BackgroundPanel(titleLabel);
+        BackgroundPanel panel = new BackgroundPanel("setting_page");
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -45,6 +45,7 @@ public class SettingPage {
     private static void addSettingTitle(JPanel panel) {
         titleLabel = new JLabel(title);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36)); // set font
+        titleLabel.setForeground(new Color(255, 255, 255)); // add color to match theme
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER); // align center
         panel.add(titleLabel);
     }
@@ -52,6 +53,7 @@ public class SettingPage {
     private static void addSettingOptions(JPanel panel) {
         JLabel soundLabel = new JLabel("Sound:");
         soundLabel.setFont(new Font("Arial", Font.BOLD, 17)); // set font
+        soundLabel.setForeground(new Color(255, 255, 255)); // add color to match theme
 
         ButtonDesign.RoundedButton soundButton = new ButtonDesign.RoundedButton(SettingUtils.getOnOffLabel(SettingManager.isEnabledSound()), 20); // set corner radius
         soundButton.setFont(new Font("Arial", Font.BOLD, 17)); // set font
@@ -59,6 +61,8 @@ public class SettingPage {
 
         JLabel saveAsDefaultLabel = new JLabel("Save as default:");
         saveAsDefaultLabel.setFont(new Font("Arial", Font.BOLD, 17)); // set font
+        saveAsDefaultLabel.setForeground(new Color(255, 255, 255)); // add color to match theme
+
         ButtonDesign.RoundedButton saveSettingButton = new ButtonDesign.RoundedButton(SettingUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()), 20); // set corner radius
         saveSettingButton.setFont(new Font("Arial", Font.BOLD, 17)); // set font
         SettingUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());

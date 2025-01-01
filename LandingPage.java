@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Component;
 
 public class LandingPage {
 
@@ -35,7 +34,7 @@ public class LandingPage {
         innerPanel.add(Box.createVerticalGlue());
 
         // set BackgroundPanel instead of a regular JPanel
-        BackgroundPanel panel = new BackgroundPanel(titleLabel);
+        BackgroundPanel panel = new BackgroundPanel("landing_page");
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -56,7 +55,7 @@ public class LandingPage {
     private static void addTitle(JPanel panel) {
         titleLabel = new JLabel(TITLE);
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 36)); // set font
-        titleLabel.setForeground(new Color(0, 0, 128)); // add color to match theme
+        titleLabel.setForeground(new Color(255, 255, 255)); // add color to match theme
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // align center
         panel.add(titleLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 30))); // spacer

@@ -3,13 +3,27 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class BackgroundImage {
-    // image paths
-    private static final String[] imagePaths = {
-        "sources/bg_image_1.jpeg", "sources/bg_image_2.png"
+    // landing page background images
+    private static final String[] landingImagePaths = {
+        "sources/landing_page_bg_image_1.png",
+        "sources/landing_page_bg_image_2.png",
+    };
+
+    // setting page background images
+    private static final String[] settingImagePaths = {
+        "sources/setting_page_bg_image_1.png",
+        "sources/setting_page_bg_image_2.png", 
     };
 
     // get image by index
-    public static BufferedImage getImageByIndex(int index) {
+    public static BufferedImage getImageByIndex(int index, String pageType) {
+        // switch case to determine the image paths
+        String[] imagePaths = switch (pageType.toLowerCase()) {
+            case "landing_page" -> landingImagePaths;
+            case "setting_page" -> settingImagePaths;
+            default -> landingImagePaths;
+        };
+
         try {
             return ImageIO.read(new File(imagePaths[index % imagePaths.length]));
         } catch (Exception e) {
