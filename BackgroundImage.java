@@ -5,14 +5,14 @@ import java.io.File;
 public class BackgroundImage {
     // landing page background images
     private static final String[] landingImagePaths = {
-        "sources/landing_page_bg_image_1.png",
-        "sources/landing_page_bg_image_2.png",
+        "Picture/landing_page_bg_image_1.png",
+        "Picture/landing_page_bg_image_2.png",
     };
 
     // setting page background images
     private static final String[] settingImagePaths = {
-        "sources/setting_page_bg_image_1.png",
-        "sources/setting_page_bg_image_2.png", 
+        "Picture/setting_page_bg_image_1.png",
+        "Picture/setting_page_bg_image_2.png", 
     };
 
     // get image by index
