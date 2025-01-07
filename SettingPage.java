@@ -16,7 +16,7 @@ public class SettingPage {
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         settingsFrame.setSize(600, 600); // Frame Size
         settingsFrame.setLocationRelativeTo(parentFrame);
-        
+
         // inner panel to align content vertically
         JPanel innerpanel = new JPanel(new GridLayout(0, 1, 0, 10)); // gridLayout: rows, columns, hgap, vgap
         innerpanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // add padding
@@ -26,7 +26,7 @@ public class SettingPage {
         addSettingTitle(innerpanel);
 
         // add settings options
-        addSettingOptions(innerpanel);
+        addSettingOptions(innerpanel, settingsFrame);
 
         // use BackgroundPanel instead of a regular JPanel
         BackgroundPanel panel = new BackgroundPanel("setting_page");
@@ -50,12 +50,13 @@ public class SettingPage {
         panel.add(titleLabel);
     }
 
-    private static void addSettingOptions(JPanel panel) {
+    private static void addSettingOptions(JPanel panel, JFrame settingsFrame) {
         JLabel soundLabel = new JLabel("Sound:");
         soundLabel.setFont(new Font("Arial", Font.BOLD, 17)); // set font
         soundLabel.setForeground(new Color(255, 255, 255)); // add color to match theme
 
-        ButtonDesign.RoundedButton soundButton = new ButtonDesign.RoundedButton(SettingUtils.getOnOffLabel(SettingManager.isEnabledSound()), 20); // set corner radius
+        ButtonDesign.RoundedButton soundButton = new ButtonDesign.RoundedButton(
+                SettingUtils.getOnOffLabel(SettingManager.isEnabledSound()), 20); // set corner radius
         soundButton.setFont(new Font("Arial", Font.BOLD, 17)); // set font
         SettingUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
 
@@ -63,7 +64,8 @@ public class SettingPage {
         saveAsDefaultLabel.setFont(new Font("Arial", Font.BOLD, 17)); // set font
         saveAsDefaultLabel.setForeground(new Color(255, 255, 255)); // add color to match theme
 
-        ButtonDesign.RoundedButton saveSettingButton = new ButtonDesign.RoundedButton(SettingUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()), 20); // set corner radius
+        ButtonDesign.RoundedButton saveSettingButton = new ButtonDesign.RoundedButton(
+                SettingUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()), 20); // set corner radius
         saveSettingButton.setFont(new Font("Arial", Font.BOLD, 17)); // set font
         SettingUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
 
@@ -87,5 +89,29 @@ public class SettingPage {
 
         // add the panel to the main settings panel
         panel.add(soundPanel);
+
+        Color backBtnColor = new Color(240, 128, 128); // light red
+
+        // add "Back" button at the bottom
+        JButton backButton = ButtonDesign.createMenuButton("Back", backBtnColor, settingsFrame, soundPanel, () -> {
+            // close the settings frame
+            settingsFrame.dispose();
+
+            // return to the landing page
+            SettingManager.loadSetting();
+            LandingPage.showMenu();
+        });
+        
+        backButton.setFont(new Font("Arial", Font.BOLD, 17)); // set font
+        backButton.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
+
+        // create a panel for the "Back" button to control spacing
+        JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // align center
+        backButtonPanel.setOpaque(false); // transparent background
+        backButtonPanel.add(backButton);
+
+        // add the "Back" button panel to the main settings panel
+        panel.add(Box.createRigidArea(new Dimension(0, 30))); // add spacing
+        panel.add(backButtonPanel);
     }
 }

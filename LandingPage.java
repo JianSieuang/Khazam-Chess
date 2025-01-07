@@ -8,7 +8,7 @@ public class LandingPage {
     private static final String TITLE = "Kwazam Chess";
     private static JLabel titleLabel;
 
-    private static void showMenu() {
+    protected static void showMenu() {
         // create the main frame
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

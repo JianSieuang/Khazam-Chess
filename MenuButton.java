@@ -31,7 +31,9 @@ public class MenuButton {
 
         // new game btn funtion
         JButton newGameButton = ButtonDesign.createMenuButton("New Game", newGameBtnBgColor, frame, panel, () -> {
-            JOptionPane.showMessageDialog(frame, "Start a new game!");
+            // JOptionPane.showMessageDialog(frame, "Start a new game!");
+            frame.dispose(); // close the current frame
+
         });
         panel.add(newGameButton);
     }
@@ -56,6 +58,7 @@ public class MenuButton {
 
         // setting button
         JButton settingButton = ButtonDesign.createMenuButton("Setting", settingBtnBgColor, frame, panel, () -> {
+            frame.dispose(); // close the current frame
             SettingPage.showSetting(frame); // navigate to SettingsPage
         });
 
