@@ -9,11 +9,13 @@ public class SettingController {
             boolean newState = !SettingManager.isEnabledSound();
             SettingManager.setEnabledSound(newState);
 
-            // update the button text
-            soundButton.setText(SettingUtils.getOnOffLabel(newState));
+            if (soundButton != null) {
+                // update the button text
+                soundButton.setText(SettingUtils.getOnOffLabel(newState));
 
-            // update button background color
-            SettingUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
+                // update button background color
+                SettingUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
+            }
 
             // play click sound
             new BtnSound("click").actionPerformed(null);
@@ -30,11 +32,13 @@ public class SettingController {
             boolean newState = !SettingManager.isSaveSettingPermanently();
             SettingManager.setSaveSettingPermanently(newState);
 
-            // update the button text
-            saveSettingButton.setText(SettingUtils.getOnOffLabel(newState));
+            if (saveSettingButton != null) {
+                // update the button text
+                saveSettingButton.setText(SettingUtils.getOnOffLabel(newState));
 
-            // update button background color
-            SettingUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
+                // update button background color
+                SettingUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
+            }
 
             new BtnSound("click").actionPerformed(null); // play click sound
 

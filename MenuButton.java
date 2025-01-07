@@ -31,9 +31,8 @@ public class MenuButton {
 
         // new game btn funtion
         JButton newGameButton = ButtonDesign.createMenuButton("New Game", newGameBtnBgColor, frame, panel, () -> {
-            // JOptionPane.showMessageDialog(frame, "Start a new game!");
             frame.dispose(); // close the current frame
-
+            SwingUtilities.invokeLater(() -> new GamePage("new"));
         });
         panel.add(newGameButton);
     }
@@ -45,7 +44,8 @@ public class MenuButton {
 
         // load game button
         JButton loadGameButton = ButtonDesign.createMenuButton("Load Game", loadGameBtnBgColor, frame, panel, () -> {
-            JOptionPane.showMessageDialog(frame, "Load an existing game!");
+            frame.dispose(); // close the current frame
+            SwingUtilities.invokeLater(() -> new GamePage("load"));
         });
 
         panel.add(loadGameButton);

@@ -9,6 +9,8 @@ public class LandingPage {
     private static JLabel titleLabel;
 
     protected static void showMenu() {
+        SettingManager.loadSetting();
+
         // create the main frame
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +65,6 @@ public class LandingPage {
     }
 
     public static void main(String[] args) {
-        SettingManager.loadSetting();
         showMenu();
     }
 }
