@@ -1,15 +1,24 @@
-import javax.swing.ImageIcon;
 import java.util.Arrays;
+import java.util.ArrayList;
 
-public class BizPiece extends GamePiece
+class BizPiece extends GamePiece
 {
-    public BizPiece(int r, int c, String image)
+    public BizPiece(int r, int c, String player)
     {
+        this.images = new ArrayList<String>();
         this.row = r;
         this.col = c;
-        pieceImage[0] = new ImageIcon(image).getImage();
-        showImage = pieceImage[0];
-        player = r == 7? 0: 1;
+        this.player = player;
+        this.currentImage = 0;
+        
+        if(player == "Blue")
+        {
+            images.add("Picture/Biz_Blue.png");
+        }
+        else if(player == "Red")
+        {
+            images.add("Picture/Biz_Red.png");
+        }
     }
     
     public int[][] moveable(GamePiece[][] board)
@@ -72,7 +81,6 @@ public class BizPiece extends GamePiece
                 {   
                     if(board[r][c] != null && board[r][c].getPlayer() != player)
                     {
-                        System.out.println("Capture this" + r + c);
                         moves[count++] = new int[] {r, c};
                     }
                 }
@@ -84,7 +92,6 @@ public class BizPiece extends GamePiece
                 {   
                     if(board[r][c] != null && board[r][c].getPlayer() != player)
                     {
-                        System.out.println("Capture this" + r + c);
                         moves[count++] = new int[] {r, c};
                     }
                 }

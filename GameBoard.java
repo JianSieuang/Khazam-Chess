@@ -4,7 +4,9 @@ public class GameBoard
     private int row = 8;
     private int col = 5;
     private GamePiece[][] board;
-    private int turn = 0;
+    private static int turn = 0;
+    private String move = "Blue";
+    private String winner;
     
     private GamePiece selectedPiece;
     private int selectedRow = -1;
@@ -13,7 +15,6 @@ public class GameBoard
     private int[][] moveableSteps;
     private int[][] capturableSteps;
     
-
     public GameBoard() 
     {
         board = new GamePiece[row][col];
@@ -22,51 +23,92 @@ public class GameBoard
     
     private void initBoard()
     {
-        board[0][0] = new XorOrTorPiece(0, 0, "Picture/Tor_Red.png", "Picture/Xor_Red.png");
-        board[0][1] = new BizPiece(0, 1, "Picture/Biz_Red.png");
-        board[0][2] = new SauPiece(0, 2, "Picture/Sau_Red.png", "Picture/Sau_Red_Flip.png");
-        board[0][3] = new BizPiece(0, 3, "Picture/Biz_Red.png");
-        board[0][4] = new XorOrTorPiece(0, 4, "Picture/Xor_Red.png", "Picture/Tor_Red.png");
-
-        board[7][0] = new XorOrTorPiece(7, 0, "Picture/Xor_Blue.png", "Picture/Tor_Blue.png");
-        board[7][1] = new BizPiece(7, 1, "Picture/Biz_Blue.png");
-        board[7][2] = new SauPiece(7, 2, "Picture/Sau_Blue.png", "Picture/Sau_Blue_Flip.png");
-        board[7][3] = new BizPiece(7, 3, "Picture/Biz_Blue.png");
-        board[7][4] = new XorOrTorPiece(7, 4, "Picture/Tor_Blue.png", "Picture/Xor_Blue.png");
+        board[0][0] = new TorPiece(0, 0, "Red");
+        board[0][1] = new BizPiece(0, 1, "Red");
+        board[0][2] = new SauPiece(0, 2, "Red");
+        board[0][3] = new BizPiece(0, 3, "Red");
+        board[0][4] = new XorPiece(0, 4, "Red");
+        
+        board[7][0] = new XorPiece(7, 0, "Blue");
+        board[7][1] = new BizPiece(7, 1, "Blue");
+        board[7][2] = new SauPiece(7, 2, "Blue");
+        board[7][3] = new BizPiece(7, 3, "Blue");
+        board[7][4] = new TorPiece(7, 4, "Blue");
         
         for(int i = 0; i < col; i++) 
         {
-            board[1][i] = new RamPiece(1, i, "Picture/Ram_Red.png", "Picture/Ram_Red_Flip.png");
-            board[6][i] = new RamPiece(6, i, "Picture/Ram_Blue.png", "Picture/Ram_Blue_FLip.png");
+            board[1][i] = new RamPiece(1, i, "Red");
+            board[6][i] = new RamPiece(6, i, "Blue");
         }
     }
     
-    public void turnBoard()
+    private void turnBoard()
     {
-        for(int i = 0; i < row / 2; i++) 
+        if(winner == null)
         {
-            for(int ii = 0; ii < col; ii++) 
+            for(int i = 0; i < row / 2; i++) 
             {
-                GamePiece temp = board[i][ii];
-                board[i][ii] = board[row - 1 - i][col - 1 - ii];
-                board[row - 1 - i][col - 1 - ii] = temp;
-            }
-        }
-        for(int i = 0; i < row; i++) 
-        {
-            for(int ii = 0; ii < col; ii++) 
-            {
-                if(board[i][ii] != null)
+                for(int ii = 0; ii < col; ii++) 
                 {
-                    board[i][ii].updatePosition(i, ii);
+                    GamePiece temp = board[i][ii];
+                    board[i][ii] = board[row - 1 - i][col - 1 - ii];
+                    board[row - 1 - i][col - 1 - ii] = temp;
+                }
+            }
+            for(int i = 0; i < row; i++) 
+            {
+                for(int ii = 0; ii < col; ii++) 
+                {
+                    if(board[i][ii] != null)
+                    {
+                        board[i][ii].updatePosition(i, ii);
+                    }
                 }
             }
         }
+        
         clearSelectedPieceAndSteps();
+    }
+    
+    private void clearSelectedPieceAndSteps() 
+    {
+        moveableSteps = new int[0][0];
+        capturableSteps = new int[0][0];
+        selectedPiece = null;
+        selectedRow = -1;
+        selectedCol = -1;
+    }
+    
+    private void countMove()
+    {
+        move = move == "Blue"? "Red" : "Blue";
+        turn = move == "Blue"? turn + 1: turn;
+        
+        if(turn % 2 == 0 && move == "Blue")
+        {
+            for(int i = 0; i < row; i++) 
+            {
+                for(int ii = 0; ii < col; ii++) 
+                {
+                    if(board[i][ii] != null)
+                    {
+                        if(board[i][ii] instanceof TorPiece)
+                        {
+                            board[i][ii] = new XorPiece(i, ii, board[i][ii].getPlayer());
+                        }
+                        else if(board[i][ii] instanceof XorPiece)
+                        {
+                            board[i][ii] = new TorPiece(i, ii, board[i][ii].getPlayer());
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public void selectPiece(int r, int c)
     {
+        if(winner != null) return;
         if(r < row && r >= 0 && c < col && c >= 0)
         {
             if (selectedPiece != null && selectedRow == r && selectedCol == c) 
@@ -74,7 +116,7 @@ public class GameBoard
                 clearSelectedPieceAndSteps();
                 return;
             }
-            else if(board[r][c] != null && board[r][c].player == turn)
+            else if(board[r][c] != null && board[r][c].player == move)
             {
                 selectedPiece = board[r][c];
                 selectedRow = r;
@@ -99,9 +141,13 @@ public class GameBoard
                     {
                         if(capturableSteps[i][0] == r && capturableSteps[i][1] == c)
                         {
+                            if (board[r][c] instanceof SauPiece)
+                            {
+                                winner = selectedPiece.getPlayer();
+                            }
                             board[r][c] = selectedPiece;
                             board[selectedRow][selectedCol] = null;
-                            turn = turn == 0 ? 1 : 0;
+                            countMove();
                             turnBoard();
                             return true;
                         }
@@ -118,7 +164,7 @@ public class GameBoard
                         {
                             board[r][c] = selectedPiece;
                             board[selectedRow][selectedCol] = null;
-                            turn = turn == 0 ? 1 : 0;
+                            countMove();
                             turnBoard();
                             return true;
                         }
@@ -129,15 +175,6 @@ public class GameBoard
         
         board[selectedRow][selectedCol] = selectedPiece;
         return false;
-    }
-    
-    public void clearSelectedPieceAndSteps() 
-    {
-        moveableSteps = new int[0][0];
-        capturableSteps = new int[0][0];
-        selectedPiece = null;
-        selectedRow = -1;
-        selectedCol = -1;
     }
     
     public GamePiece getSelectedPiece()

@@ -1,23 +1,34 @@
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
 
-public class RamPiece extends GamePiece
+class RamPiece extends GamePiece
 {
     private boolean moveForward = true;
+    private boolean updated = false;
     
-    public RamPiece(int r, int c, String image, String image2)
+    public RamPiece(int r, int c, String player)
     {
+        this.images = new ArrayList<String>();
         this.row = r;
         this.col = c;
-        pieceImage[0] = new ImageIcon(image).getImage();
-        pieceImage[1] = new ImageIcon(image2).getImage();
-        showImage = pieceImage[0];
-        player = r == 6? 0: 1;
+        this.player = player;
+        this.currentImage = 0;
+        
+        if(player == "Blue")
+        {
+            images.add("Picture/Ram_Blue.png");
+            images.add("Picture/Ram_Blue_Flip.png");
+        }
+        else if(player == "Red")
+        {
+            images.add("Picture/Ram_Red.png");
+            images.add("Picture/Ram_Red_Flip.png");
+        }
     }
     
     public int[][] moveable(GamePiece[][] board)
     {
         int r = row + (moveForward ? -1 : 1); 
-        
+
         if(r >= 0 && r < 8)
         {   
             if(board[r][col] == null)
@@ -46,11 +57,21 @@ public class RamPiece extends GamePiece
     {
         this.row = r;
         this.col = c;
-        showImage = showImage == pieceImage[0]? pieceImage[1]: pieceImage[0];
+        this.currentImage = this.currentImage == 0? 1: 0;
+        reachTheEndCheck();
     }
     
-    public void reachTheEnd()
+    private void reachTheEndCheck()
     {
-        
+        if((row == 7 || row == 0) && !updated)
+        {
+            moveForward = !moveForward;
+            this.currentImage = this.currentImage == 0? 1: 0;
+            updated = true;
+        }
+        else if (row < 7 && row > 0)
+        {
+            updated = false;
+        }
     }
 }

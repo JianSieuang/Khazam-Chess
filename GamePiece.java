@@ -1,21 +1,23 @@
 import java.awt.Image;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 abstract class GamePiece
 {
     protected int row;
     protected int col;
-    protected Image[] pieceImage = new Image[2];
-    protected Image showImage;
-    protected int player;
+    protected ArrayList<String> images;
+    protected int currentImage;
+    protected String player;
     
     public GamePiece(){}
     
     public Image getImage()
     {
-        return showImage;
+        return new ImageIcon(images.get(currentImage)).getImage();
     }
     
-    public int getPlayer()
+    public String getPlayer()
     {
         return player;
     }

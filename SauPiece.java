@@ -1,16 +1,26 @@
-import javax.swing.ImageIcon;
 import java.util.Arrays;
+import java.util.ArrayList;
 
-public class SauPiece extends GamePiece
+class SauPiece extends GamePiece
 {
-    public SauPiece(int r, int c, String image, String image2)
+    public SauPiece(int r, int c, String player)
     {
+        this.images = new ArrayList<String>();
         this.row = r;
         this.col = c;
-        pieceImage[0] = new ImageIcon(image).getImage();
-        pieceImage[1] = new ImageIcon(image2).getImage();
-        showImage = pieceImage[0];
-        player = r == 7? 0: 1;
+        this.player = player;
+        this.currentImage = 0;
+        
+        if(player == "Blue")
+        {
+            images.add("Picture/Sau_Blue.png");
+            images.add("Picture/Sau_Blue_Flip.png");
+        }
+        else if(player == "Red")
+        {
+            images.add("Picture/Sau_Red.png");
+            images.add("Picture/Sau_Red_Flip.png");
+        }
     }
     
     public int[][] moveable(GamePiece[][] board)
@@ -70,7 +80,7 @@ public class SauPiece extends GamePiece
     {
         this.row = r;
         this.col = c;
-        showImage = showImage == pieceImage[0]? pieceImage[1]: pieceImage[0];
+        this.currentImage = this.currentImage == 0? 1: 0;
     }
     
 }

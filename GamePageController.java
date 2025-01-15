@@ -1,22 +1,23 @@
 import java.awt.event.*;
 
-public class GameController implements ComponentListener, MouseListener , MouseMotionListener
+public class GamePageController implements ComponentListener, MouseListener , MouseMotionListener
 {
     private GameBoard model;
-    private GameBoardView view;
+    private GamePageView view;
     private int width = 600;
     private int height = 600;
     
-    public GameController() 
+    public GamePageController() 
     {
         model = new GameBoard();
-        view = new GameBoardView(model.getBoard(), width, height);
+        view = new GamePageView(model.getBoard(), width, height);
         view.addComponentListener(this);
-        view.getContentPane().addMouseListener(this);
-        view.getContentPane().addMouseMotionListener(this);
+        view.getGameBoardPanel().addMouseListener(this);
+        view.getGameBoardPanel().addMouseMotionListener(this);
     }
     
     //ComponentListener
+    @Override
     public void componentHidden(ComponentEvent e){}
     public void componentMoved(ComponentEvent e) {}
     public void componentResized(ComponentEvent e)
@@ -26,6 +27,7 @@ public class GameController implements ComponentListener, MouseListener , MouseM
     public void componentShown(ComponentEvent e){}
     
     //MouseListener
+    @Override
     public void mouseClicked(MouseEvent e){}
     public void mouseEntered(MouseEvent e){}
     public void mouseExited(MouseEvent e){}
@@ -33,7 +35,7 @@ public class GameController implements ComponentListener, MouseListener , MouseM
     {
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
         model.selectPiece(coor[0], coor[1]);
-        view.setPosibleMove(model.getSelectedPiece(), model.getMoveableSteps(),model.getCapturableSteps());
+        view.getGameBoardPanel().setPosibleMove(model.getSelectedPiece(), model.getMoveableSteps(), model.getCapturableSteps());
         view.setDraggedPiece(e.getX(), e.getY());
     }
     public void mouseReleased(MouseEvent e) 
@@ -43,6 +45,7 @@ public class GameController implements ComponentListener, MouseListener , MouseM
     }
     
     //MouseMotionListener
+    @Override
     public void mouseDragged(MouseEvent e) 
     {
         view.setDraggedPiece(e.getX(), e.getY());
@@ -51,6 +54,6 @@ public class GameController implements ComponentListener, MouseListener , MouseM
     
     public static void main(String[] args) 
     {
-        new GameController();
+        new GamePageController();
     }
 }
