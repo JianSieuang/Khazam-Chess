@@ -30,6 +30,8 @@ public class LandingPage {
         // add title
         addTitle(innerPanel);
 
+        
+        
         // add menu buttons use utility class
         MenuButton.addMenuButtons(innerPanel, frame);
 
@@ -37,9 +39,7 @@ public class LandingPage {
         innerPanel.add(Box.createVerticalGlue());
 
         // set BackgroundPanel instead of a regular JPanel
-        BackgroundPanel panel = new BackgroundPanel("landing_page");
-        panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        BackgroundPanel panel = new BackgroundPanel("home_page");
 
         // add inner panel to the main panel
         panel.add(innerPanel, BorderLayout.CENTER);

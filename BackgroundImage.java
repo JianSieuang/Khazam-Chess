@@ -19,7 +19,7 @@ public class BackgroundImage {
     public static BufferedImage getImageByIndex(int index, String pageType) {
         // switch case to determine the image paths
         String[] imagePaths = switch (pageType.toLowerCase()) {
-            case "landing_page" -> landingImagePaths;
+            case "home_page" -> landingImagePaths;
             case "setting_page" -> settingImagePaths;
             default -> landingImagePaths;
         };
