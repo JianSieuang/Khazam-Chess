@@ -1,10 +1,13 @@
-import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
-public class SettingController {
-
-    public static ActionListener createSoundButtonListener(JButton soundButton) {
+public class SettingController
+{
+    public SettingController() {
+        SettingManager.loadSetting();
+    }
+    
+    public static ActionListener createSoundButtonListener(JButton soundButton) {        
         return e -> {
             boolean newState = !SettingManager.isEnabledSound();
             SettingManager.setEnabledSound(newState);
@@ -19,11 +22,10 @@ public class SettingController {
 
             // play click sound
             new BtnSound("click").actionPerformed(null);
-
-            // save settings if "Save as default" is enabled
-            if (SettingManager.isSaveSettingPermanently()) {
-                SettingManager.saveSetting();
-            }
+            
+            // save settings if "Save as default"
+            SettingManager.setEnabledSound(newState);
+            SettingManager.saveSetting();
         };
     }
 
@@ -49,5 +51,18 @@ public class SettingController {
                 SettingManager.deleteSettingFile();
             }
         };
+    }
+
+    public void returnToLandingPage() {
+        LandingPage.showMenu();
+    }
+    
+    public void navigateToSettingPage(JFrame currentFrame) {
+        currentFrame.dispose();
+        SettingView.showSetting(currentFrame, this);
+    }
+    
+    public void checkSetting() {
+        SettingManager.checkBeforeQuit();
     }
 }

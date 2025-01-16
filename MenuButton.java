@@ -56,10 +56,13 @@ public class MenuButton {
         // setting btn backgrond color
         Color settingBtnBgColor = new Color(211, 211, 211); // light gray
 
+        SettingController settingController = new SettingController();
+
         // setting button
         JButton settingButton = ButtonDesign.createMenuButton("Setting", settingBtnBgColor, frame, panel, () -> {
-            frame.dispose(); // close the current frame
-            SettingPage.showSetting(frame); // navigate to SettingsPage
+            //frame.dispose(); // close the current frame
+            //SettingPage.showSetting(frame); // navigate to SettingsPage
+            settingController.navigateToSettingPage(frame); // Call the navigateToSettingPage method
         });
 
         panel.add(settingButton);
@@ -77,8 +80,10 @@ public class MenuButton {
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            AudioPlayer.stopBackgroundMusic(); // stop the background music
+                            SettingController settingController = new SettingController();
 
+                            AudioPlayer.stopBackgroundMusic(); // stop the background music
+                            settingController.checkSetting();
                             System.exit(0); // exit the program "0" mean without any error
                         }
                     },

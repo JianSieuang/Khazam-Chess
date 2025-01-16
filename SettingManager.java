@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class SettingManager 
+public class SettingManager
 {
 
     // global Varible
@@ -37,8 +37,7 @@ public class SettingManager
             {
                 e.printStackTrace();
             }
-        } 
-        else 
+        } else
         {
             // if file does not exist, create a new one with the default values
             saveSetting();
@@ -54,8 +53,7 @@ public class SettingManager
             // write sound setting to the setting.txt
             writer.println("Sound : " + (enabledSound ? "On" : "Off"));
             writer.println("Save as default : " + (saveSettingPermanently ? "On" : "Off"));
-        } 
-        catch (IOException e) 
+        } catch (IOException e) 
         {
             e.printStackTrace();
         }
@@ -71,6 +69,13 @@ public class SettingManager
             {
                 System.err.println("Failed to delete " + setting_file);
             }
+        }
+    }
+    
+    public static void checkBeforeQuit()
+    {
+        if (!saveSettingPermanently) {
+            deleteSettingFile();
         }
     }
 

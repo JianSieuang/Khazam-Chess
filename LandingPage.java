@@ -9,7 +9,7 @@ public class LandingPage {
     private static JLabel titleLabel;
 
     protected static void showMenu() {
-        SettingManager.loadSetting();
+        new SettingController();
 
         // create the main frame
         JFrame frame = new JFrame(TITLE);
@@ -30,8 +30,6 @@ public class LandingPage {
         // add title
         addTitle(innerPanel);
 
-        
-        
         // add menu buttons use utility class
         MenuButton.addMenuButtons(innerPanel, frame);
 
