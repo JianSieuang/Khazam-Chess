@@ -3,13 +3,26 @@ import java.awt.*;
 
 public class SettingView {
 
-    private static final String title = "Settings";
-    private static JLabel titleLabel;
+    private JLabel titleLabel;
+    private JButton soundButton;
+    private JButton saveSettingButton;
+    private JButton backButton;
 
-    public static void showSetting(JFrame parentFrame, SettingController controller) {
+    public SettingView(SettingController controller) {
+        soundButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isEnabledSound()));
+        SettingViewUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
+
+        saveSettingButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()));
+        SettingViewUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
+
+        backButton = new JButton("Back");
+        SettingViewUtils.setButtonDesign(backButton, false);
+    }
+
+    public void showSetting(JFrame parentFrame) {
         SettingManager.loadSetting();
 
-        JFrame settingsFrame = new JFrame(title);
+        JFrame settingsFrame = new JFrame("Settings");
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         settingsFrame.setSize(600, 600);
         settingsFrame.setLocationRelativeTo(parentFrame);
@@ -19,7 +32,7 @@ public class SettingView {
         innerPanel.setOpaque(false);
 
         addSettingTitle(innerPanel);
-        addSettingOptions(innerPanel, settingsFrame, controller);
+        addSettingOptions(innerPanel, settingsFrame);
 
         BackgroundPanel panel = new BackgroundPanel("setting_page");
         panel.setLayout(new BorderLayout());
@@ -30,30 +43,22 @@ public class SettingView {
         settingsFrame.setVisible(true);
     }
 
-    private static void addSettingTitle(JPanel panel) {
-        titleLabel = new JLabel(title);
+    private void addSettingTitle(JPanel panel) {
+        titleLabel = new JLabel("Settings");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
         titleLabel.setForeground(new Color(255, 255, 255));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(titleLabel);
     }
 
-    private static void addSettingOptions(JPanel panel, JFrame settingsFrame, SettingController controller) {
+    private void addSettingOptions(JPanel panel, JFrame settingsFrame) {
         JLabel soundLabel = new JLabel("Sound:");
         soundLabel.setFont(new Font("Arial", Font.BOLD, 17));
         soundLabel.setForeground(new Color(255, 255, 255));
 
-        JButton soundButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isEnabledSound()));
-        SettingViewUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
-        soundButton.addActionListener(controller.createSoundButtonListener(soundButton));
-
         JLabel saveAsDefaultLabel = new JLabel("Save as default:");
         saveAsDefaultLabel.setFont(new Font("Arial", Font.BOLD, 17));
         saveAsDefaultLabel.setForeground(new Color(255, 255, 255));
-
-        JButton saveSettingButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()));
-        SettingViewUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
-        saveSettingButton.addActionListener(controller.createSaveSettingButtonListener(saveSettingButton));
 
         JPanel soundPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         soundPanel.setOpaque(false);
@@ -66,13 +71,6 @@ public class SettingView {
 
         panel.add(soundPanel);
 
-        JButton backButton = new JButton("Back");
-        SettingViewUtils.setButtonDesign(backButton, false);
-        backButton.addActionListener(e -> {
-            settingsFrame.dispose();
-            controller.returnToLandingPage();
-        });
-
         JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         backButtonPanel.setOpaque(false);
         backButtonPanel.add(backButton);
@@ -81,12 +79,24 @@ public class SettingView {
         panel.add(backButtonPanel);
     }
 
-    public static void updateSoundButton(JButton soundButton, boolean isEnabled) {
+    public JButton getSoundButton() {
+        return soundButton;
+    }
+
+    public JButton getSaveSettingButton() {
+        return saveSettingButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public void updateSoundButton(JButton soundButton, boolean isEnabled) {
         soundButton.setText(SettingViewUtils.getOnOffLabel(isEnabled));
         SettingViewUtils.setButtonDesign(soundButton, isEnabled);
     }
 
-    public static void updateSaveSettingButton(JButton saveSettingButton, boolean isEnabled) {
+    public void updateSaveSettingButton(JButton saveSettingButton, boolean isEnabled) {
         saveSettingButton.setText(SettingViewUtils.getOnOffLabel(isEnabled));
         SettingViewUtils.setButtonDesign(saveSettingButton, isEnabled);
     }
