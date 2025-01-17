@@ -28,7 +28,6 @@ public class GamePageController implements ComponentListener, MouseListener, Mou
         view.getNavigationBar().getSoundMenuItem().addItemListener(this);
     }
     
-    
     //ComponentListener
     @Override public void componentHidden(ComponentEvent e){}
     @Override public void componentMoved(ComponentEvent e) {}
