@@ -39,7 +39,7 @@ public class HomePageController
             public void actionPerformed(ActionEvent e) 
             {
                 view.dispose();
-                SettingView.showSetting(view, settingController);
+                settingController.navigateToSettingPage(view);
             }
         });
 
