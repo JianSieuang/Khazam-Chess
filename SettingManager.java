@@ -3,14 +3,10 @@ import java.util.Scanner;
 
 public class SettingManager {
 
-    // global Varible
     private static final String setting_file = "setting.txt";
     private static boolean enabledSound = true;
     private static boolean saveSettingPermanently = false;
 
-    // load setting from the setting.txt file
-    // if file exist, read and update the setting
-    // if file not exist, it create a new file with default value
     public static void loadSetting() {
         File file = new File(setting_file);
         if (file.exists()) {
@@ -29,16 +25,12 @@ public class SettingManager {
                 e.printStackTrace();
             }
         } else {
-            // if file does not exist, create a new one with the default values
             saveSetting();
         }
     }
 
-    // save current setting to setting.txt when "Save as default" checked
-    // if setting.txt exist, it will overwrite the setting.txt
     public static void saveSetting() {
         try (PrintWriter writer = new PrintWriter(setting_file)) {
-            // write sound setting to the setting.txt
             writer.println("Sound : " + (enabledSound ? "On" : "Off"));
             writer.println("Save as default : " + (saveSettingPermanently ? "On" : "Off"));
         } catch (IOException e) {
@@ -46,13 +38,17 @@ public class SettingManager {
         }
     }
 
-    // delete setting.txt, if exist
     public static void deleteSettingFile() {
         File file = new File(setting_file);
-        if (file.exists()) {
-            if (!file.delete()) {
-                System.err.println("Failed to delete " + setting_file);
-            }
+        if (file.exists() && !file.delete()) {
+            System.err.println("Failed to delete " + setting_file);
+        }
+    }
+
+    public static void checkBeforeQuit() {
+        if (!saveSettingPermanently) {
+            enabledSound = true; // set the sound 'on' 
+            saveSetting();
         }
     }
 

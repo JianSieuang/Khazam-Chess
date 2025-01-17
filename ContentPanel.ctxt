@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=ContentPanel
+comment1.params=h\ w
+comment1.target=ContentPanel(int,\ int)
+comment2.params=button
+comment2.target=void\ buttonDesign(javax.swing.JButton)
+comment3.params=
+comment3.target=javax.swing.JButton\ getNewGameButton()
+comment4.params=
+comment4.target=javax.swing.JButton\ getLoadGameButton()
+comment5.params=
+comment5.target=javax.swing.JButton\ getSettingsButton()
+comment6.params=
+comment6.target=javax.swing.JButton\ getQuitGameButton()
+numComments=7

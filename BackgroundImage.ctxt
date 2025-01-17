@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=BackgroundImage
+comment1.params=index\ pageType
+comment1.target=java.awt.image.BufferedImage\ getImageByIndex(int,\ java.lang.String)
+numComments=2

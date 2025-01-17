@@ -87,8 +87,8 @@ public class NavigationBar extends JMenuBar {
             disposeFrame();
 
             // return to the landing page
-            SettingManager.loadSetting();
-            LandingPage.showMenu();
+            new SettingController();
+            new HomePageController();
         });
 
         undoMoveItem.addActionListener(e -> {
@@ -99,7 +99,7 @@ public class NavigationBar extends JMenuBar {
             // call redo move function here
         });
 
-        soundMenuItem.addActionListener(SettingController.createSoundButtonListener(null));
+        //soundMenuItem.addActionListener(SettingController.createSoundButtonListener(null));
 
         rulesItem.addActionListener(e -> showRulesDialog());
 
