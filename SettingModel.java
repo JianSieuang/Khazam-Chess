@@ -1,14 +1,35 @@
 public class SettingModel 
 {
-    private static boolean soundEnabled = true;
+    private boolean soundEnabled;
 
-    public static boolean isSoundEnabled() 
+    public SettingModel() 
     {
-        return soundEnabled;
+        soundEnabled = true;
     }
 
-    public static void toggleSound() 
+    public void newGame() 
+    {
+        System.out.println("[Model] Starting a new game...");
+    }
+
+    public void saveGame() 
+    {
+        System.out.println("[Model] Saving the game...");
+    }
+    
+    public void exitGame()
+    {
+        System.out.println("Bye bye");
+    }
+
+    public void toggleSound() 
     {
         soundEnabled = !soundEnabled;
+        System.out.println("[Model] Sound is now: " + (soundEnabled ? "ON" : "OFF"));
+    }
+
+    public boolean isSoundEnabled() 
+    {
+        return soundEnabled;
     }
 }

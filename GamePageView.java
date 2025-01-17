@@ -28,7 +28,7 @@ public class GamePageView extends JFrame
         setSize(width, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
+        setLocationRelativeTo(null);
         redrawBoard();
     }
 
