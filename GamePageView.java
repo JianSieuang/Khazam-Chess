@@ -7,6 +7,7 @@ public class GamePageView extends JFrame
     private int width;
     private int height;
     private GameBoardPanel GamePanel;
+    private NavigationBar navbar;
     public CoordinateAdapter adapter;
 
     public GamePageView(GamePiece[][] board, int w, int h) 
@@ -15,15 +16,15 @@ public class GamePageView extends JFrame
         this.board = board;
         this.width = w;
         this.height = h;
-        
+
         adapter = new CoordinateAdapter();
-
-        setJMenuBar(new NavigationBar());
-        
+        navbar = new NavigationBar();
         GamePanel = new GameBoardPanel(board);
-        add(GamePanel);
-
-        setMinimumSize(new Dimension(400, 400));
+        setLayout(new BorderLayout());
+        setJMenuBar(navbar);
+        add(GamePanel, BorderLayout.CENTER);
+        
+        setMinimumSize(new Dimension(450, 450));
         setSize(width, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -67,5 +68,10 @@ public class GamePageView extends JFrame
     public GameBoardPanel getGameBoardPanel()
     {
         return GamePanel;
+    }
+    
+    public NavigationBar getNavigationBar()
+    {
+        return navbar;
     }
 }

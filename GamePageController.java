@@ -36,19 +36,19 @@ public class GamePageController implements ComponentListener, MouseListener , Mo
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
         model.selectPiece(coor[0], coor[1]);
         view.getGameBoardPanel().setPosibleMove(model.getSelectedPiece(), model.getMoveableSteps(), model.getCapturableSteps());
-        view.setDraggedPiece(e.getX(), e.getY());
+        view.getGameBoardPanel().setDraggedPiece(e.getX(), e.getY());
     }
     public void mouseReleased(MouseEvent e) 
     {
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
-        view.clear(model.putPiece(coor[0], coor[1]));
+        view.getGameBoardPanel().clear(model.putPiece(coor[0], coor[1]));
     }
     
     //MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e) 
     {
-        view.setDraggedPiece(e.getX(), e.getY());
+        view.getGameBoardPanel().setDraggedPiece(e.getX(), e.getY());
     }
     public void mouseMoved(MouseEvent e){}
     
