@@ -88,7 +88,7 @@ public class NavigationBar extends JMenuBar {
 
             // return to the landing page
             new SettingController();
-            LandingPage.showMenu();
+            new HomePageController();
         });
 
         undoMoveItem.addActionListener(e -> {

@@ -43,19 +43,16 @@ public class SettingView {
         soundLabel.setFont(new Font("Arial", Font.BOLD, 17));
         soundLabel.setForeground(new Color(255, 255, 255));
 
-        JButton soundButton = new JButton(SettingUtils.getOnOffLabel(SettingManager.isEnabledSound()));
-        soundButton.setFont(new Font("Arial", Font.BOLD, 17));
-        SettingUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
+        JButton soundButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isEnabledSound()));
+        SettingViewUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
+        soundButton.addActionListener(controller.createSoundButtonListener(soundButton));
 
         JLabel saveAsDefaultLabel = new JLabel("Save as default:");
         saveAsDefaultLabel.setFont(new Font("Arial", Font.BOLD, 17));
         saveAsDefaultLabel.setForeground(new Color(255, 255, 255));
 
-        JButton saveSettingButton = new JButton(SettingUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()));
-        saveSettingButton.setFont(new Font("Arial", Font.BOLD, 17));
-        SettingUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
-
-        soundButton.addActionListener(controller.createSoundButtonListener(soundButton));
+        JButton saveSettingButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()));
+        SettingViewUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
         saveSettingButton.addActionListener(controller.createSaveSettingButtonListener(saveSettingButton));
 
         JPanel soundPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -70,8 +67,7 @@ public class SettingView {
         panel.add(soundPanel);
 
         JButton backButton = new JButton("Back");
-        backButton.setFont(new Font("Arial", Font.BOLD, 17));
-        backButton.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        SettingViewUtils.setButtonDesign(backButton, false);
         backButton.addActionListener(e -> {
             settingsFrame.dispose();
             controller.returnToLandingPage();
@@ -83,5 +79,15 @@ public class SettingView {
 
         panel.add(Box.createRigidArea(new Dimension(0, 30)));
         panel.add(backButtonPanel);
+    }
+
+    public static void updateSoundButton(JButton soundButton, boolean isEnabled) {
+        soundButton.setText(SettingViewUtils.getOnOffLabel(isEnabled));
+        SettingViewUtils.setButtonDesign(soundButton, isEnabled);
+    }
+
+    public static void updateSaveSettingButton(JButton saveSettingButton, boolean isEnabled) {
+        saveSettingButton.setText(SettingViewUtils.getOnOffLabel(isEnabled));
+        SettingViewUtils.setButtonDesign(saveSettingButton, isEnabled);
     }
 }

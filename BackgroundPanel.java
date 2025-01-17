@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 
 public class BackgroundPanel extends JPanel 
 {
-
     private int imageIndex = 0;
     private Timer imageTimer;
     private String pageType;

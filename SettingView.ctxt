@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=SettingView
+comment1.params=parentFrame\ controller
+comment1.target=void\ showSetting(javax.swing.JFrame,\ SettingController)
+comment2.params=panel
+comment2.target=void\ addSettingTitle(javax.swing.JPanel)
+comment3.params=panel\ settingsFrame\ controller
+comment3.target=void\ addSettingOptions(javax.swing.JPanel,\ javax.swing.JFrame,\ SettingController)
+comment4.params=soundButton\ isEnabled
+comment4.target=void\ updateSoundButton(javax.swing.JButton,\ boolean)
+comment5.params=saveSettingButton\ isEnabled
+comment5.target=void\ updateSaveSettingButton(javax.swing.JButton,\ boolean)
+numComments=6

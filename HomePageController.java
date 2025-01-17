@@ -4,10 +4,13 @@ import java.awt.event.ActionListener;
 public class HomePageController 
 {
     private HomePageView view;
+    private SettingController settingController;
 
     public HomePageController() 
     {
         view = new HomePageView();
+        settingController = new SettingController();
+        AudioPlayer.playBackgroundMusic();
         initializeListeners();
     }
 
@@ -36,7 +39,7 @@ public class HomePageController
             public void actionPerformed(ActionEvent e) 
             {
                 view.dispose();
-                SettingView.showSetting(view, new SettingController());
+                SettingView.showSetting(view, settingController);
             }
         });
 
@@ -44,6 +47,7 @@ public class HomePageController
             @Override
             public void actionPerformed(ActionEvent e) 
             {
+                settingController.checkSetting();
                 AudioPlayer.stopBackgroundMusic();
                 System.exit(0);
             }
