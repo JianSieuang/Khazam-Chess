@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class SettingView {
+public class SettingView 
+{
 
+    private JFrame settingsFrame;
     private JLabel titleLabel;
     private JButton soundButton;
     private JButton saveSettingButton;
@@ -22,7 +24,7 @@ public class SettingView {
     public void showSetting(JFrame parentFrame) {
         SettingManager.loadSetting();
 
-        JFrame settingsFrame = new JFrame("Settings");
+        settingsFrame = new JFrame("Settings");
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         settingsFrame.setSize(600, 600);
         settingsFrame.setLocationRelativeTo(parentFrame);
@@ -99,5 +101,9 @@ public class SettingView {
     public void updateSaveSettingButton(JButton saveSettingButton, boolean isEnabled) {
         saveSettingButton.setText(SettingViewUtils.getOnOffLabel(isEnabled));
         SettingViewUtils.setButtonDesign(saveSettingButton, isEnabled);
+    }
+
+    public JFrame getSettingFrame() {
+        return settingsFrame;
     }
 }

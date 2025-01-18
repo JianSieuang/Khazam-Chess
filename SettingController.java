@@ -20,6 +20,7 @@ public class SettingController {
         view.getSoundButton().addActionListener(createSoundButtonListener());
         view.getSaveSettingButton().addActionListener(createSaveSettingButtonListener());
         view.getBackButton().addActionListener(e -> {
+            view.getSettingFrame().dispose();
             new BtnSound("click").actionPerformed(null);
             returnToLandingPage();
         });
