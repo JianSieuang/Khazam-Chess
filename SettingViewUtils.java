@@ -23,6 +23,6 @@ public class SettingViewUtils {
         }
 
         button.setBackground(backgroundColor);
-        button.setForeground(Color.WHITE); // default text color
+        button.setForeground(Color.BLACK); // default text color
     }
 }

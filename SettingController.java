@@ -1,5 +1,8 @@
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 
 public class SettingController {
 
@@ -24,6 +27,10 @@ public class SettingController {
             new BtnSound("click").actionPerformed(null);
             returnToLandingPage();
         });
+
+        addHoverSound(view.getSoundButton());
+        addHoverSound(view.getSaveSettingButton());
+        addHoverSound(view.getBackButton());
     }
 
     private ActionListener createSoundButtonListener() {
@@ -52,6 +59,25 @@ public class SettingController {
                 SettingManager.deleteSettingFile();
             }
         };
+    }
+
+    private void addHoverSound(JButton button) {
+        Color originalBackgroundColor = button.getBackground();
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(originalBackgroundColor.darker());
+                button.setForeground(Color.WHITE);
+                new BtnSound("hover").actionPerformed(null);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(originalBackgroundColor);
+                button.setForeground(Color.BLACK);
+            }
+        });
     }
 
     public boolean getIsSoundEnabled() {
