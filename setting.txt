@@ -1,2 +1,2 @@
-Sound : On
-Save as default : Off
+Sound : Off
+Save as default : On

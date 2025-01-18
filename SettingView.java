@@ -8,20 +8,23 @@ public class SettingView {
     private JButton soundButton;
     private JButton saveSettingButton;
     private JButton backButton;
+    private SettingController controller;
 
     public SettingView(SettingController controller) {
-        soundButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isEnabledSound()));
-        SettingViewUtils.setButtonDesign(soundButton, SettingManager.isEnabledSound());
+        this.controller = controller;
+        controller.runLoadSetting();
+        soundButton = new JButton(SettingViewUtils.getOnOffLabel(controller.getIsSoundEnabled()));
+        SettingViewUtils.setButtonDesign(soundButton, controller.getIsSoundEnabled());
 
-        saveSettingButton = new JButton(SettingViewUtils.getOnOffLabel(SettingManager.isSaveSettingPermanently()));
-        SettingViewUtils.setButtonDesign(saveSettingButton, SettingManager.isSaveSettingPermanently());
+        saveSettingButton = new JButton(SettingViewUtils.getOnOffLabel(controller.getIsSaveSettingPermanently()));
+        SettingViewUtils.setButtonDesign(saveSettingButton, controller.getIsSaveSettingPermanently());
 
         backButton = new JButton("Back");
         SettingViewUtils.setButtonDesign(backButton, false);
     }
 
     public void showSetting(JFrame parentFrame) {
-        SettingManager.loadSetting();
+        controller.runLoadSetting();
 
         settingsFrame = new JFrame("Settings");
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
