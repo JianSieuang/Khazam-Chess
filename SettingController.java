@@ -42,6 +42,12 @@ public class SettingController {
             SettingManager.setEnabledSound(newState);
             view.updateButton(view.getSoundButton(), newState);
 
+            if (newState) {
+                AudioPlayer.playBackgroundMusic();
+            } else {
+                AudioPlayer.stopBackgroundMusic();
+            }
+
             new BtnSound("click").actionPerformed(null);
             SettingManager.saveSetting();
         };
@@ -77,7 +83,7 @@ public class SettingController {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setBackground(button.getBackground());
+                button.setBackground(button.getBackground().brighter());
                 button.setForeground(Color.BLACK);
             }
         });

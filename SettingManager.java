@@ -62,7 +62,6 @@ public class SettingManager {
 
     public static void setEnabledSound(boolean enabledSound) {
         SettingManager.enabledSound = enabledSound;
-        AudioPlayer.playBackgroundMusic();
     }
 
     public static void setSaveSettingPermanently(boolean saveSettingPermanently) {
