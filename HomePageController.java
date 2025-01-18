@@ -5,31 +5,26 @@ import javax.swing.JButton;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
-public class HomePageController 
-{
+public class HomePageController {
     private HomePageView view;
     private SettingController settingController;
 
-    public HomePageController() 
-    {
+    public HomePageController() {
         view = new HomePageView();
         settingController = new SettingController();
-        // AudioPlayer.playBackgroundMusic();
 
         if (SettingManager.isEnabledSound()) {
             AudioPlayer.playBackgroundMusic();
         }
-    
+
         initializeListeners();
     }
 
-    private void initializeListeners() 
-    {
+    private void initializeListeners() {
         buttonSound(view.getHomePanel().getNewGameButton());
         view.getHomePanel().getNewGameButton().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
-            {
+            public void actionPerformed(ActionEvent e) {
                 view.dispose();
                 new GamePage("new");
             }
@@ -38,8 +33,7 @@ public class HomePageController
         buttonSound(view.getHomePanel().getLoadGameButton());
         view.getHomePanel().getLoadGameButton().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
-            {
+            public void actionPerformed(ActionEvent e) {
                 view.dispose();
                 new GamePage("load");
             }
@@ -48,8 +42,7 @@ public class HomePageController
         buttonSound(view.getHomePanel().getSettingsButton());
         view.getHomePanel().getSettingsButton().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
-            {
+            public void actionPerformed(ActionEvent e) {
                 view.dispose();
                 settingController.navigateToSettingPage(view);
             }
@@ -58,8 +51,7 @@ public class HomePageController
         buttonSound(view.getHomePanel().getQuitGameButton());
         view.getHomePanel().getQuitGameButton().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
-            {
+            public void actionPerformed(ActionEvent e) {
                 settingController.checkSetting();
                 AudioPlayer.stopBackgroundMusic();
                 System.exit(0);
@@ -73,7 +65,7 @@ public class HomePageController
             public void mouseEntered(MouseEvent e) {
                 button.setBackground(button.getBackground().darker());
                 button.setForeground(Color.WHITE);
-                new BtnSound("hover").actionPerformed(null);
+                new BtnSound("hover", settingController).actionPerformed(null);
             }
 
             @Override
@@ -83,11 +75,10 @@ public class HomePageController
             }
         });
 
-        button.addActionListener(e -> new BtnSound("click").actionPerformed(null));
+        button.addActionListener(e -> new BtnSound("click", settingController).actionPerformed(null));
     }
 
-    public static void main(String[] args) 
-    {
+    public static void main(String[] args) {
         new HomePageController();
     }
 }

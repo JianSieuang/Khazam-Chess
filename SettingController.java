@@ -27,7 +27,7 @@ public class SettingController {
         view.getSaveSettingButton().addActionListener(createSaveSettingButtonListener());
         view.getBackButton().addActionListener(e -> {
             view.getSettingFrame().dispose();
-            new BtnSound("click").actionPerformed(null);
+            new BtnSound("click", SettingController.this).actionPerformed(null);
             returnToLandingPage();
         });
 
@@ -48,7 +48,7 @@ public class SettingController {
                 AudioPlayer.stopBackgroundMusic();
             }
 
-            new BtnSound("click").actionPerformed(null);
+            new BtnSound("click", SettingController.this).actionPerformed(null);
             SettingManager.saveSetting();
         };
     }
@@ -60,7 +60,7 @@ public class SettingController {
 
             view.updateButton(view.getSaveSettingButton(), newState);
 
-            new BtnSound("click").actionPerformed(null);
+            new BtnSound("click", SettingController.this).actionPerformed(null);
 
             if (newState) {
                 SettingManager.saveSetting();
@@ -78,7 +78,7 @@ public class SettingController {
             public void mouseEntered(MouseEvent e) {
                 button.setBackground(originalBackgroundColor.darker());
                 button.setForeground(Color.WHITE);
-                new BtnSound("hover").actionPerformed(null);
+                new BtnSound("hover", SettingController.this).actionPerformed(null);
             }
 
             @Override
@@ -94,7 +94,7 @@ public class SettingController {
         settingsFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                new BtnSound("click").actionPerformed(null);
+                new BtnSound("click", SettingController.this).actionPerformed(null);
                 returnToLandingPage();
                 settingsFrame.dispose();
             }
