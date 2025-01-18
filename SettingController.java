@@ -102,6 +102,10 @@ public class SettingController {
         return SettingManager.isSaveSettingPermanently();
     }
 
+    public void runLoadSetting() {
+        SettingManager.loadSetting();
+    }
+
     public void checkSetting() {
         SettingManager.checkBeforeQuit();
     }
