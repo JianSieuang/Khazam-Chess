@@ -3,6 +3,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class SettingController {
 
@@ -17,6 +19,7 @@ public class SettingController {
     public void navigateToSettingPage(JFrame currentFrame) {
         currentFrame.dispose();
         view.showSetting(currentFrame);
+        addWindowListener();
     }
 
     private void initializeListeners() {
@@ -76,6 +79,17 @@ public class SettingController {
             public void mouseExited(MouseEvent e) {
                 button.setBackground(originalBackgroundColor);
                 button.setForeground(Color.BLACK);
+            }
+        });
+    }
+
+    private void addWindowListener() {
+        JFrame settingsFrame = view.getSettingFrame();
+        settingsFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                returnToLandingPage();
+                settingsFrame.dispose();
             }
         });
     }
