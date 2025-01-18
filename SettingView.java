@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class SettingView 
-{
-
+public class SettingView {
+    
     private JFrame settingsFrame;
     private JLabel titleLabel;
     private JButton soundButton;
