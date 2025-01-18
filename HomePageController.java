@@ -12,7 +12,6 @@ public class HomePageController {
     public HomePageController() {
         view = new HomePageView();
         settingController = new SettingController();
-        // AudioPlayer.playBackgroundMusic();
 
         if (SettingManager.isEnabledSound()) {
             AudioPlayer.playBackgroundMusic();
@@ -66,7 +65,7 @@ public class HomePageController {
             public void mouseEntered(MouseEvent e) {
                 button.setBackground(button.getBackground().darker());
                 button.setForeground(Color.WHITE);
-                new BtnSound("hover").actionPerformed(null);
+                new BtnSound("hover", settingController).actionPerformed(null);
             }
 
             @Override
@@ -76,7 +75,7 @@ public class HomePageController {
             }
         });
 
-        button.addActionListener(e -> new BtnSound("click").actionPerformed(null));
+        button.addActionListener(e -> new BtnSound("click", settingController).actionPerformed(null));
     }
 
     public static void main(String[] args) {
