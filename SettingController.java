@@ -40,7 +40,7 @@ public class SettingController {
         return e -> {
             boolean newState = !SettingManager.isEnabledSound();
             SettingManager.setEnabledSound(newState);
-            view.updateSoundButton(view.getSoundButton(), newState);
+            view.updateButton(view.getSoundButton(), newState);
 
             new BtnSound("click").actionPerformed(null);
             SettingManager.saveSetting();
@@ -52,7 +52,7 @@ public class SettingController {
             boolean newState = !SettingManager.isSaveSettingPermanently();
             SettingManager.setSaveSettingPermanently(newState);
 
-            view.updateSaveSettingButton(view.getSaveSettingButton(), newState);
+            view.updateButton(view.getSaveSettingButton(), newState);
 
             new BtnSound("click").actionPerformed(null);
 
@@ -77,7 +77,7 @@ public class SettingController {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setBackground(originalBackgroundColor);
+                button.setBackground(button.getBackground());
                 button.setForeground(Color.BLACK);
             }
         });
@@ -88,6 +88,7 @@ public class SettingController {
         settingsFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                new BtnSound("click").actionPerformed(null);
                 returnToLandingPage();
                 settingsFrame.dispose();
             }
