@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SettingView {
-    
+
     private JFrame settingsFrame;
     private JLabel titleLabel;
     private JButton soundButton;
@@ -13,14 +13,14 @@ public class SettingView {
     public SettingView(SettingController controller) {
         this.controller = controller;
         controller.runLoadSetting();
-        soundButton = new JButton(SettingViewUtils.getOnOffLabel(controller.getIsSoundEnabled()));
-        SettingViewUtils.setButtonDesign(soundButton, controller.getIsSoundEnabled());
+        soundButton = new JButton(getOnOffLabel(controller.getIsSoundEnabled()));
+        setButtonDesign(soundButton, controller.getIsSoundEnabled());
 
-        saveSettingButton = new JButton(SettingViewUtils.getOnOffLabel(controller.getIsSaveSettingPermanently()));
-        SettingViewUtils.setButtonDesign(saveSettingButton, controller.getIsSaveSettingPermanently());
+        saveSettingButton = new JButton(getOnOffLabel(controller.getIsSaveSettingPermanently()));
+        setButtonDesign(saveSettingButton, controller.getIsSaveSettingPermanently());
 
         backButton = new JButton("Back");
-        SettingViewUtils.setButtonDesign(backButton, false);
+        setButtonDesign(backButton, false);
     }
 
     public void showSetting(JFrame parentFrame) {
@@ -83,6 +83,23 @@ public class SettingView {
         panel.add(backButtonPanel);
     }
 
+    // reusable Methods for Button Updates
+    private String getOnOffLabel(boolean state) {
+        return state ? "ON" : "OFF";
+    }
+
+    private void setButtonDesign(JButton button, boolean isOn) {
+        Color backgroundColor = isOn ? new Color(144, 238, 144) : new Color(240, 128, 128);
+
+        button.setUI(new RoundedButtonUI()); // set the button's UI to the custom UI
+        button.setFocusPainted(false); // remove focus border
+        button.setOpaque(false); // set to true to allow background color to show
+        button.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // remove default border
+
+        button.setBackground(backgroundColor); // default background color
+        button.setForeground(Color.BLACK); // default text color
+    }
+
     public JButton getSoundButton() {
         return soundButton;
     }
@@ -95,14 +112,9 @@ public class SettingView {
         return backButton;
     }
 
-    public void updateSoundButton(JButton soundButton, boolean isEnabled) {
-        soundButton.setText(SettingViewUtils.getOnOffLabel(isEnabled));
-        SettingViewUtils.setButtonDesign(soundButton, isEnabled);
-    }
-
-    public void updateSaveSettingButton(JButton saveSettingButton, boolean isEnabled) {
-        saveSettingButton.setText(SettingViewUtils.getOnOffLabel(isEnabled));
-        SettingViewUtils.setButtonDesign(saveSettingButton, isEnabled);
+    public void updateButton(JButton button, boolean state) {
+        button.setText(getOnOffLabel(state));
+        setButtonDesign(button, state);
     }
 
     public JFrame getSettingFrame() {
