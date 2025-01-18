@@ -12,7 +12,12 @@ public class HomePageController {
     public HomePageController() {
         view = new HomePageView();
         settingController = new SettingController();
-        AudioPlayer.playBackgroundMusic();
+        // AudioPlayer.playBackgroundMusic();
+
+        if (SettingManager.isEnabledSound()) {
+            AudioPlayer.playBackgroundMusic();
+        }
+
         initializeListeners();
     }
 
