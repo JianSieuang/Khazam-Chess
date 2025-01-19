@@ -9,7 +9,6 @@ public class AudioPlayer {
     // play music
     public static void playBackgroundMusic() {
         try {
-            // if (SettingManager.isEnabledSound()) {
             if (currentClip == null || !currentClip.isRunning()) {
                 stopBackgroundMusic(); // stop any currently playing music
                 File musicFile = new File("sources/background_music.wav");
@@ -19,9 +18,6 @@ public class AudioPlayer {
                 currentClip.loop(Clip.LOOP_CONTINUOUSLY); // loop the music
                 currentClip.start();
             }
-            // } else {
-            // stopBackgroundMusic();
-            // }
         } catch (Exception e) {
             e.printStackTrace();
         }
