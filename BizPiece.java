@@ -11,15 +11,21 @@ class BizPiece extends GamePiece
         this.player = player;
         this.currentImage = 0;
         
-        if(player == "Blue")
+        if(player.equals("Blue"))
         {
             images.add("Picture/Biz_Blue.png");
         }
-        else if(player == "Red")
+        else if(player.equals("Red"))
         {
             images.add("Picture/Biz_Red.png");
         }
     }
+    
+    public String getPieceName()
+    {
+        return "Biz_" + player;
+    }
+
     
     public int[][] moveable(GamePiece[][] board)
     {
@@ -79,7 +85,7 @@ class BizPiece extends GamePiece
                 
                 if(r >= 0 && r < 8 && c >= 0 && c < 5)
                 {   
-                    if(board[r][c] != null && board[r][c].getPlayer() != player)
+                    if(board[r][c] != null && !board[r][c].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {r, c};
                     }
@@ -90,7 +96,7 @@ class BizPiece extends GamePiece
                 
                 if(r >= 0 && r < 8 && c >= 0 && c < 5)
                 {   
-                    if(board[r][c] != null && board[r][c].getPlayer() != player)
+                    if(board[r][c] != null && !board[r][c].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {r, c};
                     }

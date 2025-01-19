@@ -13,17 +13,30 @@ class RamPiece extends GamePiece
         this.player = player;
         this.currentImage = 0;
         
-        if(player == "Blue")
+        if(player.equals("Blue") || player.equals("Blue_Flip"))
         {
             images.add("Picture/Ram_Blue.png");
             images.add("Picture/Ram_Blue_Flip.png");
         }
-        else if(player == "Red")
+        else if(player.equals("Red") || player.equals("Red_Flip"))
         {
             images.add("Picture/Ram_Red.png");
             images.add("Picture/Ram_Red_Flip.png");
         }
+        
+        if(player.equals("Blue_Flip") || player.equals("Red_Flip"))
+        {
+            String temp[] = player.split("_");
+            this.player = temp[0];
+            this.currentImage = 1;
+        }
     }
+    
+    public String getPieceName()
+    {
+        return "Ram_" + player + (currentImage == 0? "": "_Flip");
+    }
+
     
     public int[][] moveable(GamePiece[][] board)
     {
@@ -45,7 +58,7 @@ class RamPiece extends GamePiece
         
         if(r >= 0 && r < 8)
         {   
-            if(board[r][col] != null &&board[r][col].getPlayer() != player)
+            if(board[r][col] != null && !board[r][col].getPlayer().equals(player))
             {
                 return new int [][] {{r, col}};
             }

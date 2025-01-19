@@ -60,6 +60,7 @@ public class NavigationBar extends JMenuBar
         rulesPanel.add(imageAndRules(torImage, torRules));
         rulesPanel.add(imageAndRules(xorImage, xorRules));
         rulesPanel.add(imageAndRules(sauImage, sauRules));
+        rulesPanel.add(generalRules);
 
         rulesPanel.setBackground(Color.WHITE);
         rulesDialog.add(rulesPanel);

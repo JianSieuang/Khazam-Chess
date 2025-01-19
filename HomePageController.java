@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 public class HomePageController {
     private HomePageView view;
     private SettingController settingController;
+    private GamePageController gameController;
 
     public HomePageController() {
         view = new HomePageView();
@@ -26,7 +27,7 @@ public class HomePageController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                new GamePage("new");
+                gameController = new GamePageController("New Game");
             }
         });
 
@@ -35,7 +36,7 @@ public class HomePageController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                new GamePage("load");
+                gameController = new GamePageController("load Game");
             }
         });
 

@@ -1,25 +1,27 @@
 public class SettingModel 
 {
     private boolean soundEnabled;
+    private GameBoard gameBoard;
 
-    public SettingModel() 
+    public SettingModel(GameBoard gameBoard) 
     {
         soundEnabled = true;
+        this.gameBoard = gameBoard;
     }
 
     public void newGame() 
     {
-        System.out.println("[Model] Starting a new game...");
+
     }
 
     public void saveGame() 
     {
-        System.out.println("[Model] Saving the game...");
-    }
+        gameBoard.saveGame();
+    }   
     
     public void exitGame()
     {
-        System.out.println("Bye bye");
+
     }
 
     public void toggleSound() 

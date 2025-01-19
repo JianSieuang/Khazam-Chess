@@ -1,6 +1,8 @@
+import java.io.*;
+import java.util.Scanner;
 
 public class GameBoard
- {
+{
     private int row = 8;
     private int col = 5;
     private GamePiece[][] board;
@@ -15,10 +17,18 @@ public class GameBoard
     private int[][] moveableSteps;
     private int[][] capturableSteps;
     
-    public GameBoard() 
+    public GameBoard(String gameType) 
     {
         board = new GamePiece[row][col];
-        initBoard();
+        if(gameType.equals("New Game"))
+        {
+            initBoard();
+        }
+        else
+        {
+            loadGame();
+        }
+        
     }
     
     private void initBoard()
@@ -39,6 +49,101 @@ public class GameBoard
         {
             board[1][i] = new RamPiece(1, i, "Red");
             board[6][i] = new RamPiece(6, i, "Blue");
+        }
+    }
+    
+    public void saveGame()
+    {
+        try (PrintWriter writer = new PrintWriter("game.txt")) 
+        {
+            writer.println("Turn: " + turn);
+            writer.println("Move: " + move);
+            writer.println();
+    
+            writer.println("Board:");
+            for (GamePiece[] row : board) 
+            {
+                for (GamePiece piece : row) 
+                {
+                    if (piece != null) 
+                    {
+                        writer.print(piece.getPieceName() + " ");
+                    } 
+                    else 
+                    {
+                        writer.print(". ");
+                    }
+                }
+                writer.println();
+            }
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    public void loadGame() 
+    {
+        try (Scanner scanner = new Scanner(new File("game.txt"))) 
+        {
+            String turnLine = scanner.nextLine();
+            turn = Integer.parseInt(turnLine.split(": ")[1]);
+    
+            String moveLine = scanner.nextLine();
+            move = moveLine.split(": ")[1];
+    
+            if (scanner.hasNextLine()) 
+            {
+                scanner.nextLine();
+            }
+    
+            if (scanner.hasNextLine()) 
+            {
+                scanner.nextLine();
+            }
+    
+            for (int i = 0; i < row; i++) 
+            {
+                String[] line = scanner.nextLine().split(" ");
+                for (int j = 0; j < col; j++) 
+                {
+                    String piece = line[j];
+                    if (!piece.equals(".")) 
+                    {
+                        String[] parts = piece.split("_", 2);
+                        String type = parts[0];
+                        String player = parts[1];
+
+                        switch (type) 
+                        {
+                            case "Tor":
+                                board[i][j] = new TorPiece(i, j, player);
+                                break;
+                            case "Xor":
+                                board[i][j] = new XorPiece(i, j, player);
+                                break;
+                            case "Biz":
+                                board[i][j] = new BizPiece(i, j, player);
+                                break;
+                            case "Sau":
+                                board[i][j] = new SauPiece(i, j, player);
+                                break;
+                            case "Ram":
+                                board[i][j] = new RamPiece(i, j, player);
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unknown piece type: " + type);
+                        }
+                    } 
+                    else 
+                    {
+                        board[i][j] = null;
+                    }
+                }
+            }
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
         }
     }
     
@@ -116,7 +221,7 @@ public class GameBoard
                 clearSelectedPieceAndSteps();
                 return;
             }
-            else if(board[r][c] != null && board[r][c].player == move)
+            else if(board[r][c] != null && board[r][c].player.equals(move))
             {
                 selectedPiece = board[r][c];
                 selectedRow = r;

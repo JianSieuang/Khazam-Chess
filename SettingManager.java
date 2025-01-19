@@ -26,7 +26,7 @@ public class SettingManager {
             }
         } else {
             saveSetting();
-        }
+        }   
     }
 
     public static void saveSetting() {

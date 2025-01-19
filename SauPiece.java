@@ -11,18 +11,30 @@ class SauPiece extends GamePiece
         this.player = player;
         this.currentImage = 0;
         
-        if(player == "Blue")
+        if(player.equals("Blue") || player.equals("Blue_Flip"))
         {
             images.add("Picture/Sau_Blue.png");
             images.add("Picture/Sau_Blue_Flip.png");
         }
-        else if(player == "Red")
+        else if(player.equals("Red") || player.equals("Red_Flip"))
         {
             images.add("Picture/Sau_Red.png");
             images.add("Picture/Sau_Red_Flip.png");
         }
+        
+        if(player.equals("Blue_Flip") || player.equals("Red_Flip"))
+        {
+            String temp[] = player.split("_");
+            this.player = temp[0];
+            this.currentImage = 1;
+        }
     }
     
+    public String getPieceName()
+    {
+        return "Sau_" + player + (currentImage == 0? "": "_Flip");
+    }
+
     public int[][] moveable(GamePiece[][] board)
     {
         int r, c;
@@ -66,7 +78,7 @@ class SauPiece extends GamePiece
                 
                 if(r >= 0 && r < 8 && c >= 0 && c < 8)
                 {   
-                    if(board[r][c] != null && board[r][c].getPlayer() != player)
+                    if(board[r][c] != null && !board[r][c].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {r, c};
                     }

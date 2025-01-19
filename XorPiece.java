@@ -11,15 +11,21 @@ class XorPiece extends GamePiece
         this.player = player;
         this.currentImage = 0;
         
-        if(player == "Blue")
+        if(player.equals("Blue"))
         {
             images.add("Picture/Xor_Blue.png");
         }
-        else if(player == "Red")
+        else if(player.equals("Red"))
         {
             images.add("Picture/Xor_Red.png");
         }
     }
+    
+    public String getPieceName()
+    {
+        return "Xor_" + player;
+    }
+
 
     public int[][] moveable(GamePiece[][] board)
     {
@@ -113,7 +119,7 @@ class XorPiece extends GamePiece
             {
                 if(board[row-i][col-i] != null)
                 {
-                    if(board[row-i][col-i].getPlayer() != player)
+                    if(!board[row-i][col-i].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row - i, col - i};
                     }
@@ -129,7 +135,7 @@ class XorPiece extends GamePiece
             {
                 if(board[row-i][col+i] != null)
                 {
-                    if(board[row-i][col+i].getPlayer() != player)
+                    if(!board[row-i][col+i].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row - i, col + i};
                     }
@@ -145,7 +151,7 @@ class XorPiece extends GamePiece
             {
                 if(board[row+i][col-i] != null)
                 {
-                    if(board[row+i][col-i].getPlayer() != player)
+                    if(!board[row+i][col-i].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row + i, col - i};
                     }
@@ -161,7 +167,7 @@ class XorPiece extends GamePiece
             {
                 if(board[row+i][col+i] != null)
                 {
-                    if(board[row+i][col+i].getPlayer() != player)
+                    if(!board[row+i][col+i].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row + i, col + i};
                     }

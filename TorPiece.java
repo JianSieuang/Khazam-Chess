@@ -11,14 +11,19 @@ class TorPiece extends GamePiece
         this.player = player;
         this.currentImage = 0;
         
-        if(player == "Blue")
+        if(player.equals("Blue"))
         {
             images.add("Picture/Tor_Blue.png");
         }
-        else if(player == "Red")
+        else if(player.equals("Red"))
         {
             images.add("Picture/Tor_Red.png");
         }
+    }
+    
+    public String getPieceName()
+    {
+        return "Tor_" + player;
     }
 
     public int[][] moveable(GamePiece[][] board)
@@ -113,7 +118,7 @@ class TorPiece extends GamePiece
             {
                 if(board[row-i][col] != null)
                 {
-                    if(board[row-i][col].getPlayer() != player)
+                    if(!board[row-i][col].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row - i, col};
                     }
@@ -129,7 +134,7 @@ class TorPiece extends GamePiece
             {
                 if(board[row+i][col] != null)
                 {
-                    if(board[row+i][col].getPlayer() != player)
+                    if(!board[row+i][col].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row + i, col};
                     }
@@ -145,7 +150,7 @@ class TorPiece extends GamePiece
             {
                 if(board[row][col-i] != null)
                 {
-                    if(board[row][col-i].getPlayer() != player)
+                    if(!board[row][col-i].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row, col - i};
                     }
@@ -161,7 +166,7 @@ class TorPiece extends GamePiece
             {
                 if(board[row][col+i] != null)
                 {
-                    if(board[row][col+i].getPlayer() != player)
+                    if(!board[row][col+i].getPlayer().equals(player))
                     {
                         moves[count++] = new int[] {row, col + i};
                     }

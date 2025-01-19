@@ -22,6 +22,7 @@ abstract class GamePiece
         return player;
     }
     
+    public abstract String getPieceName();
     public abstract int[][] moveable(GamePiece[][] board);
     public abstract int[][] capturable(GamePiece[][] board);
     public abstract void updatePosition(int r, int c);
