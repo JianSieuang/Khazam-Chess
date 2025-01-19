@@ -13,7 +13,7 @@ public class HomePageController {
         view = new HomePageView();
         settingController = new SettingController();
 
-        if (SettingManager.isEnabledSound()) {
+        if (settingController.getIsSoundEnabled()) {
             AudioPlayer.playBackgroundMusic();
         }
 
