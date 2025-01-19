@@ -23,7 +23,6 @@ View
 - ContentPanel.java (Panel with buttons for main actions)
 - BackgroundPanel.java (Handles background images)
 - BackgroundImage.java (Fetches background images)
-- SettingViewUtils.java (Utility for button styling in views)
 
 Controller
 - SettingController.java (Manages user interaction with settings)
