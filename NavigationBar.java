@@ -35,12 +35,13 @@ public class NavigationBar extends JMenuBar
     {
         JDialog rulesDialog = new JDialog();
         rulesDialog.setTitle("Kwazam Chess Rules");
-        rulesDialog.setSize(600, 450);
+        rulesDialog.setSize(400, 550);
         rulesDialog.setLocationRelativeTo(null);
         rulesDialog.setModal(true);
         
         JPanel rulesPanel = new JPanel();
         rulesPanel.setLayout(new GridLayout(0, 1, 10, 10));
+        rulesPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
         
         JLabel ramImage = new JLabel(resizeImage("Picture/Ram_Blue.png", 50, 50));
         JLabel bizImage = new JLabel(resizeImage("Picture/Biz_Blue.png", 50, 50));
@@ -54,6 +55,7 @@ public class NavigationBar extends JMenuBar
         JTextArea xorRules = new JTextArea("The Xor piece can move diagonally only but can go any distance. It cannot skip over other pieces. However, after 2 turns, it transforms into the Tor piece.");
         JTextArea sauRules = new JTextArea("The Sau piece can move only one step in any direction. The game ends when the Sau is captured by the other side.");
         JTextArea generalRules = new JTextArea("General Rule: None of the pieces are allowed to skip over other pieces, except for Biz.");
+        generalRules.setLineWrap(true);
 
         rulesPanel.add(imageAndRules(ramImage, ramRules));
         rulesPanel.add(imageAndRules(bizImage, bizRules));
@@ -86,7 +88,7 @@ public class NavigationBar extends JMenuBar
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         rule.setLineWrap(true);
         panel.add(image, BorderLayout.WEST);
         panel.add(rule, BorderLayout.CENTER);
