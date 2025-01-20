@@ -9,6 +9,9 @@ public class SettingView {
     private JButton saveSettingButton;
     private JButton backButton;
     private SettingController controller;
+    private JButton primaryColorButton;
+    private JButton secondaryColorButton;
+    private Color txtColor = new Color(34, 34, 34);
 
     public SettingView(SettingController controller) {
         this.controller = controller;
@@ -18,6 +21,11 @@ public class SettingView {
 
         saveSettingButton = new JButton(getOnOffLabel(controller.getIsSaveSettingPermanently()));
         setButtonDesign(saveSettingButton, controller.getIsSaveSettingPermanently());
+
+        primaryColorButton = new JButton("Color Picker");
+        setButtonDesign(primaryColorButton, false);
+        secondaryColorButton = new JButton("Color Picker");
+        setButtonDesign(secondaryColorButton, false);
 
         backButton = new JButton("Back");
         setButtonDesign(backButton, false);
@@ -50,19 +58,17 @@ public class SettingView {
     private void addSettingTitle(JPanel panel) {
         titleLabel = new JLabel("Settings");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
-        titleLabel.setForeground(new Color(255, 255, 255));
+        titleLabel.setForeground(txtColor);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(titleLabel);
     }
 
     private void addSettingOptions(JPanel panel, JFrame settingsFrame) {
         JLabel soundLabel = new JLabel("Sound:");
-        soundLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        soundLabel.setForeground(new Color(255, 255, 255));
+        configureLabel(soundLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
 
         JLabel saveAsDefaultLabel = new JLabel("Save as default:");
-        saveAsDefaultLabel.setFont(new Font("Arial", Font.BOLD, 17));
-        saveAsDefaultLabel.setForeground(new Color(255, 255, 255));
+        configureLabel(saveAsDefaultLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
 
         JPanel soundPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         soundPanel.setOpaque(false);
@@ -73,7 +79,38 @@ public class SettingView {
         soundPanel.add(saveAsDefaultLabel);
         soundPanel.add(saveSettingButton);
 
+        JLabel themeColorLabel = new JLabel("Theme Color");
+        configureLabel(themeColorLabel, new Font("Arial", Font.BOLD, 26), txtColor, false);
+        themeColorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JPanel themeTitlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        themeTitlePanel.setOpaque(false);
+        themeTitlePanel.add(themeColorLabel);
+
+        JLabel primaryColorLabel = new JLabel("     Primary Color:");
+        configureLabel(primaryColorLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
+
+        JLabel secondaryColorLabel = new JLabel("Secondary Color:");
+        configureLabel(secondaryColorLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
+
+        JPanel primaryColorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        primaryColorPanel.setOpaque(false);
+        primaryColorPanel.add(primaryColorLabel);
+        primaryColorPanel.add(primaryColorButton);
+
+        JPanel secondaryColorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        secondaryColorPanel.setOpaque(false);
+        secondaryColorPanel.add(secondaryColorLabel);
+        secondaryColorPanel.add(secondaryColorButton);
+
+        primaryColorButton.setBackground(controller.getPrimaryColor());
+        secondaryColorButton.setBackground(controller.getSecondaryColor());
+
         panel.add(soundPanel);
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        panel.add(themeTitlePanel);
+        panel.add(primaryColorPanel);
+        panel.add(secondaryColorPanel);
 
         JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         backButtonPanel.setOpaque(false);
@@ -100,6 +137,14 @@ public class SettingView {
         button.setForeground(Color.BLACK); // default text color
     }
 
+    public JButton getPrimaryColorButton() {
+        return primaryColorButton;
+    }
+
+    public JButton getSecondaryColorButton() {
+        return secondaryColorButton;
+    }
+
     public JButton getSoundButton() {
         return soundButton;
     }
@@ -119,5 +164,11 @@ public class SettingView {
 
     public JFrame getSettingFrame() {
         return settingsFrame;
+    }
+
+    private void configureLabel(JLabel label, Font font, Color foregroundColor, boolean isOpaque) {
+        label.setFont(font);
+        label.setForeground(foregroundColor);
+        label.setOpaque(isOpaque);
     }
 }

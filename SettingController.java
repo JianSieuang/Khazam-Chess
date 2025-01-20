@@ -16,22 +16,16 @@ public class SettingController {
         SettingManager.loadSetting();
         initializeListeners();
     }
-    
-        
-    public static SettingController getController()
-    {
-        if(controller == null)
-        {
+
+    public static SettingController getController() {
+        if (controller == null) {
             controller = new SettingController();
-        }
-        else
-        {
+        } else {
             controller.view = new SettingView(controller);
             controller.initializeListeners();
         }
         return controller;
     }
-    
 
     public void navigateToSettingPage(JFrame currentFrame) {
         currentFrame.dispose();
@@ -42,6 +36,8 @@ public class SettingController {
     private void initializeListeners() {
         view.getSoundButton().addActionListener(createSoundButtonListener());
         view.getSaveSettingButton().addActionListener(createSaveSettingButtonListener());
+        view.getPrimaryColorButton().addActionListener(createColorPickerListener(true));
+        view.getSecondaryColorButton().addActionListener(createColorPickerListener(false));
         view.getBackButton().addActionListener(e -> {
             view.getSettingFrame().dispose();
             new BtnSound("click", SettingController.this).actionPerformed(null);
@@ -51,6 +47,9 @@ public class SettingController {
         addHoverSound(view.getSoundButton());
         addHoverSound(view.getSaveSettingButton());
         addHoverSound(view.getBackButton());
+
+        addColorPickerHoverSound(view.getPrimaryColorButton(), true);
+        addColorPickerHoverSound(view.getSecondaryColorButton(), false);
     }
 
     private ActionListener createSoundButtonListener() {
@@ -106,6 +105,51 @@ public class SettingController {
         });
     }
 
+    private void addColorPickerHoverSound(JButton button, boolean isPrimary) {
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                if (isPrimary) {
+                    button.setBackground(getPrimaryColor().darker());
+                } else {
+                    button.setBackground(getSecondaryColor().darker());
+                }
+                button.setForeground(Color.WHITE);
+                new BtnSound("hover", SettingController.this).actionPerformed(null);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if (isPrimary) {
+                    button.setBackground(getPrimaryColor().brighter());
+                } else {
+                    button.setBackground(getSecondaryColor().brighter());
+                }
+                button.setForeground(Color.BLACK);
+            }
+        });
+    }
+
+    private ActionListener createColorPickerListener(boolean isPrimary) {
+        new BtnSound("click", SettingController.this).actionPerformed(null);
+
+        return e -> {
+            Color initialColor = isPrimary ? SettingManager.getPrimaryColor() : SettingManager.getSecondaryColor();
+            Color newColor = JColorChooser.showDialog(view.getPrimaryColorButton(), "Choose a color", initialColor);
+            if (newColor != null) {
+                if (isPrimary) {
+                    SettingManager.setPrimaryColor(newColor);
+                    view.getPrimaryColorButton().setBackground(newColor);
+                } else {
+                    SettingManager.setSecondaryColor(newColor);
+                    view.getSecondaryColorButton().setBackground(newColor);
+                }
+                SettingManager.saveSetting();
+            }
+        };
+    }
+
     private void addWindowListener() {
         JFrame settingsFrame = view.getSettingFrame();
         settingsFrame.addWindowListener(new WindowAdapter() {
@@ -124,6 +168,14 @@ public class SettingController {
 
     public boolean getIsSaveSettingPermanently() {
         return SettingManager.isSaveSettingPermanently();
+    }
+
+    public Color getPrimaryColor() {
+        return SettingManager.getPrimaryColor();
+    }
+
+    public Color getSecondaryColor() {
+        return SettingManager.getSecondaryColor();
     }
 
     public void runLoadSetting() {
