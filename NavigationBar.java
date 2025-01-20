@@ -68,6 +68,19 @@ public class NavigationBar extends JMenuBar
         rulesDialog.setResizable(false);
     }
     
+    public int showConfirmNewGameDialog()
+    {
+        return JOptionPane.showConfirmDialog(
+            null,
+            "Starting a new game will erase the current progress. Do you want to proceed?",
+            "Confirm New Game",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
+    
+    
+    
     private JPanel imageAndRules(JLabel image, JTextArea  rule)
     {
         JPanel panel = new JPanel();

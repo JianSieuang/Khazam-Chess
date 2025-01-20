@@ -4,14 +4,14 @@ public class GamePageController implements ComponentListener, MouseListener, Mou
 {
     private GameBoard gameModel;
     private GamePageView view;
-    private SettingModel settingModel;
+    private NavbarModel navbarModel;
     private int width = 600;
     private int height = 600;
     
     public GamePageController(String gameType) 
     {
         gameModel = new GameBoard(gameType);
-        settingModel = new SettingModel(gameModel);
+        navbarModel = new NavbarModel(gameModel);
         view = new GamePageView(gameModel.getBoard(), width, height);
         
         view.addComponentListener(this);
@@ -71,15 +71,16 @@ public class GamePageController implements ComponentListener, MouseListener, Mou
         String command = e.getActionCommand();
         switch (command) {
             case "New Game":
-                settingModel.newGame();
+                navbarModel.newGame(view.getNavigationBar().showConfirmNewGameDialog());
+                view.redrawBoard();
                 break;
             case "Save Game":
-                settingModel.saveGame();
+                navbarModel.saveGame();
                 break;
             case "Exit":
                 view.dispose();
                 new HomePageController();
-                settingModel.exitGame();
+                navbarModel.exitGame();
                 break;
             case "Rules":
                 view.getNavigationBar().showRulesDialog();
@@ -92,6 +93,6 @@ public class GamePageController implements ComponentListener, MouseListener, Mou
     //ItemListener
     public void itemStateChanged(ItemEvent e) 
     {
-        settingModel.toggleSound();
+        navbarModel.toggleSound();
     }
 }

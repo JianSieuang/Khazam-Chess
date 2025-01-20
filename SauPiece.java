@@ -24,8 +24,7 @@ class SauPiece extends GamePiece
         
         if(player.equals("Blue_Flip") || player.equals("Red_Flip"))
         {
-            String temp[] = player.split("_");
-            this.player = temp[0];
+            this.player = player.split("_")[0];
             this.currentImage = 1;
         }
     }

@@ -1,13 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class GameBoard
 {
     private int row = 8;
     private int col = 5;
     private GamePiece[][] board;
-    private static int turn = 0;
-    private String move = "Blue";
+    private static int turn;
+    private String move;
     private String winner;
     
     private GamePiece selectedPiece;
@@ -28,11 +29,12 @@ public class GameBoard
         {
             loadGame();
         }
-        
     }
     
     private void initBoard()
     {
+        move = "Blue";
+        turn = 0;
         board[0][0] = new TorPiece(0, 0, "Red");
         board[0][1] = new BizPiece(0, 1, "Red");
         board[0][2] = new SauPiece(0, 2, "Red");
@@ -50,6 +52,14 @@ public class GameBoard
             board[1][i] = new RamPiece(1, i, "Red");
             board[6][i] = new RamPiece(6, i, "Blue");
         }
+    }
+    
+    public void newGame()
+    {
+        for (GamePiece[] row : board) {
+            Arrays.fill(row, null); 
+        }
+        initBoard();
     }
     
     public void saveGame()
@@ -87,10 +97,10 @@ public class GameBoard
         try (Scanner scanner = new Scanner(new File("game.txt"))) 
         {
             String turnLine = scanner.nextLine();
-            turn = Integer.parseInt(turnLine.split(": ")[1]);
+            this.turn = Integer.parseInt(turnLine.split(": ")[1]);
     
             String moveLine = scanner.nextLine();
-            move = moveLine.split(": ")[1];
+            this.move = moveLine.split(": ")[1];
     
             if (scanner.hasNextLine()) 
             {
@@ -186,10 +196,10 @@ public class GameBoard
     
     private void countMove()
     {
-        move = move == "Blue"? "Red" : "Blue";
-        turn = move == "Blue"? turn + 1: turn;
+        move = move.equals("Blue")? "Red" : "Blue";
+        turn = move.equals("Blue")? turn + 1: turn;
         
-        if(turn % 2 == 0 && move == "Blue")
+        if(turn % 2 == 0 &&  move.equals("Blue"))
         {
             for(int i = 0; i < row; i++) 
             {
@@ -230,6 +240,7 @@ public class GameBoard
                 capturableSteps = selectedPiece.capturable(board);
             }
         }
+
     }
     
     public boolean putPiece(int r, int c)

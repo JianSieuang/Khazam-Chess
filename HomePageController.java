@@ -78,8 +78,4 @@ public class HomePageController {
 
         button.addActionListener(e -> new BtnSound("click", settingController).actionPerformed(null));
     }
-
-    public static void main(String[] args) {
-        new HomePageController();
-    }
 }
