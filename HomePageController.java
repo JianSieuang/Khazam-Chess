@@ -68,7 +68,6 @@ public class HomePageController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 settingController.checkSetting();
-                AudioPlayer.stopBackgroundMusic();
                 System.exit(0);
             }
         });
