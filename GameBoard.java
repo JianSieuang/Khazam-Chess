@@ -23,7 +23,7 @@ public class GameBoard
         board = new GamePiece[row][col];
         if(gameType.equals("New Game"))
         {
-            initBoard();
+            newGame();
         }
         else
         {

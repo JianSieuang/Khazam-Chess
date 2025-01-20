@@ -2,22 +2,40 @@ import java.awt.event.*;
 
 public class GamePageController implements ComponentListener, MouseListener, MouseMotionListener, ActionListener, ItemListener
 {
+    private static GamePageController controller;
     private GameBoard gameModel;
     private GamePageView view;
     private NavbarModel navbarModel;
     private int width = 600;
     private int height = 600;
     
-    public GamePageController(String gameType) 
+    private GamePageController(String gameType) 
     {
         gameModel = new GameBoard(gameType);
         navbarModel = new NavbarModel(gameModel);
         view = new GamePageView(gameModel.getBoard(), width, height);
-        
+
         view.addComponentListener(this);
         view.getGameBoardPanel().addMouseListener(this);
         view.getGameBoardPanel().addMouseMotionListener(this);
         initializeMenuListener();
+    }
+    
+    public static GamePageController getController(String gameType)
+    {
+        if(controller == null)
+        {
+            controller = new GamePageController(gameType);
+        } 
+        else if (controller.view == null || !controller.view.isDisplayable()) 
+        {            
+            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height);
+            controller.view.addComponentListener(controller);
+            controller.view.getGameBoardPanel().addMouseListener(controller);
+            controller.view.getGameBoardPanel().addMouseMotionListener(controller);
+            controller.initializeMenuListener();
+        }
+        return controller;
     }
     
     private void initializeMenuListener()
@@ -79,7 +97,7 @@ public class GamePageController implements ComponentListener, MouseListener, Mou
                 break;
             case "Exit":
                 view.dispose();
-                new HomePageController();
+                HomePageController.getController();
                 navbarModel.exitGame();
                 break;
             case "Rules":

@@ -81,8 +81,7 @@ public class NavigationBar extends JMenuBar
         );
     }
     
-    
-    
+        
     private JPanel imageAndRules(JLabel image, JTextArea  rule)
     {
         JPanel panel = new JPanel();

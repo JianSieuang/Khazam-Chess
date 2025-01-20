@@ -1,12 +1,12 @@
-Turn: 1
+Turn: 2
 Move: Blue
 
 Board:
-Tor_Red Biz_Red Sau_Red Biz_Red Xor_Red 
-Ram_Red . Ram_Red Ram_Red Ram_Red 
-. Ram_Red . . . 
+Xor_Red Biz_Red Sau_Red Biz_Red Tor_Red 
+. Ram_Red . Ram_Red Ram_Red 
+Ram_Red . Ram_Red . . 
 . . . . . 
 . . . . . 
-. . Ram_Blue . . 
-Ram_Blue Ram_Blue . Ram_Blue Ram_Blue 
-Xor_Blue Biz_Blue Sau_Blue Biz_Blue Tor_Blue 
+. . Ram_Blue Ram_Blue . 
+Ram_Blue Ram_Blue . . Ram_Blue 
+Tor_Blue Biz_Blue Sau_Blue Biz_Blue Xor_Blue 

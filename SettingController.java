@@ -7,16 +7,31 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class SettingController {
-
+    private static SettingController controller;
     private SettingView view;
 
-    public SettingController() {
+    private SettingController() {
         this.view = new SettingView(this);
         AudioPlayer.setSettingController(this);
-
         SettingManager.loadSetting();
         initializeListeners();
     }
+    
+        
+    public static SettingController getController()
+    {
+        if(controller == null)
+        {
+            controller = new SettingController();
+        }
+        else
+        {
+            controller.view = new SettingView(controller);
+            controller.initializeListeners();
+        }
+        return controller;
+    }
+    
 
     public void navigateToSettingPage(JFrame currentFrame) {
         currentFrame.dispose();
@@ -120,6 +135,6 @@ public class SettingController {
     }
 
     public void returnToLandingPage() {
-        new HomePageController();
+        HomePageController.getController();
     }
 }

@@ -6,19 +6,33 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
 public class HomePageController {
+    private static HomePageController controller;
     private HomePageView view;
     private SettingController settingController;
     private GamePageController gameController;
 
-    public HomePageController() {
+    private HomePageController() {
         view = new HomePageView();
-        settingController = new SettingController();
+        settingController = SettingController.getController();
 
         if (settingController.getIsSoundEnabled()) {
             AudioPlayer.playBackgroundMusic();
         }
-
         initializeListeners();
+    }
+    
+    public static HomePageController getController()
+    {
+        if(controller == null)
+        {
+            controller = new HomePageController();
+        }
+        else
+        {
+            controller.view = new HomePageView();
+            controller.initializeListeners();
+        }
+        return controller;
     }
 
     private void initializeListeners() {
@@ -27,7 +41,7 @@ public class HomePageController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                gameController = new GamePageController("New Game");
+                gameController = GamePageController.getController("New Game");
             }
         });
 
@@ -36,7 +50,7 @@ public class HomePageController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                gameController = new GamePageController("load Game");
+                gameController = GamePageController.getController("load Game");
             }
         });
 
