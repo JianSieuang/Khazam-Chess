@@ -12,6 +12,8 @@ public class SettingController {
 
     public SettingController() {
         this.view = new SettingView(this);
+        AudioPlayer.setSettingController(this);
+
         SettingManager.loadSetting();
         initializeListeners();
     }
