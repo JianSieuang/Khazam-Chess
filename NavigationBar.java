@@ -6,22 +6,26 @@ public class NavigationBar extends JMenuBar {
     private JMenuItem saveGameItem;
     private JMenuItem exitItem;
     private JMenuItem rulesItem;
+    private JCheckBoxMenuItem soundMenuItem;
     private JCheckBoxMenuItem musicMenuItem;
 
-    public NavigationBar(boolean initialSoundState) {
+    public NavigationBar(boolean initialSoundState, boolean initialMusicState) {
         JMenu fileMenu = new JMenu("File");
         JMenu settingsMenu = new JMenu("Settings");
         JMenu helpMenu = new JMenu("Help");
         newGameItem = new JMenuItem("New Game");
         saveGameItem = new JMenuItem("Save Game");
         exitItem = new JMenuItem("Exit");
+        soundMenuItem = new JCheckBoxMenuItem("Sound");
+        soundMenuItem.setState(initialSoundState);
         musicMenuItem = new JCheckBoxMenuItem("Music");
-        musicMenuItem.setState(initialSoundState);
+        musicMenuItem.setState(initialMusicState);
         rulesItem = new JMenuItem("Rules");
 
         fileMenu.add(newGameItem);
         fileMenu.add(saveGameItem);
         fileMenu.add(exitItem);
+        settingsMenu.add(soundMenuItem);
         settingsMenu.add(musicMenuItem);
         helpMenu.add(rulesItem);
         add(fileMenu);

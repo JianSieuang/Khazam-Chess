@@ -10,7 +10,7 @@ public class GamePageView extends JFrame
     private NavigationBar navbar;
     public CoordinateAdapter adapter;
 
-    public GamePageView(GamePiece[][] board, int w, int h, boolean initialSoundState) 
+    public GamePageView(GamePiece[][] board, int w, int h,boolean initialSoundState, boolean initialMusicState) 
     {
         super("Game Board");
         this.board = board;
@@ -18,7 +18,7 @@ public class GamePageView extends JFrame
         this.height = h;
 
         adapter = new CoordinateAdapter();
-        navbar = new NavigationBar(initialSoundState);
+        navbar = new NavigationBar(initialSoundState, initialMusicState);
         GamePanel = new GameBoardPanel(board);
         setLayout(new BorderLayout());
         setJMenuBar(navbar);

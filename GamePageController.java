@@ -12,7 +12,7 @@ public class GamePageController
     private GamePageController(String gameType) {
         gameModel = new GameBoard(gameType);
         navbarModel = new NavbarModel(gameModel);
-        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsMusicSoundEnabled());
+        view = new GamePageView(gameModel.getBoard(), width, height,navbarModel.getIsButtonSoundEnabled(), navbarModel.getIsMusicSoundEnabled());
 
         view.addComponentListener(this);
         view.getGameBoardPanel().addMouseListener(this);
@@ -24,8 +24,7 @@ public class GamePageController
         if (controller == null) {
             controller = new GamePageController(gameType);
         } else if (controller.view == null || !controller.view.isDisplayable()) {
-            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
-                    controller.navbarModel.getIsMusicSoundEnabled());
+            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height, controller.navbarModel.getIsButtonSoundEnabled(), controller.navbarModel.getIsMusicSoundEnabled());
             controller.view.addComponentListener(controller);
             controller.view.getGameBoardPanel().addMouseListener(controller);
             controller.view.getGameBoardPanel().addMouseMotionListener(controller);

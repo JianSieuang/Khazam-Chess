@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class NavbarModel {
+    private boolean musicEnabled;
     private boolean soundEnabled;
     private GameBoard gameBoard;
 
@@ -26,20 +27,30 @@ public class NavbarModel {
 
     }
 
-    public void toggleSound() {
+    public void toogleButtonSound() {
         soundEnabled = !soundEnabled;
     }
 
-    public boolean getIsMusicSoundEnabled() {
+    public void toggleSound() {
+        musicEnabled = !musicEnabled;
+    }
+
+    public boolean getIsButtonSoundEnabled() {
         return soundEnabled;
+    }
+
+    public boolean getIsMusicSoundEnabled() {
+        return musicEnabled;
     }
 
     public void loadSettings(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Music Sound")) {
-                    soundEnabled = line.split(":")[1].trim().equalsIgnoreCase("On");
+                if (line.startsWith("Button Sound")) {
+                    soundEnabled = line.split(" : ")[1].trim().equalsIgnoreCase("On");
+                } else if (line.startsWith("Music Sound")) {
+                    musicEnabled = line.split(":")[1].trim().equalsIgnoreCase("On");
                 }
             }
         } catch (IOException e) {
