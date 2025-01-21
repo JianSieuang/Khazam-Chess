@@ -14,7 +14,7 @@ public class BtnSound implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // play sound
-        if (settingController.getIsSoundEnabled()) {
+        if (settingController.getIsButtonSoundEnabled()) {
             if (actionType == "hover") {
                 playSound("sources/hover_btn_sound.wav");
             } else if (actionType == "click") {

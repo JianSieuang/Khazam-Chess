@@ -30,7 +30,7 @@ public class NavbarModel {
         soundEnabled = !soundEnabled;
     }
 
-    public boolean isSoundEnabled() {
+    public boolean getIsMusicSoundEnabled() {
         return soundEnabled;
     }
 
@@ -38,7 +38,7 @@ public class NavbarModel {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Sound")) {
+                if (line.startsWith("Music Sound")) {
                     soundEnabled = line.split(":")[1].trim().equalsIgnoreCase("On");
                 }
             }

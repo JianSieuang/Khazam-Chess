@@ -12,7 +12,7 @@ public class GamePageController
     private GamePageController(String gameType) {
         gameModel = new GameBoard(gameType);
         navbarModel = new NavbarModel(gameModel);
-        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.isSoundEnabled());
+        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsMusicSoundEnabled());
 
         view.addComponentListener(this);
         view.getGameBoardPanel().addMouseListener(this);
@@ -25,7 +25,7 @@ public class GamePageController
             controller = new GamePageController(gameType);
         } else if (controller.view == null || !controller.view.isDisplayable()) {
             controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
-                    controller.navbarModel.isSoundEnabled());
+                    controller.navbarModel.getIsMusicSoundEnabled());
             controller.view.addComponentListener(controller);
             controller.view.getGameBoardPanel().addMouseListener(controller);
             controller.view.getGameBoardPanel().addMouseMotionListener(controller);
@@ -126,11 +126,11 @@ public class GamePageController
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == view.getNavigationBar().getSoundMenuItem()) {
             navbarModel.toggleSound(); // update the sound state in the model
-            SettingManager.setEnabledSound(navbarModel.isSoundEnabled()); // sync the state with SettingManager
+            SettingManager.setEnabledMusicSound(navbarModel.getIsMusicSoundEnabled()); // sync the state with SettingManager
             SettingManager.saveSetting(); // save to setting.txt
 
             // start or stop the background music based on the updated sound state
-            if (navbarModel.isSoundEnabled()) {
+            if (navbarModel.getIsMusicSoundEnabled()) {
                 AudioPlayer.playBackgroundMusic();
             } else {
                 AudioPlayer.stopBackgroundMusic();

@@ -29,13 +29,15 @@ public class SettingController {
 
     public void navigateToSettingPage(JFrame currentFrame) {
         currentFrame.dispose();
-        view.updateButton(view.getSoundButton(), SettingManager.isEnabledSound());
+        view.updateButton(view.getButtonSoundButton(), SettingManager.isEnabledButtonSound());
+        view.updateButton(view.getMusicSoundButton(), SettingManager.isEnabledMusicSound());
         view.showSetting(currentFrame);
         addWindowListener();
     }
 
     private void initializeListeners() {
-        view.getSoundButton().addActionListener(createSoundButtonListener());
+        view.getButtonSoundButton().addActionListener(createButtonSoundListener());
+        view.getMusicSoundButton().addActionListener(createMusicSoundListener());
         view.getSaveSettingButton().addActionListener(createSaveSettingButtonListener());
         view.getPrimaryColorButton().addActionListener(createColorPickerListener(true));
         view.getSecondaryColorButton().addActionListener(createColorPickerListener(false));
@@ -45,7 +47,8 @@ public class SettingController {
             returnToLandingPage();
         });
 
-        addHoverSound(view.getSoundButton());
+        addHoverSound(view.getButtonSoundButton());
+        addHoverSound(view.getMusicSoundButton());
         addHoverSound(view.getSaveSettingButton());
         addHoverSound(view.getBackButton());
 
@@ -53,11 +56,20 @@ public class SettingController {
         addColorPickerHoverSound(view.getSecondaryColorButton(), false);
     }
 
-    private ActionListener createSoundButtonListener() {
+    private ActionListener createButtonSoundListener() {
         return e -> {
-            boolean newState = !SettingManager.isEnabledSound();
-            SettingManager.setEnabledSound(newState);
-            view.updateButton(view.getSoundButton(), newState);
+            boolean newState = !SettingManager.isEnabledButtonSound();
+            SettingManager.setEnabledButtonSound(newState);
+            view.updateButton(view.getButtonSoundButton(), newState);
+            SettingManager.saveSetting();
+        };
+    }
+
+    private ActionListener createMusicSoundListener() {
+        return e -> {
+            boolean newState = !SettingManager.isEnabledMusicSound();
+            SettingManager.setEnabledMusicSound(newState);
+            view.updateButton(view.getMusicSoundButton(), newState);
 
             if (newState) {
                 AudioPlayer.playBackgroundMusic();
@@ -65,7 +77,6 @@ public class SettingController {
                 AudioPlayer.stopBackgroundMusic();
             }
 
-            new BtnSound("click", SettingController.this).actionPerformed(null);
             SettingManager.saveSetting();
         };
     }
@@ -163,8 +174,12 @@ public class SettingController {
         });
     }
 
-    public boolean getIsSoundEnabled() {
-        return SettingManager.isEnabledSound();
+    public boolean getIsButtonSoundEnabled() {
+        return SettingManager.isEnabledButtonSound();
+    }
+
+    public boolean getIsMusicSoundEnabled() {
+        return SettingManager.isEnabledMusicSound();
     }
 
     public boolean getIsSaveSettingPermanently() {

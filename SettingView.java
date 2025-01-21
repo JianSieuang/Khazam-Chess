@@ -5,7 +5,8 @@ public class SettingView {
 
     private JFrame settingsFrame;
     private JLabel titleLabel;
-    private JButton soundButton;
+    private JButton buttonSoundButton; // New button for button sound
+    private JButton musicSoundButton; // New button for music sound
     private JButton saveSettingButton;
     private JButton backButton;
     private SettingController controller;
@@ -16,14 +17,19 @@ public class SettingView {
     public SettingView(SettingController controller) {
         this.controller = controller;
         controller.runLoadSetting();
-        soundButton = new JButton(getOnOffLabel(controller.getIsSoundEnabled()));
-        setButtonDesign(soundButton, controller.getIsSoundEnabled());
+
+        buttonSoundButton = new JButton(getOnOffLabel(controller.getIsButtonSoundEnabled()));
+        setButtonDesign(buttonSoundButton, controller.getIsButtonSoundEnabled());
+
+        musicSoundButton = new JButton(getOnOffLabel(controller.getIsMusicSoundEnabled()));
+        setButtonDesign(musicSoundButton, controller.getIsMusicSoundEnabled());
 
         saveSettingButton = new JButton(getOnOffLabel(controller.getIsSaveSettingPermanently()));
         setButtonDesign(saveSettingButton, controller.getIsSaveSettingPermanently());
 
         primaryColorButton = new JButton("Color Picker");
         setButtonDesign(primaryColorButton, false);
+
         secondaryColorButton = new JButton("Color Picker");
         setButtonDesign(secondaryColorButton, false);
 
@@ -64,20 +70,30 @@ public class SettingView {
     }
 
     private void addSettingOptions(JPanel panel, JFrame settingsFrame) {
-        JLabel soundLabel = new JLabel("Sound:");
-        configureLabel(soundLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
+        JLabel buttonSoundLabel = new JLabel("Button Sound:");
+        configureLabel(buttonSoundLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
+
+        JLabel musicSoundLabel = new JLabel("Music Sound:");
+        configureLabel(musicSoundLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
+
+        JPanel soundPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        soundPanel.setOpaque(false);
+        soundPanel.add(buttonSoundLabel);
+        soundPanel.add(buttonSoundButton);
+        soundPanel.add(musicSoundLabel);
+        soundPanel.add(musicSoundButton);
+
+        panel.add(soundPanel);
 
         JLabel saveAsDefaultLabel = new JLabel("Save as default:");
         configureLabel(saveAsDefaultLabel, new Font("Arial", Font.BOLD, 17), txtColor, false);
 
-        JPanel soundPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        soundPanel.setOpaque(false);
+        JPanel saveSettingPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        saveSettingPanel.setOpaque(false);
+        saveSettingPanel.add(saveAsDefaultLabel);
+        saveSettingPanel.add(saveSettingButton);
 
-        soundPanel.add(soundLabel);
-        soundPanel.add(soundButton);
-        soundPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        soundPanel.add(saveAsDefaultLabel);
-        soundPanel.add(saveSettingButton);
+        panel.add(saveSettingPanel);
 
         JLabel themeColorLabel = new JLabel("Theme Color");
         configureLabel(themeColorLabel, new Font("Arial", Font.BOLD, 26), txtColor, false);
@@ -106,7 +122,6 @@ public class SettingView {
         primaryColorButton.setBackground(controller.getPrimaryColor());
         secondaryColorButton.setBackground(controller.getSecondaryColor());
 
-        panel.add(soundPanel);
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
         panel.add(themeTitlePanel);
         panel.add(primaryColorPanel);
@@ -145,8 +160,12 @@ public class SettingView {
         return secondaryColorButton;
     }
 
-    public JButton getSoundButton() {
-        return soundButton;
+    public JButton getButtonSoundButton() {
+        return buttonSoundButton;
+    }
+
+    public JButton getMusicSoundButton() {
+        return musicSoundButton;
     }
 
     public JButton getSaveSettingButton() {

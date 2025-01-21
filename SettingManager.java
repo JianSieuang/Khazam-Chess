@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class SettingManager {
 
     private static final String setting_file = "setting.txt";
-    private static boolean enabledSound = true;
+    private static boolean enabledButtonSound = true; // New field for button sound
+    private static boolean enabledMusicSound = true; // New field for music sound
     private static boolean saveSettingPermanently = false;
     private static Color primaryColor = Color.WHITE;
     private static Color secondaryColor = Color.BLACK;
@@ -16,9 +17,10 @@ public class SettingManager {
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
-                    if (line.startsWith("Sound")) {
-                        String soundValue = line.split(" : ")[1].trim();
-                        enabledSound = soundValue.equalsIgnoreCase("On");
+                    if (line.startsWith("Button Sound")) {
+                        enabledButtonSound = line.split(" : ")[1].trim().equalsIgnoreCase("On");
+                    } else if (line.startsWith("Music Sound")) {
+                        enabledMusicSound = line.split(" : ")[1].trim().equalsIgnoreCase("On");
                     } else if (line.startsWith("Save as default")) {
                         String saveValue = line.split(" : ")[1].trim();
                         saveSettingPermanently = saveValue.equalsIgnoreCase("On");
@@ -38,7 +40,8 @@ public class SettingManager {
 
     public static void saveSetting() {
         try (PrintWriter writer = new PrintWriter(setting_file)) {
-            writer.println("Sound : " + (enabledSound ? "On" : "Off"));
+            writer.println("Button Sound : " + (enabledButtonSound ? "On" : "Off"));
+            writer.println("Music Sound : " + (enabledMusicSound ? "On" : "Off"));
             writer.println("Save as default : " + (saveSettingPermanently ? "On" : "Off"));
             writer.println("Primary Color : " + String.format("#%06X", primaryColor.getRGB() & 0xFFFFFF));
             writer.println("Secondary Color : " + String.format("#%06X", secondaryColor.getRGB() & 0xFFFFFF));
@@ -56,21 +59,30 @@ public class SettingManager {
 
     public static void checkBeforeQuit() {
         if (!saveSettingPermanently) {
-            enabledSound = true; // set the sound 'on'
+            enabledButtonSound = true; // set the sound 'on'
+            enabledMusicSound = true; // set the music 'on'
             saveSetting();
         }
     }
 
-    public static boolean isEnabledSound() {
-        return enabledSound;
+    public static boolean isEnabledButtonSound() {
+        return enabledButtonSound;
+    }
+
+    public static boolean isEnabledMusicSound() {
+        return enabledMusicSound;
     }
 
     public static boolean isSaveSettingPermanently() {
         return saveSettingPermanently;
     }
 
-    public static void setEnabledSound(boolean enabledSound) {
-        SettingManager.enabledSound = enabledSound;
+    public static void setEnabledButtonSound(boolean enabled) {
+        enabledButtonSound = enabled;
+    }
+
+    public static void setEnabledMusicSound(boolean enabled) {
+        enabledMusicSound = enabled;
     }
 
     public static void setSaveSettingPermanently(boolean saveSettingPermanently) {

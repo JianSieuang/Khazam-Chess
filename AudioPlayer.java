@@ -40,7 +40,7 @@ public class AudioPlayer {
     private static void playTrack(int index) {
         // stopBackgroundMusic(); // stop if any clip is currently running
         try {
-            if (settingController.getIsSoundEnabled()) {
+            if (settingController.getIsMusicSoundEnabled()) {
                 if (currentClip != null && currentClip.isRunning()) {
                     return;
                 }

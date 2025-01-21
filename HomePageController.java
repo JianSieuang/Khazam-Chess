@@ -15,7 +15,7 @@ public class HomePageController {
         view = new HomePageView();
         settingController = SettingController.getController();
 
-        if (settingController.getIsSoundEnabled()) {
+        if (settingController.getIsMusicSoundEnabled()) {
             AudioPlayer.playBackgroundMusic();
         }
         initializeListeners();
