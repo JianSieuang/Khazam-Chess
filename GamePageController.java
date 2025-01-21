@@ -102,6 +102,8 @@ public class GamePageController
 
     // ActionListener
     public void actionPerformed(ActionEvent e) {
+        new BtnSound("click", SettingController.getController()).actionPerformed(null);
+
         String command = e.getActionCommand();
         switch (command) {
             case "New Game":
@@ -128,10 +130,12 @@ public class GamePageController
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == view.getNavigationBar().getButtonSoundMenuItem()) {
             navbarModel.toogleButtonSound(); // Update button sound state
-            SettingManager.setEnabledButtonSound(navbarModel.getIsButtonSoundEnabled()); // sync the state with setitng.txt
+            SettingManager.setEnabledButtonSound(navbarModel.getIsButtonSoundEnabled()); // sync the state with
+                                                                                         // setitng.txt
         } else if (e.getSource() == view.getNavigationBar().getSoundMenuItem()) {
             navbarModel.toggleSound(); // Update music sound state
-            SettingManager.setEnabledMusicSound(navbarModel.getIsMusicSoundEnabled()); // sync the state with setting.txt
+            SettingManager.setEnabledMusicSound(navbarModel.getIsMusicSoundEnabled()); // sync the state with
+                                                                                       // setting.txt
 
             if (navbarModel.getIsMusicSoundEnabled()) {
                 AudioPlayer.playBackgroundMusic();
@@ -139,7 +143,8 @@ public class GamePageController
                 AudioPlayer.stopBackgroundMusic();
             }
         }
-
         SettingManager.saveSetting(); // save to setting.txt
+
+        new BtnSound("click", SettingController.getController()).actionPerformed(null);
     }
 }

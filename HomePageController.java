@@ -20,15 +20,11 @@ public class HomePageController {
         }
         initializeListeners();
     }
-    
-    public static HomePageController getController()
-    {
-        if(controller == null)
-        {
+
+    public static HomePageController getController() {
+        if (controller == null) {
             controller = new HomePageController();
-        }
-        else
-        {
+        } else {
             controller.view = new HomePageView();
             controller.initializeListeners();
         }
