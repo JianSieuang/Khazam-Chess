@@ -1,35 +1,31 @@
 import java.awt.event.*;
 
-public class GamePageController implements ComponentListener, MouseListener, MouseMotionListener, ActionListener, ItemListener
-{
+public class GamePageController
+        implements ComponentListener, MouseListener, MouseMotionListener, ActionListener, ItemListener {
     private static GamePageController controller;
     private GameBoard gameModel;
     private GamePageView view;
     private NavbarModel navbarModel;
     private int width = 600;
     private int height = 600;
-    
-    private GamePageController(String gameType) 
-    {
+
+    private GamePageController(String gameType) {
         gameModel = new GameBoard(gameType);
         navbarModel = new NavbarModel(gameModel);
-        view = new GamePageView(gameModel.getBoard(), width, height);
+        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.isSoundEnabled());
 
         view.addComponentListener(this);
         view.getGameBoardPanel().addMouseListener(this);
         view.getGameBoardPanel().addMouseMotionListener(this);
         initializeMenuListener();
     }
-    
-    public static GamePageController getController(String gameType)
-    {
-        if(controller == null)
-        {
+
+    public static GamePageController getController(String gameType) {
+        if (controller == null) {
             controller = new GamePageController(gameType);
-        } 
-        else if (controller.view == null || !controller.view.isDisplayable()) 
-        {            
-            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height);
+        } else if (controller.view == null || !controller.view.isDisplayable()) {
+            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
+                    controller.navbarModel.isSoundEnabled());
             controller.view.addComponentListener(controller);
             controller.view.getGameBoardPanel().addMouseListener(controller);
             controller.view.getGameBoardPanel().addMouseMotionListener(controller);
@@ -37,54 +33,72 @@ public class GamePageController implements ComponentListener, MouseListener, Mou
         }
         return controller;
     }
-    
-    private void initializeMenuListener()
-    {
+
+    private void initializeMenuListener() {
         view.getNavigationBar().getNewGameItem().addActionListener(this);
         view.getNavigationBar().getSaveGameItem().addActionListener(this);
         view.getNavigationBar().getExitItem().addActionListener(this);
         view.getNavigationBar().getRulesItem().addActionListener(this);
         view.getNavigationBar().getSoundMenuItem().addItemListener(this);
     }
-    
-    //ComponentListener
-    @Override public void componentHidden(ComponentEvent e){}
-    @Override public void componentMoved(ComponentEvent e) {}
+
+    // ComponentListener
     @Override
-    public void componentResized(ComponentEvent e)
-    {
+    public void componentHidden(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
         view.redrawBoard();
     }
-    @Override public void componentShown(ComponentEvent e){}
-    
-    //MouseListener
-    @Override public void mouseClicked(MouseEvent e){}
-    @Override public void mouseEntered(MouseEvent e){}
-    @Override public void mouseExited(MouseEvent e){}
-    @Override 
-    public void mousePressed(MouseEvent e) 
-    {
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+    }
+
+    // MouseListener
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
         gameModel.selectPiece(coor[0], coor[1]);
-        view.getGameBoardPanel().setPosibleMove(gameModel.getSelectedPiece(), gameModel.getMoveableSteps(), gameModel.getCapturableSteps());
+        view.getGameBoardPanel().setPosibleMove(gameModel.getSelectedPiece(), gameModel.getMoveableSteps(),
+                gameModel.getCapturableSteps());
         view.getGameBoardPanel().setDraggedPiece(e.getX(), e.getY());
     }
+
     @Override
-    public void mouseReleased(MouseEvent e) 
-    {
+    public void mouseReleased(MouseEvent e) {
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
         view.getGameBoardPanel().clear(gameModel.putPiece(coor[0], coor[1]));
     }
-    
-    //MouseMotionListener
+
+    // MouseMotionListener
     @Override
-    public void mouseDragged(MouseEvent e) 
-    {
+    public void mouseDragged(MouseEvent e) {
         view.getGameBoardPanel().setDraggedPiece(e.getX(), e.getY());
     }
-    @Override public void mouseMoved(MouseEvent e){}
-    
-    //ActionListener
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
+
+    // ActionListener
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
@@ -107,10 +121,20 @@ public class GamePageController implements ComponentListener, MouseListener, Mou
                 break;
         }
     }
-    
-    //ItemListener
-    public void itemStateChanged(ItemEvent e) 
-    {
-        navbarModel.toggleSound();
+
+    // ItemListener
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getSource() == view.getNavigationBar().getSoundMenuItem()) {
+            navbarModel.toggleSound(); // update the sound state in the model
+            SettingManager.setEnabledSound(navbarModel.isSoundEnabled()); // sync the state with SettingManager
+            SettingManager.saveSetting(); // save to setting.txt
+
+            // start or stop the background music based on the updated sound state
+            if (navbarModel.isSoundEnabled()) {
+                AudioPlayer.playBackgroundMusic();
+            } else {
+                AudioPlayer.stopBackgroundMusic();
+            }
+        }
     }
 }

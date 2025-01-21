@@ -29,6 +29,7 @@ public class SettingController {
 
     public void navigateToSettingPage(JFrame currentFrame) {
         currentFrame.dispose();
+        view.updateButton(view.getSoundButton(), SettingManager.isEnabledSound());
         view.showSetting(currentFrame);
         addWindowListener();
     }

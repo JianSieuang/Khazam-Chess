@@ -1,4 +1,4 @@
-Sound : On
-Save as default : Off
+Sound : Off
+Save as default : On
 Primary Color : #00CCCC
 Secondary Color : #00FF33
