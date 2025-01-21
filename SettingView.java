@@ -27,11 +27,13 @@ public class SettingView {
         saveSettingButton = new JButton(getOnOffLabel(controller.getIsSaveSettingPermanently()));
         setButtonDesign(saveSettingButton, controller.getIsSaveSettingPermanently());
 
-        primaryColorButton = new JButton("Color Picker");
+        primaryColorButton = new JButton("");
         setButtonDesign(primaryColorButton, false);
+        primaryColorButton.setPreferredSize(new Dimension(100, 40)); // Set custom width and height
 
-        secondaryColorButton = new JButton("Color Picker");
+        secondaryColorButton = new JButton("");
         setButtonDesign(secondaryColorButton, false);
+        secondaryColorButton.setPreferredSize(new Dimension(100, 40)); // Set custom width and height
 
         backButton = new JButton("Back");
         setButtonDesign(backButton, false);
@@ -96,7 +98,7 @@ public class SettingView {
         panel.add(saveSettingPanel);
 
         JLabel themeColorLabel = new JLabel("Theme Color");
-        configureLabel(themeColorLabel, new Font("Arial", Font.BOLD, 26), txtColor, false);
+        configureLabel(themeColorLabel, new Font("Arial", Font.BOLD, 36), txtColor, false);
         themeColorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         JPanel themeTitlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));

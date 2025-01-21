@@ -12,7 +12,8 @@ public class GamePageController
     private GamePageController(String gameType) {
         gameModel = new GameBoard(gameType);
         navbarModel = new NavbarModel(gameModel);
-        view = new GamePageView(gameModel.getBoard(), width, height,navbarModel.getIsButtonSoundEnabled(), navbarModel.getIsMusicSoundEnabled());
+        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsButtonSoundEnabled(),
+                navbarModel.getIsMusicSoundEnabled());
 
         view.addComponentListener(this);
         view.getGameBoardPanel().addMouseListener(this);
@@ -24,7 +25,8 @@ public class GamePageController
         if (controller == null) {
             controller = new GamePageController(gameType);
         } else if (controller.view == null || !controller.view.isDisplayable()) {
-            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height, controller.navbarModel.getIsButtonSoundEnabled(), controller.navbarModel.getIsMusicSoundEnabled());
+            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
+                    controller.navbarModel.getIsButtonSoundEnabled(), controller.navbarModel.getIsMusicSoundEnabled());
             controller.view.addComponentListener(controller);
             controller.view.getGameBoardPanel().addMouseListener(controller);
             controller.view.getGameBoardPanel().addMouseMotionListener(controller);
@@ -37,8 +39,9 @@ public class GamePageController
         view.getNavigationBar().getNewGameItem().addActionListener(this);
         view.getNavigationBar().getSaveGameItem().addActionListener(this);
         view.getNavigationBar().getExitItem().addActionListener(this);
-        view.getNavigationBar().getRulesItem().addActionListener(this);
+        view.getNavigationBar().getButtonSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getSoundMenuItem().addItemListener(this);
+        view.getNavigationBar().getRulesItem().addActionListener(this);
     }
 
     // ComponentListener
@@ -123,17 +126,20 @@ public class GamePageController
 
     // ItemListener
     public void itemStateChanged(ItemEvent e) {
-        if (e.getSource() == view.getNavigationBar().getSoundMenuItem()) {
-            navbarModel.toggleSound(); // update the sound state in the model
-            SettingManager.setEnabledMusicSound(navbarModel.getIsMusicSoundEnabled()); // sync the state with SettingManager
-            SettingManager.saveSetting(); // save to setting.txt
+        if (e.getSource() == view.getNavigationBar().getButtonSoundMenuItem()) {
+            navbarModel.toogleButtonSound(); // Update button sound state
+            SettingManager.setEnabledButtonSound(navbarModel.getIsButtonSoundEnabled()); // sync the state with setitng.txt
+        } else if (e.getSource() == view.getNavigationBar().getSoundMenuItem()) {
+            navbarModel.toggleSound(); // Update music sound state
+            SettingManager.setEnabledMusicSound(navbarModel.getIsMusicSoundEnabled()); // sync the state with setting.txt
 
-            // start or stop the background music based on the updated sound state
             if (navbarModel.getIsMusicSoundEnabled()) {
                 AudioPlayer.playBackgroundMusic();
             } else {
                 AudioPlayer.stopBackgroundMusic();
             }
         }
+
+        SettingManager.saveSetting(); // save to setting.txt
     }
 }

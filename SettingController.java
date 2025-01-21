@@ -121,23 +121,28 @@ public class SettingController {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
+                Color currentColor = isPrimary ? getPrimaryColor() : getSecondaryColor();
 
-                if (isPrimary) {
-                    button.setBackground(getPrimaryColor().darker());
+                if (isPureBlack(currentColor)) {
+                    button.setBackground(new Color(80, 80, 80)); // Gray if black
                 } else {
-                    button.setBackground(getSecondaryColor().darker());
+                    button.setBackground(currentColor.darker()); // Darken if not black
                 }
+
                 button.setForeground(Color.WHITE);
                 new BtnSound("hover", SettingController.this).actionPerformed(null);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if (isPrimary) {
-                    button.setBackground(getPrimaryColor().brighter());
+                Color currentColor = isPrimary ? getPrimaryColor() : getSecondaryColor();
+
+                if (isPureBlack(currentColor)) {
+                    button.setBackground(new Color(0, 0, 0)); // Black if black
                 } else {
-                    button.setBackground(getSecondaryColor().brighter());
+                    button.setBackground(currentColor); // Original color if not black
                 }
+
                 button.setForeground(Color.BLACK);
             }
         });
@@ -172,6 +177,10 @@ public class SettingController {
                 settingsFrame.dispose();
             }
         });
+    }
+
+    private boolean isPureBlack(Color color) {
+        return color.getRed() == 0 && color.getGreen() == 0 && color.getBlue() == 0;
     }
 
     public boolean getIsButtonSoundEnabled() {

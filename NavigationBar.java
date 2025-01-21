@@ -120,6 +120,10 @@ public class NavigationBar extends JMenuBar {
         return rulesItem;
     }
 
+    public JCheckBoxMenuItem getButtonSoundMenuItem() {
+        return soundMenuItem; // Ensure this returns the correct button sound menu item
+    }
+
     public JCheckBoxMenuItem getSoundMenuItem() {
         return musicMenuItem;
     }
