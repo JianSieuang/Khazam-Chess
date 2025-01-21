@@ -99,19 +99,19 @@ public class SettingController {
     }
 
     private void addHoverSound(JButton button) {
-        Color originalBackgroundColor = button.getBackground();
-
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(originalBackgroundColor.darker());
+                boolean isOn = button.getText().equals("ON");
+                button.setBackground(isOn ? new Color(144, 238, 144).darker() : new Color(240, 128, 128).darker());
                 button.setForeground(Color.WHITE);
                 new BtnSound("hover", SettingController.this).actionPerformed(null);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setBackground(button.getBackground().brighter());
+                boolean isOn = button.getText().equals("ON");
+                button.setBackground(isOn ? new Color(144, 238, 144) : new Color(240, 128, 128));
                 button.setForeground(Color.BLACK);
             }
         });
