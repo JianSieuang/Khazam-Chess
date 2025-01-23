@@ -72,6 +72,11 @@ public class GameBoardPanel extends JPanel
         }
         repaint();
     }
+    
+    public void showWinnerDialog(String winner)
+    {
+        JOptionPane.showMessageDialog(this, "Winner: " + winner, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     @Override
     protected void paintComponent(Graphics g) 

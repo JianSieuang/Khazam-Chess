@@ -321,6 +321,10 @@ public class GameBoard
         return false;
     }
     
+    public String getWinner() {
+        return winner;
+    }
+    
     public GamePiece getSelectedPiece()
     {
         if(selectedPiece != null)

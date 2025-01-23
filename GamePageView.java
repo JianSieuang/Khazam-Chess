@@ -49,21 +49,6 @@ public class GamePageView extends JFrame
         GamePanel.updateDimensions(cellSize, offsetX, offsetY);
         GamePanel.repaint();
     }
-
-    public void setPosibleMove(GamePiece p, int[][] m, int[][] c) 
-    {
-        GamePanel.setPosibleMove(p, m, c);
-    }
-
-    public void setDraggedPiece(int x, int y) 
-    {
-        GamePanel.setDraggedPiece(x, y);
-    }
-
-    public void clear(boolean isMoved) 
-    {
-        GamePanel.clear(isMoved);
-    }
     
     public GameBoardPanel getGameBoardPanel()
     {

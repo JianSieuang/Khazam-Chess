@@ -103,6 +103,11 @@ public class GamePageController
     public void mouseReleased(MouseEvent e) {
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
         view.getGameBoardPanel().clear(gameModel.putPiece(coor[0], coor[1]));
+        
+        String winner = gameModel.getWinner();
+        if (winner != null) {
+            view.getGameBoardPanel().showWinnerDialog(winner);
+        }
     }
 
     // MouseMotionListener

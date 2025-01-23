@@ -1,12 +1,12 @@
-Turn: 2
-Move: Red
+Turn: 0
+Move: Blue
 
 Board:
-Xor_Blue Biz_Blue Sau_Blue_Flip Biz_Blue Tor_Blue 
-Ram_Blue_Flip . . Ram_Blue_Flip Ram_Blue_Flip 
-. Ram_Blue_Flip . . . 
-. . Ram_Blue_Flip . . 
+Tor_Red Biz_Red Sau_Red Biz_Red Xor_Red 
+Ram_Red Ram_Red Ram_Red Ram_Red Ram_Red 
 . . . . . 
-. . Ram_Red_Flip . Ram_Red_Flip 
-Ram_Red_Flip Ram_Red_Flip . Ram_Red_Flip . 
-Tor_Red Biz_Red Sau_Red_Flip Biz_Red Xor_Red 
+. . . . . 
+. . . . . 
+. . . . . 
+Ram_Blue Ram_Blue Ram_Blue Ram_Blue Ram_Blue 
+Xor_Blue Biz_Blue Sau_Blue Biz_Blue Tor_Blue 
