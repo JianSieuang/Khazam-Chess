@@ -288,6 +288,12 @@ public class GameBoard
                             if (board[r][c] instanceof SauPiece)
                             {
                                 winner = selectedPiece.getPlayer();
+
+                                File file = new File("game.txt");
+
+                                if (file.exists()) {
+                                    file.delete();
+                                }
                             }
                             board[r][c] = selectedPiece;
                             board[selectedRow][selectedCol] = null;

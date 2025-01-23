@@ -1,4 +1,7 @@
 import java.awt.event.*;
+
+import javax.swing.SwingUtilities;
+
 import java.awt.Color;
 
 public class GamePageController
@@ -107,6 +110,11 @@ public class GamePageController
         String winner = gameModel.getWinner();
         if (winner != null) {
             view.getGameBoardPanel().showWinnerDialog(winner);
+
+            // after the OK button is pressed, transition to the landing page
+            SwingUtilities.invokeLater(() -> {
+                //
+            });
         }
     }
 
