@@ -51,7 +51,7 @@ public class GamePageController
         view.getNavigationBar().getSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getRulesItem().addActionListener(this);
     }
-    
+
     public void updatePanelColors() {
         String primaryColorStr = gameModel.getPrimaryColor();
         String secondaryColorStr = gameModel.getSecondaryColor();
@@ -106,14 +106,15 @@ public class GamePageController
     public void mouseReleased(MouseEvent e) {
         int[] coor = view.adapter.convertCoordinate(e.getX(), e.getY());
         view.getGameBoardPanel().clear(gameModel.putPiece(coor[0], coor[1]));
-        
+
         String winner = gameModel.getWinner();
         if (winner != null) {
             view.getGameBoardPanel().showWinnerDialog(winner);
 
             // after the OK button is pressed, transition to the landing page
             SwingUtilities.invokeLater(() -> {
-                //
+                getController("").view.dispose(); // dispose of the current game window
+                HomePageController.getController(); // navigate to the landing page
             });
         }
     }
