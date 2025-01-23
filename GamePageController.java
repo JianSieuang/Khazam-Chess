@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import java.awt.Color;
 
 public class GamePageController
         implements ComponentListener, MouseListener, MouseMotionListener, ActionListener, ItemListener {
@@ -19,6 +20,7 @@ public class GamePageController
         view.getGameBoardPanel().addMouseListener(this);
         view.getGameBoardPanel().addMouseMotionListener(this);
         initializeMenuListener();
+        updatePanelColors();
     }
 
     public static GamePageController getController(String gameType) {
@@ -42,6 +44,16 @@ public class GamePageController
         view.getNavigationBar().getButtonSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getRulesItem().addActionListener(this);
+    }
+    
+    public void updatePanelColors() {
+        String primaryColorStr = gameModel.getPrimaryColor();
+        String secondaryColorStr = gameModel.getSecondaryColor();
+
+        Color primaryColor = Color.decode(primaryColorStr);
+        Color secondaryColor = Color.decode(secondaryColorStr);
+
+        view.getGameBoardPanel().setColors(primaryColor, secondaryColor);
     }
 
     // ComponentListener

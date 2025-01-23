@@ -18,6 +18,9 @@ public class GameBoardPanel extends JPanel
 
     private int[][] moveableSteps;
     private int[][] capturableSteps;
+    
+    private Color primaryColor;
+    private Color secondaryColor;
 
     public GameBoardPanel(GamePiece[][] board) 
     {
@@ -51,6 +54,12 @@ public class GameBoardPanel extends JPanel
         this.dragY = y;
         repaint();
     }
+    
+    public void setColors(Color primary, Color secondary) {
+        this.primaryColor = primary;
+        this.secondaryColor = secondary;
+        repaint();
+    }
 
     public void clear(boolean isMoved) 
     {
@@ -76,7 +85,14 @@ public class GameBoardPanel extends JPanel
                 int positionX = offsetX + col * cellSize;
                 int positionY = offsetY + row * cellSize;
 
-                g.setColor(Color.BLUE);
+                if ((row + col) % 2 == 0) {
+                    g.setColor(primaryColor != null ? primaryColor : Color.LIGHT_GRAY);
+                } else {
+                    g.setColor(secondaryColor != null ? secondaryColor : Color.DARK_GRAY);
+                }
+                g.fillRect(positionX, positionY, cellSize, cellSize);
+    
+                g.setColor(Color.BLACK);
                 g.drawRect(positionX, positionY, cellSize, cellSize);
 
                 if(board[row][col] != null) 

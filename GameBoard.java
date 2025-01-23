@@ -18,6 +18,9 @@ public class GameBoard
     private int[][] moveableSteps;
     private int[][] capturableSteps;
     
+    private String primaryColor;
+    private String secondaryColor;
+
     public GameBoard(String gameType) 
     {
         board = new GamePiece[row][col];
@@ -29,6 +32,7 @@ public class GameBoard
         {
             loadGame();
         }
+        loadBoardColor();
     }
     
     private void initBoard()
@@ -157,6 +161,30 @@ public class GameBoard
         }
     }
     
+    private void loadBoardColor()
+    {  
+        try (BufferedReader reader = new BufferedReader(new FileReader("setting.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Primary Color")) {
+                    primaryColor = line.split(" : ")[1];
+                } else if (line.startsWith("Secondary Color")) {
+                    secondaryColor = line.split(" : ")[1];
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading settings file: " + e.getMessage());
+        }
+    }
+    
+    public String getPrimaryColor() {
+        return primaryColor != null ? primaryColor : "#FFFFFF";
+    }
+    
+    public String getSecondaryColor() {
+        return secondaryColor != null ? secondaryColor : "#000000";
+    }
+        
     private void turnBoard()
     {
         if(winner == null)
