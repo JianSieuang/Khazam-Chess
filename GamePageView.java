@@ -26,7 +26,7 @@ public class GamePageView extends JFrame
         
         setMinimumSize(new Dimension(450, 450));
         setSize(width, height);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
         redrawBoard();
@@ -58,5 +58,24 @@ public class GamePageView extends JFrame
     public NavigationBar getNavigationBar()
     {
         return navbar;
+    }
+
+    // dialog confirmation for exit game
+    public int showConfirmExitDialog() {
+        JFrame tempFrame = new JFrame(); // temporary frame as a parent for the dialog
+        tempFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        tempFrame.setUndecorated(true); // no UI for this frame
+        tempFrame.setVisible(false); // keep it invisible
+
+        int result = JOptionPane.showConfirmDialog(
+                tempFrame,
+                "Save game before exiting?",
+                "Save Game Before Exit",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
+        tempFrame.dispose(); // dispose the temporary frame
+
+        return result;
     }
 }

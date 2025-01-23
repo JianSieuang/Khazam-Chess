@@ -25,4 +25,8 @@ public class HomePageView extends JFrame {
     public ContentPanel getHomePanel() {
         return contentPanel;
     }
+
+    public void showLoadGameErrorDialog() {
+        JOptionPane.showMessageDialog(this, "No saved game found!", "Attention", JOptionPane.ERROR_MESSAGE);
+    }
 }

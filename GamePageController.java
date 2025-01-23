@@ -23,6 +23,7 @@ public class GamePageController
         view.getGameBoardPanel().addMouseListener(this);
         view.getGameBoardPanel().addMouseMotionListener(this);
         initializeMenuListener();
+        addWindowListener();
         updatePanelColors();
     }
 
@@ -143,9 +144,8 @@ public class GamePageController
                 navbarModel.saveGame();
                 break;
             case "Exit":
-                view.dispose();
-                HomePageController.getController();
-                navbarModel.exitGame();
+                checkConfirmExit(view.showConfirmExitDialog());
+
                 break;
             case "Rules":
                 view.getNavigationBar().showRulesDialog();
@@ -153,6 +153,16 @@ public class GamePageController
             default:
                 break;
         }
+    }
+
+    private void addWindowListener() {
+        view.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                new BtnSound("click", SettingController.getController()).actionPerformed(null);
+                checkConfirmExit(view.showConfirmExitDialog());
+            }
+        });
     }
 
     // ItemListener
@@ -173,5 +183,19 @@ public class GamePageController
         SettingManager.saveSetting(); // save to setting.txt
 
         new BtnSound("click", SettingController.getController()).actionPerformed(null);
+    }
+
+    private void checkConfirmExit(int exitValue) {
+        new BtnSound("click", SettingController.getController()).actionPerformed(null);
+
+        if (exitValue != -1) {
+            if (exitValue == 0) {
+                navbarModel.saveGame();
+            }
+
+            view.dispose();
+            HomePageController.getController();
+            navbarModel.exitGame();
+        }
     }
 }

@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.awt.event.MouseAdapter;
 
 public class HomePageController {
@@ -45,8 +46,12 @@ public class HomePageController {
         view.getHomePanel().getLoadGameButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                view.dispose();
-                gameController = GamePageController.getController("load Game");
+                if (new File("game.txt").exists()) {
+                    view.dispose();
+                    gameController = GamePageController.getController("load Game");
+                } else {
+                    view.showLoadGameErrorDialog();
+                }
             }
         });
 
