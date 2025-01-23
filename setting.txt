@@ -1,5 +1,5 @@
 Button Sound : On
-Music Sound : Off
-Save as default : Off
+Music Sound : On
+Save as default : On
 Primary Color : #99FFFF
-Secondary Color : #CC99FF
+Secondary Color : #FF66FF

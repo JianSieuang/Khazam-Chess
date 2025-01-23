@@ -27,12 +27,15 @@ public class GamePageController
         if (controller == null) {
             controller = new GamePageController(gameType);
         } else if (controller.view == null || !controller.view.isDisplayable()) {
+            controller.gameModel = new GameBoard(gameType);
+            controller.navbarModel = new NavbarModel(controller.gameModel);
             controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
                     controller.navbarModel.getIsButtonSoundEnabled(), controller.navbarModel.getIsMusicSoundEnabled());
             controller.view.addComponentListener(controller);
             controller.view.getGameBoardPanel().addMouseListener(controller);
             controller.view.getGameBoardPanel().addMouseMotionListener(controller);
             controller.initializeMenuListener();
+            controller.updatePanelColors();
         }
         return controller;
     }
