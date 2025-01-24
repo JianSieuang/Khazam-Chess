@@ -20,6 +20,7 @@ public class HomePageView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set application icon
     }
 
     public ContentPanel getHomePanel() {

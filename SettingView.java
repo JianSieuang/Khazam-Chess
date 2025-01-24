@@ -44,6 +44,7 @@ public class SettingView {
 
         settingsFrame = new JFrame("Settings");
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        settingsFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set application icon
         settingsFrame.setSize(600, 600);
         settingsFrame.setLocationRelativeTo(parentFrame);
 

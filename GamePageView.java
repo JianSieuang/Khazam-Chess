@@ -32,6 +32,7 @@ public class GamePageView extends JFrame
         setMinimumSize(new Dimension(450, 450));
         setSize(width, height);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set application icon
         setVisible(true);
         setLocationRelativeTo(null);
         redrawBoard();

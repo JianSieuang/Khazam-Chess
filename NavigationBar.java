@@ -39,6 +39,7 @@ public class NavigationBar extends JMenuBar {
         rulesDialog.setSize(400, 550);
         rulesDialog.setLocationRelativeTo(null);
         rulesDialog.setModal(true);
+        rulesDialog.setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set application icon
         rulesDialog.setResizable(false);
 
         JPanel rulesPanel = new JPanel();
