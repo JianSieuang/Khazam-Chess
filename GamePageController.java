@@ -39,6 +39,7 @@ public class GamePageController
             controller.view.getGameBoardPanel().addMouseListener(controller);
             controller.view.getGameBoardPanel().addMouseMotionListener(controller);
             controller.initializeMenuListener();
+            controller.addWindowListener();
             controller.updatePanelColors();
         }
         return controller;

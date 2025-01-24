@@ -37,8 +37,18 @@ public class HomePageController {
         view.getHomePanel().getNewGameButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                view.dispose();
-                gameController = GamePageController.getController("New Game");
+                int value = 0;
+
+                if (new File("game.txt").exists()) {
+                    value = view.showAttentionDialog();
+                }
+
+                if (value != -1) {
+                    if (value == 0) {
+                        view.dispose();
+                        gameController = GamePageController.getController("New Game");
+                    }
+                }
             }
         });
 

@@ -27,6 +27,17 @@ public class HomePageView extends JFrame {
     }
 
     public void showLoadGameErrorDialog() {
-        JOptionPane.showMessageDialog(this, "No saved game found!", "Attention", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Saved Game Not Found!!", "Attention", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public int showAttentionDialog() {
+        int result = JOptionPane.showConfirmDialog(
+                this,
+                "Do you want to start a new game? Your current game may lost.",
+                "Attention",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
+        return result;
     }
 }
