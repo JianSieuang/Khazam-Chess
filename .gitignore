@@ -12,3 +12,5 @@ bluej.project
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+package.bluej
