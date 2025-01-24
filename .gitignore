@@ -2,7 +2,7 @@
 *.class
 *.ctxt
 *.class~
-
+*.txt
 # Ignore package information files
 *.pkg
 
