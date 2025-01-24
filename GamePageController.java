@@ -1,7 +1,5 @@
 import java.awt.event.*;
-
 import javax.swing.SwingUtilities;
-
 import java.awt.Color;
 
 public class GamePageController
@@ -119,6 +117,9 @@ public class GamePageController
                 HomePageController.getController(); // navigate to the landing page
             });
         }
+        
+        view.getGameStatusPanel().setMove(gameModel.getMove());
+        view.getGameStatusPanel().setTurn(gameModel.getTurn());
     }
 
     // MouseMotionListener

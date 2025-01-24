@@ -25,7 +25,6 @@ public class GameBoardPanel extends JPanel
     public GameBoardPanel(GamePiece[][] board) 
     {
         this.board = board;
-        setBackground(Color.LIGHT_GRAY);
     }
 
     public void updateDimensions(int cellSize, int offsetX, int offsetY) 

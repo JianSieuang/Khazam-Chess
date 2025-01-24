@@ -7,6 +7,7 @@ public class GamePageView extends JFrame
     private int width;
     private int height;
     private GameBoardPanel GamePanel;
+    private GameStatusPanel statusPanel;
     private NavigationBar navbar;
     public CoordinateAdapter adapter;
 
@@ -20,9 +21,13 @@ public class GamePageView extends JFrame
         adapter = new CoordinateAdapter();
         navbar = new NavigationBar(initialSoundState, initialMusicState);
         GamePanel = new GameBoardPanel(board);
+        statusPanel = new GameStatusPanel();
+        
         setLayout(new BorderLayout());
         setJMenuBar(navbar);
+        
         add(GamePanel, BorderLayout.CENTER);
+        add(statusPanel, BorderLayout.WEST);
         
         setMinimumSize(new Dimension(450, 450));
         setSize(width, height);
@@ -60,6 +65,11 @@ public class GamePageView extends JFrame
         return navbar;
     }
 
+    public GameStatusPanel getGameStatusPanel()
+    {
+        return statusPanel;
+    }
+    
     // dialog confirmation for exit game
     public int showConfirmExitDialog() {
         JFrame tempFrame = new JFrame(); // temporary frame as a parent for the dialog

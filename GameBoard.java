@@ -24,12 +24,9 @@ public class GameBoard
     public GameBoard(String gameType) 
     {
         board = new GamePiece[row][col];
-        if(gameType.equals("New Game"))
-        {
+        if(gameType.equals("New Game")) {
             newGame();
-        }
-        else
-        {
+        } else {
             loadGame();
         }
         loadBoardColor();
@@ -329,6 +326,14 @@ public class GameBoard
     
     public String getWinner() {
         return winner;
+    }
+    
+    public String getMove() {
+        return move;
+    }
+    
+    public int getTurn() {
+        return turn;
     }
     
     public GamePiece getSelectedPiece()
