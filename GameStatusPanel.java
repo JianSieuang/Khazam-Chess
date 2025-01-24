@@ -16,11 +16,10 @@ public class GameStatusPanel extends JPanel
         add(turnLabel);
     }
     
-    public void setMove(String move) {
+    public void setStatus(String move, int turn)
+    {
+        turn++;
         playerLabel.setText("Player move: " + move);
-    }
-
-    public void setTurn(int turn) {
         turnLabel.setText("Turn: " + turn);
     }
 }

@@ -60,6 +60,8 @@ public class GamePageController
         Color secondaryColor = Color.decode(secondaryColorStr);
 
         view.getGameBoardPanel().setColors(primaryColor, secondaryColor);
+        
+        view.getGameStatusPanel().setStatus(gameModel.getMove(), gameModel.getTurn());
     }
 
     // ComponentListener
@@ -118,8 +120,7 @@ public class GamePageController
             });
         }
         
-        view.getGameStatusPanel().setMove(gameModel.getMove());
-        view.getGameStatusPanel().setTurn(gameModel.getTurn());
+        view.getGameStatusPanel().setStatus(gameModel.getMove(), gameModel.getTurn());
     }
 
     // MouseMotionListener
