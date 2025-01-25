@@ -20,12 +20,6 @@ class XorPiece extends GamePiece
             images.add("Picture/Xor_Red.png");
         }
     }
-    
-    public String getPieceName()
-    {
-        return "Xor_" + player;
-    }
-
 
     public int[][] moveable(GamePiece[][] board)
     {

@@ -28,11 +28,6 @@ class SauPiece extends GamePiece
             this.currentImage = 1;
         }
     }
-    
-    public String getPieceName()
-    {
-        return "Sau_" + player + (currentImage == 0? "": "_Flip");
-    }
 
     public int[][] moveable(GamePiece[][] board)
     {

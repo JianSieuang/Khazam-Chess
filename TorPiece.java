@@ -21,11 +21,6 @@ class TorPiece extends GamePiece
         }
     }
     
-    public String getPieceName()
-    {
-        return "Tor_" + player;
-    }
-
     public int[][] moveable(GamePiece[][] board)
     {
         boolean top = true, bottom = true, left = true, right = true;

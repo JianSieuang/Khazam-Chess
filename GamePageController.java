@@ -23,6 +23,7 @@ public class GamePageController
         initializeMenuListener();
         addWindowListener();
         updatePanelColors();
+        view.setVisible(true);
     }
 
     public static GamePageController getController(String gameType) {
@@ -39,6 +40,7 @@ public class GamePageController
             controller.initializeMenuListener();
             controller.addWindowListener();
             controller.updatePanelColors();
+            controller.view.setVisible(true);
         }
         return controller;
     }
@@ -60,8 +62,6 @@ public class GamePageController
         Color secondaryColor = Color.decode(secondaryColorStr);
 
         view.getGameBoardPanel().setColors(primaryColor, secondaryColor);
-        
-        view.getGameStatusPanel().setStatus(gameModel.getMove(), gameModel.getTurn());
     }
 
     // ComponentListener
@@ -80,6 +80,7 @@ public class GamePageController
 
     @Override
     public void componentShown(ComponentEvent e) {
+        view.getGameStatusPanel().setStatus(gameModel.getMove(), gameModel.getTurn());
     }
 
     // MouseListener

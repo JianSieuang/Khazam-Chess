@@ -20,13 +20,7 @@ class BizPiece extends GamePiece
             images.add("Picture/Biz_Red.png");
         }
     }
-    
-    public String getPieceName()
-    {
-        return "Biz_" + player;
-    }
 
-    
     public int[][] moveable(GamePiece[][] board)
     {
         int r, c;

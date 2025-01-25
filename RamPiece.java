@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 class RamPiece extends GamePiece
 {
-    private boolean moveForward = true;
     private boolean updated = false;
     
     public RamPiece(int r, int c, String player)
@@ -20,26 +19,21 @@ class RamPiece extends GamePiece
         }
         else if(player.equals("Red") || player.equals("Red_Flip"))
         {
-            images.add("Picture/Ram_Red.png");
             images.add("Picture/Ram_Red_Flip.png");
+            images.add("Picture/Ram_Red.png");
         }
         
-        if(player.equals("Blue_Flip") || player.equals("Red_Flip"))
+        if(player.equals("Blue_Flip") || player.equals("Red"))
         {
-            this.player = player.split("_")[0];
             this.currentImage = 1;
         }
-    }
-    
-    public String getPieceName()
-    {
-        return "Ram_" + player + (currentImage == 0? "": "_Flip");
+        
+        this.player = player.split("_")[0];
     }
 
-    
     public int[][] moveable(GamePiece[][] board)
     {
-        int r = row + (moveForward ? -1 : 1); 
+        int r = row + (currentImage == 0? -1 : 1); 
 
         if(r >= 0 && r < 8)
         {   
@@ -53,7 +47,7 @@ class RamPiece extends GamePiece
     
     public int[][] capturable(GamePiece[][] board)
     {
-        int r = row + (moveForward ? -1: 1);
+        int r = row + (currentImage == 0? -1: 1);
         
         if(r >= 0 && r < 8)
         {   
@@ -77,7 +71,6 @@ class RamPiece extends GamePiece
     {
         if((row == 7 || row == 0) && !updated)
         {
-            moveForward = !moveForward;
             this.currentImage = this.currentImage == 0? 1: 0;
             updated = true;
         }

@@ -32,6 +32,14 @@ public class GameBoard
         loadBoardColor();
     }
     
+    public void newGame()
+    {
+        for (GamePiece[] row : board) {
+            Arrays.fill(row, null); 
+        }
+        initBoard();
+    }
+    
     private void initBoard()
     {
         move = "Blue";
@@ -55,13 +63,7 @@ public class GameBoard
         }
     }
     
-    public void newGame()
-    {
-        for (GamePiece[] row : board) {
-            Arrays.fill(row, null); 
-        }
-        initBoard();
-    }
+
     
     public void saveGame()
     {
