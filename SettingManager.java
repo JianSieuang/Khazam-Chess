@@ -2,21 +2,28 @@ import java.awt.Color;
 import java.io.*;
 import java.util.Scanner;
 
+/*
+ Model, this class is to manage application settings such as button sound, music sound, and colors
+ Settings are saved to and loaded from a file named "setting.txt"
+ */
 public class SettingManager {
 
-    private static final String setting_file = "setting.txt";
-    private static boolean enabledButtonSound = true; // New field for button sound
-    private static boolean enabledMusicSound = true; // New field for music sound
-    private static boolean saveSettingPermanently = false;
-    private static Color primaryColor = Color.WHITE;
-    private static Color secondaryColor = Color.BLACK;
+    private static final String setting_file = "setting.txt"; // naming for setting file
+    private static boolean enabledButtonSound = true; // new field for button sound
+    private static boolean enabledMusicSound = true; // new field for music sound
+    private static boolean saveSettingPermanently = false; // save setting default
+    private static Color primaryColor = Color.WHITE; // default primary color
+    private static Color secondaryColor = Color.BLACK; // default secondary color
 
+    // load settiing from setting.txt file, if don't exist create a default setting file
     public static void loadSetting() {
         File file = new File(setting_file);
-        if (file.exists()) {
-            try (Scanner scanner = new Scanner(file)) {
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
+        if (file.exists()) { // check if the file exists
+            try (Scanner scanner = new Scanner(file)) { // open setting.txt file
+                while (scanner.hasNextLine()) { // read the file line by line
+                    String line = scanner.nextLine(); // read the line
+
+                    // check the line and set the value
                     if (line.startsWith("Button Sound")) {
                         enabledButtonSound = line.split(" : ")[1].trim().equalsIgnoreCase("On");
                     } else if (line.startsWith("Music Sound")) {
@@ -38,8 +45,9 @@ public class SettingManager {
         }
     }
 
+    // save setting to setting.txt file
     public static void saveSetting() {
-        try (PrintWriter writer = new PrintWriter(setting_file)) {
+        try (PrintWriter writer = new PrintWriter(setting_file)) { // open setting.txt file
             writer.println("Button Sound : " + (enabledButtonSound ? "On" : "Off"));
             writer.println("Music Sound : " + (enabledMusicSound ? "On" : "Off"));
             writer.println("Save as default : " + (saveSettingPermanently ? "On" : "Off"));
@@ -50,13 +58,17 @@ public class SettingManager {
         }
     }
 
+    // delete setting.txt file
     public static void deleteSettingFile() {
         File file = new File(setting_file);
+
+        // if the file exist and not deleted, print error message
         if (file.exists() && !file.delete()) {
             System.err.println("Failed to delete " + setting_file);
         }
     }
 
+    // before quit the program, check the save as default value, if not save as default then it will auto change button & music sound be on
     public static void checkBeforeQuit() {
         if (!saveSettingPermanently) {
             enabledButtonSound = true; // set the sound 'on'
