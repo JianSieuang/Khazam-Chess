@@ -8,14 +8,21 @@ import java.io.IOException;
  * game action (new game, save game, exit game) and sound setting
  */
 public class NavbarModel {
-    private boolean musicEnabled; // track music setting
-    private boolean soundEnabled; // track button sound setting
-    private GameBoard gameBoard; // reference game board model
+    // track music setting
+    private boolean musicEnabled;
+    
+    // track button sound setting
+    private boolean soundEnabled;
+    
+    // reference game board model
+    private GameBoard gameBoard;
 
     // constructor for navbar model
     public NavbarModel(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
-        loadSettings("setting.txt"); // load setting.txt
+        
+        // load setting.txt
+        loadSettings("setting.txt");
     }
 
     // start new game based on player choise
@@ -28,22 +35,30 @@ public class NavbarModel {
 
     // save the current game to a game.txt file
     public void saveGame() {
-        gameBoard.saveGame(); // call game board save game
+        // call game board save game
+        gameBoard.saveGame();
     }
 
     // handle exit game, save progress if necessary
     // exitValue = value from dialog box
     // view = game page view
     public void exitGame(int exitValue, GamePageView view) {
-        new BtnSound("click", SettingController.getController()).actionPerformed(null); // play button sound
+        // play button sound
+        new BtnSound("click", SettingController.getController()).actionPerformed(null);
 
-        if (exitValue != -1) { // if player didn't close the dialog
-            if (exitValue == 0) { // if player choose to save the game
-                this.saveGame(); // save the game
+        // if player didn't close the dialog
+        if (exitValue != -1) {
+            // if player choose to save the game
+            if (exitValue == 0) {
+                // save the game
+                this.saveGame();
             }
 
-            view.dispose(); // close the game page
-            HomePageController.getController(); // navigate to home page
+            // close the game page
+            view.dispose();
+            
+            // navigate to home page
+            HomePageController.getController();
         }
     }
 
@@ -67,17 +82,24 @@ public class NavbarModel {
 
     // load setting from setting.txt file
     public void loadSettings(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) { // read setting.txt file
+        // read setting.txt file
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) { 
             String line;
-            while ((line = reader.readLine()) != null) { // read line by line
-                if (line.startsWith("Button Sound")) { // check for button sound setting
+            
+            // read line by line
+            while ((line = reader.readLine()) != null) { 
+                // check for button sound setting
+                if (line.startsWith("Button Sound")) { 
                     soundEnabled = line.split(" : ")[1].trim().equalsIgnoreCase("On");
-                } else if (line.startsWith("Music Sound")) { // check for music sound setting
+
+                    // check for music sound setting
+                } else if (line.startsWith("Music Sound")) { 
                     musicEnabled = line.split(":")[1].trim().equalsIgnoreCase("On");
                 }
             }
-        } catch (IOException e) { // catch exception if file not found
-            System.err.println("Error reading settings file: " + e.getMessage()); // print error message
+        } catch (IOException e) { 
+            // print error message
+            System.err.println("Error reading settings file: " + e.getMessage()); 
         }
     }
 }

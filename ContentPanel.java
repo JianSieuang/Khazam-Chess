@@ -69,7 +69,9 @@ public class ContentPanel extends JPanel {
         
         // not show background color
         button.setOpaque(false);
-        button.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // border
+
+        // set button border top, left, right, bottom
+        button.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     }
 
     public JButton getNewGameButton() {

@@ -7,22 +7,38 @@ import java.util.Scanner;
  Settings are saved to and loaded from a file named "setting.txt"
  */
 public class SettingManager {
+    // naming for setting file
+    private static final String setting_file = "setting.txt";
+    
+    // new field for button sound
+    private static boolean enabledButtonSound = true;
+    
+    // new field for music sound
+    private static boolean enabledMusicSound = true;
+    
+    // save setting default
+    private static boolean saveSettingPermanently = false;
+    
+    // default primary color
+    private static Color primaryColor = Color.WHITE;
+    
+    // default secondary color
+    private static Color secondaryColor = Color.BLACK;
 
-    private static final String setting_file = "setting.txt"; // naming for setting file
-    private static boolean enabledButtonSound = true; // new field for button sound
-    private static boolean enabledMusicSound = true; // new field for music sound
-    private static boolean saveSettingPermanently = false; // save setting default
-    private static Color primaryColor = Color.WHITE; // default primary color
-    private static Color secondaryColor = Color.BLACK; // default secondary color
-
-    // load settiing from setting.txt file, if don't exist create a default setting
-    // file
+    // load settiing from setting.txt file, if don't exist create a default setting file
     public static void loadSetting() {
         File file = new File(setting_file);
-        if (file.exists()) { // check if the file exists
-            try (Scanner scanner = new Scanner(file)) { // open setting.txt file
-                while (scanner.hasNextLine()) { // read the file line by line
-                    String line = scanner.nextLine(); // read the line
+        
+        // check if the file exists
+        if (file.exists()) {
+            
+            // open setting.txt file
+            try (Scanner scanner = new Scanner(file)) {
+                
+                // read the file line by line
+                while (scanner.hasNextLine()) {
+                    // read the line
+                    String line = scanner.nextLine();
 
                     // check the line and set the value
                     if (line.startsWith("Button Sound")) {
@@ -48,7 +64,8 @@ public class SettingManager {
 
     // save setting to setting.txt file
     public static void saveSetting() {
-        try (PrintWriter writer = new PrintWriter(setting_file)) { // open setting.txt file
+        // open setting.txt file
+        try (PrintWriter writer = new PrintWriter(setting_file)) {
             writer.println("Button Sound : " + (enabledButtonSound ? "On" : "Off"));
             writer.println("Music Sound : " + (enabledMusicSound ? "On" : "Off"));
             writer.println("Save as default : " + (saveSettingPermanently ? "On" : "Off"));
@@ -73,8 +90,12 @@ public class SettingManager {
     // default then it will auto change button & music sound be on
     public static void checkBeforeQuit() {
         if (!saveSettingPermanently) {
-            enabledButtonSound = true; // set the sound 'on'
-            enabledMusicSound = true; // set the music 'on'
+            
+            // set the sound 'on'
+            enabledButtonSound = true;
+            
+            // set the music 'on'
+            enabledMusicSound = true;
             saveSetting();
         }
     }

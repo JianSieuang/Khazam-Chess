@@ -31,18 +31,29 @@ public class BackgroundImage {
     public static BufferedImage getImageByIndex(int index, String pageType) {
         // switch case to determine the image paths
         String[] imagePaths = switch (pageType.toLowerCase()) {
-            case "home_page" -> landingImagePaths; // use landing page images
-            case "setting_page" -> settingImagePaths; // use setting page images
+            // use landing page images
+            case "home_page" -> landingImagePaths; 
+            
+            // use setting page images
+            case "setting_page" -> settingImagePaths;
+            
+            // use game page images
             case "game_page" -> gameImagePaths;
-            default -> landingImagePaths; // default to landing page images
+            
+            // default to landing page images
+            default -> landingImagePaths;
         };
 
-        try { // load and return thimage based on the given index, if the index exceeds the
-              // array length, it will loop back to the first image
+        /*
+         * load and return thimage based on the given index
+         * if the index exceeds the array length, it will loop back to the first image
+         */
+        try {
             return ImageIO.read(new File(imagePaths[index % imagePaths.length]));
         } catch (Exception e) { // catch exception if image not found
             e.printStackTrace();
-            System.out.println("Error loading image by index: " + index); // print error message
+            // print error message
+            System.out.println("Error loading image by index: " + index);
             return null;
         }
     }

@@ -7,12 +7,23 @@ import java.awt.*;
  * include menus for game action, setting, and help with rules dialog
  */
 public class NavigationBar extends JMenuBar {
-    private JMenuItem newGameItem; // new game menu item
-    private JMenuItem saveGameItem; // save game menu item
-    private JMenuItem exitItem; // exit game menu item
-    private JMenuItem rulesItem; // rules menu item
-    private JCheckBoxMenuItem soundMenuItem; // sound menu item
-    private JCheckBoxMenuItem musicMenuItem; // music menu item
+    // new game menu item
+    private JMenuItem newGameItem;
+
+    // save game menu item
+    private JMenuItem saveGameItem;
+
+    // exit game menu item
+    private JMenuItem exitItem;
+
+    // rules menu item
+    private JMenuItem rulesItem;
+
+    // sound menu item
+    private JCheckBoxMenuItem soundMenuItem;
+
+    // music menu item
+    private JCheckBoxMenuItem musicMenuItem;
 
     // constructor for navigation bar
     // initialSoundState = initial state of button sound setting
@@ -25,9 +36,13 @@ public class NavigationBar extends JMenuBar {
         saveGameItem = new JMenuItem("Save Game");
         exitItem = new JMenuItem("Exit");
         soundMenuItem = new JCheckBoxMenuItem("Sound");
-        soundMenuItem.setState(initialSoundState); // set initialSoundState for sound
+
+        // set initialSoundState for sound
+        soundMenuItem.setState(initialSoundState);
         musicMenuItem = new JCheckBoxMenuItem("Music");
-        musicMenuItem.setState(initialMusicState); // set initialMusicState for music
+
+        // set initialMusicState for music
+        musicMenuItem.setState(initialMusicState);
         rulesItem = new JMenuItem("Rules");
 
         // add item to menu
@@ -46,19 +61,28 @@ public class NavigationBar extends JMenuBar {
 
     // display rules dialog
     public void showRulesDialog() {
-        JDialog rulesDialog = new JDialog(); // create dialog for rules
+        // create dialog for rules
+        JDialog rulesDialog = new JDialog();
         rulesDialog.setTitle("Kwazam Chess Rules");
-        rulesDialog.setSize(400, 550); // set dialog size
-        rulesDialog.setLocationRelativeTo(null); // center the dialog
+
+        // set dialog size
+        rulesDialog.setSize(400, 550);
+
+        // center the dialog
+        rulesDialog.setLocationRelativeTo(null);
         rulesDialog.setModal(true);
-        rulesDialog.setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set
-                                                                                                        // application
-                                                                                                        // icon
-        rulesDialog.setResizable(false); // disable resize
+
+        // set application icon
+        rulesDialog.setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png"));
+
+        // disable resize
+        rulesDialog.setResizable(false);
 
         JPanel rulesPanel = new JPanel();
         rulesPanel.setLayout(new GridLayout(0, 1, 10, 10));
-        rulesPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20)); // add padding to the panel
+
+        // add padding to the panel border (top, left, bottom, right)
+        rulesPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
 
         // create image and rules for each piece
         JLabel ramImage = new JLabel(resizeImage("Picture/Ram_Blue.png", 50, 50));
@@ -80,7 +104,9 @@ public class NavigationBar extends JMenuBar {
                 "The Sau piece can move only one step in any direction. The game ends when the Sau is captured by the other side.");
         JTextArea generalRules = new JTextArea(
                 "General Rule: None of the pieces are allowed to skip over other pieces, except for Biz.");
-        generalRules.setLineWrap(true); // wrap text
+
+        // wrap text
+        generalRules.setLineWrap(true);
 
         // add image and rules to the panel
         rulesPanel.add(imageAndRules(ramImage, ramRules));
@@ -90,10 +116,15 @@ public class NavigationBar extends JMenuBar {
         rulesPanel.add(imageAndRules(sauImage, sauRules));
         rulesPanel.add(generalRules);
 
-        rulesPanel.setBackground(Color.WHITE); // background color
+        // background color
+        rulesPanel.setBackground(Color.WHITE);
         rulesDialog.add(rulesPanel);
-        rulesDialog.setVisible(true); // show dialog
-        rulesDialog.setResizable(false); // disable resize
+
+        // show dialog
+        rulesDialog.setVisible(true);
+
+        // disable resize
+        rulesDialog.setResizable(false);
     }
 
     // show dialog to confirm new game
@@ -112,17 +143,29 @@ public class NavigationBar extends JMenuBar {
         panel.setLayout(new BorderLayout());
         panel.setBackground(Color.WHITE);
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-        rule.setLineWrap(true); // wrap text
-        panel.add(image, BorderLayout.WEST); // add image to the left
-        panel.add(rule, BorderLayout.CENTER); // add rules text to center
+        
+        // wrap text
+        rule.setLineWrap(true);
+        
+        // add image to the left
+        panel.add(image, BorderLayout.WEST);
+        
+        // add rules text to center
+        panel.add(rule, BorderLayout.CENTER);
         return panel;
     }
 
     // resize image to the given width and height
     private ImageIcon resizeImage(String imagePath, int width, int height) {
-        ImageIcon originalIcon = new ImageIcon(imagePath); // load original image
-        Image originalImage = originalIcon.getImage(); // get image
-        Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH); // resize image
+        // load original image
+        ImageIcon originalIcon = new ImageIcon(imagePath);
+
+        // get image
+        Image originalImage = originalIcon.getImage();
+
+        // resize image
+        Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
         return new ImageIcon(resizedImage);
     }
 
@@ -143,7 +186,7 @@ public class NavigationBar extends JMenuBar {
     }
 
     public JCheckBoxMenuItem getButtonSoundMenuItem() {
-        return soundMenuItem; // Ensure this returns the correct button sound menu item
+        return soundMenuItem;
     }
 
     public JCheckBoxMenuItem getSoundMenuItem() {
