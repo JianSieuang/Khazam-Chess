@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Model, utility class for playing background music and controlling audio settings.
+ * Model, utility class for playing background music and controlling audio
+ * settings.
  */
 public class AudioPlayer {
     private static Clip currentClip; // keep track of the currently playing clip
-    private static final Random RANDOM = new Random();  // random number generator
+    private static final Random RANDOM = new Random(); // random number generator
     private static SettingController settingController; // reference to the SettingController
 
     // array of 2 background music files
@@ -23,7 +24,8 @@ public class AudioPlayer {
             "sources/background_music_2.wav"
     };
 
-    // registers the SettingController so the audio player can check if music is enabled.
+    // registers the SettingController so the audio player can check if music is
+    // enabled.
     public static void setSettingController(SettingController controller) {
         settingController = controller; // set the SettingController
     }

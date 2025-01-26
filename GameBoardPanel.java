@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GameBoardPanel extends JPanel 
-{
+public class GameBoardPanel extends JPanel {
     private GamePiece[][] board;
     private int cellSize;
     private int offsetX;
@@ -18,17 +17,15 @@ public class GameBoardPanel extends JPanel
 
     private int[][] moveableSteps;
     private int[][] capturableSteps;
-    
+
     private Color primaryColor;
     private Color secondaryColor;
 
-    public GameBoardPanel(GamePiece[][] board) 
-    {
+    public GameBoardPanel(GamePiece[][] board) {
         this.board = board;
     }
 
-    public void updateDimensions(int cellSize, int offsetX, int offsetY) 
-    {
+    public void updateDimensions(int cellSize, int offsetX, int offsetY) {
         this.cellSize = cellSize;
         this.offsetX = offsetX;
         this.offsetY = offsetY;
@@ -38,54 +35,46 @@ public class GameBoardPanel extends JPanel
         imageSizeY = cellSize - (2 * margin);
     }
 
-    public void setPosibleMove(GamePiece p, int[][] m, int[][] c) 
-    {
+    public void setPosibleMove(GamePiece p, int[][] m, int[][] c) {
         this.selectedPiece = p;
         this.moveableSteps = m;
         this.capturableSteps = c;
         repaint();
     }
 
-    public void setDraggedPiece(int x, int y) 
-    {
+    public void setDraggedPiece(int x, int y) {
         this.isDragging = true;
         this.dragX = x;
         this.dragY = y;
         repaint();
     }
-    
+
     public void setColors(Color primary, Color secondary) {
         this.primaryColor = primary;
         this.secondaryColor = secondary;
         repaint();
     }
 
-    public void clear(boolean isMoved) 
-    {
+    public void clear(boolean isMoved) {
         this.isDragging = false;
-        if(isMoved) 
-        {
+        if (isMoved) {
             this.selectedPiece = null;
             this.moveableSteps = new int[0][0];
             this.capturableSteps = new int[0][0];
         }
         repaint();
     }
-    
-    public void showWinnerDialog(String winner)
-    {
+
+    public void showWinnerDialog(String winner) {
         JOptionPane.showMessageDialog(this, "Winner: " + winner, "Game Over", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
-    protected void paintComponent(Graphics g) 
-    {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for(int row = 0; row < board.length; row++) 
-        {
-            for(int col = 0; col < board[0].length; col++) 
-            {
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[0].length; col++) {
                 int positionX = offsetX + col * cellSize;
                 int positionY = offsetY + row * cellSize;
 
@@ -95,21 +84,19 @@ public class GameBoardPanel extends JPanel
                     g.setColor(secondaryColor != null ? secondaryColor : Color.DARK_GRAY);
                 }
                 g.fillRect(positionX, positionY, cellSize, cellSize);
-    
+
                 g.setColor(Color.BLACK);
                 g.drawRect(positionX, positionY, cellSize, cellSize);
 
-                if(board[row][col] != null) 
-                {
-                    g.drawImage(board[row][col].getImage(), positionX + margin, positionY + margin, imageSizeX, imageSizeY, this);
+                if (board[row][col] != null) {
+                    g.drawImage(board[row][col].getImage(), positionX + margin, positionY + margin, imageSizeX,
+                            imageSizeY, this);
                 }
             }
         }
 
-        if(moveableSteps != null && selectedPiece != null) 
-        {
-            for(int i = 0; i < moveableSteps.length; i++) 
-            {
+        if (moveableSteps != null && selectedPiece != null) {
+            for (int i = 0; i < moveableSteps.length; i++) {
                 int size = cellSize / 4;
                 int positionX = offsetX + moveableSteps[i][1] * cellSize + (cellSize - size) / 2;
                 int positionY = offsetY + moveableSteps[i][0] * cellSize + (cellSize - size) / 2;
@@ -119,10 +106,8 @@ public class GameBoardPanel extends JPanel
             }
         }
 
-        if(capturableSteps != null && selectedPiece != null) 
-        {
-            for(int i = 0; i < capturableSteps.length; i++) 
-            {
+        if (capturableSteps != null && selectedPiece != null) {
+            for (int i = 0; i < capturableSteps.length; i++) {
                 int positionX = offsetX + capturableSteps[i][1] * cellSize;
                 int positionY = offsetY + capturableSteps[i][0] * cellSize;
 
@@ -131,9 +116,9 @@ public class GameBoardPanel extends JPanel
             }
         }
 
-        if(selectedPiece != null && isDragging) 
-        {
-            g.drawImage(selectedPiece.getImage(), dragX - imageSizeX / 2, dragY - imageSizeY / 2, imageSizeX, imageSizeY, this);
+        if (selectedPiece != null && isDragging) {
+            g.drawImage(selectedPiece.getImage(), dragX - imageSizeX / 2, dragY - imageSizeY / 2, imageSizeX,
+                    imageSizeY, this);
         }
     }
 }

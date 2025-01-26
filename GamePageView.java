@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePageView extends JFrame 
-{
+public class GamePageView extends JFrame {
     private GamePiece[][] board;
     private int width;
     private int height;
@@ -11,8 +10,7 @@ public class GamePageView extends JFrame
     private NavigationBar navbar;
     public CoordinateAdapter adapter;
 
-    public GamePageView(GamePiece[][] board, int w, int h,boolean initialSoundState, boolean initialMusicState) 
-    {
+    public GamePageView(GamePiece[][] board, int w, int h, boolean initialSoundState, boolean initialMusicState) {
         super("Game Board");
         this.board = board;
         this.width = w;
@@ -22,13 +20,13 @@ public class GamePageView extends JFrame
         navbar = new NavigationBar(initialSoundState, initialMusicState);
         GamePanel = new GameBoardPanel(board);
         statusPanel = new GameStatusPanel();
-        
+
         setLayout(new BorderLayout());
         setJMenuBar(navbar);
-        
+
         add(GamePanel, BorderLayout.CENTER);
         add(statusPanel, BorderLayout.WEST);
-        
+
         setMinimumSize(new Dimension(450, 450));
         setSize(width, height);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -38,11 +36,10 @@ public class GamePageView extends JFrame
         redrawBoard();
     }
 
-    public void redrawBoard()
-    {
+    public void redrawBoard() {
         width = GamePanel.getWidth();
         height = GamePanel.getHeight();
-        
+
         int widthSize = width / board[0].length;
         int heightSize = height / board.length;
 
@@ -55,22 +52,19 @@ public class GamePageView extends JFrame
         GamePanel.updateDimensions(cellSize, offsetX, offsetY);
         GamePanel.repaint();
     }
-    
-    public GameBoardPanel getGameBoardPanel()
-    {
+
+    public GameBoardPanel getGameBoardPanel() {
         return GamePanel;
     }
-    
-    public NavigationBar getNavigationBar()
-    {
+
+    public NavigationBar getNavigationBar() {
         return navbar;
     }
 
-    public GameStatusPanel getGameStatusPanel()
-    {
+    public GameStatusPanel getGameStatusPanel() {
         return statusPanel;
     }
-    
+
     // dialog confirmation for exit game
     public int showConfirmExitDialog() {
         JFrame tempFrame = new JFrame(); // temporary frame as a parent for the dialog

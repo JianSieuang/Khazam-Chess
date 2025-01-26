@@ -36,8 +36,10 @@ public class SettingController {
     // navigate to setting page
     public void navigateToSettingPage(JFrame currentFrame) {
         currentFrame.dispose(); // close the current page
-        view.updateButton(view.getButtonSoundButton(), SettingManager.isEnabledButtonSound()); // update button sound button
-        view.updateButton(view.getMusicSoundButton(), SettingManager.isEnabledMusicSound()); // update music sound button
+        view.updateButton(view.getButtonSoundButton(), SettingManager.isEnabledButtonSound()); // update button sound
+                                                                                               // button
+        view.updateButton(view.getMusicSoundButton(), SettingManager.isEnabledMusicSound()); // update music sound
+                                                                                             // button
         view.showSetting(currentFrame); // display setting page
         addWindowListener(); // handle window close action
     }
@@ -84,7 +86,7 @@ public class SettingController {
 
             // play or stop background music
             if (newState) {
-                AudioPlayer.playBackgroundMusic();  // call audio player to play music
+                AudioPlayer.playBackgroundMusic(); // call audio player to play music
             } else {
                 AudioPlayer.stopBackgroundMusic(); // call audio player stop music
             }
@@ -118,7 +120,8 @@ public class SettingController {
             @Override
             public void mouseEntered(MouseEvent e) { // when mouse enter
                 boolean isOn = button.getText().equals("ON");
-                button.setBackground(isOn ? new Color(144, 238, 144).darker() : new Color(240, 128, 128).darker()); // darken color
+                button.setBackground(isOn ? new Color(144, 238, 144).darker() : new Color(240, 128, 128).darker()); // darken
+                                                                                                                    // color
                 button.setForeground(Color.WHITE);
                 new BtnSound("hover", SettingController.this).actionPerformed(null); // call button sound play sound
             }
@@ -126,7 +129,8 @@ public class SettingController {
             @Override
             public void mouseExited(MouseEvent e) { // when mouse exit
                 boolean isOn = button.getText().equals("ON");
-                button.setBackground(isOn ? new Color(144, 238, 144) : new Color(240, 128, 128)); // change the color back to normal
+                button.setBackground(isOn ? new Color(144, 238, 144) : new Color(240, 128, 128)); // change the color
+                                                                                                  // back to normal
                 button.setForeground(Color.BLACK);
             }
         });
@@ -169,9 +173,13 @@ public class SettingController {
         new BtnSound("click", SettingController.this).actionPerformed(null); // play click sound
 
         return e -> {
-            Color initialColor = isPrimary ? SettingManager.getPrimaryColor() : SettingManager.getSecondaryColor(); // get initial color
-            Color newColor = JColorChooser.showDialog(view.getPrimaryColorButton(), "Choose a color", initialColor); // open color picker
-            
+            Color initialColor = isPrimary ? SettingManager.getPrimaryColor() : SettingManager.getSecondaryColor(); // get
+                                                                                                                    // initial
+                                                                                                                    // color
+            Color newColor = JColorChooser.showDialog(view.getPrimaryColorButton(), "Choose a color", initialColor); // open
+                                                                                                                     // color
+                                                                                                                     // picker
+
             // if have color, set the color
             if (newColor != null) {
                 if (isPrimary) { // set primary color

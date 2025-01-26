@@ -14,7 +14,6 @@ public class HomePageController {
     private static HomePageController controller; // singleton instance
     private HomePageView view; // view for home page
     private SettingController settingController; // controller for setting page
-    private GamePageController gameController; // controller for game page
 
     /*
      * private constructor for singleton design pattern
@@ -66,20 +65,21 @@ public class HomePageController {
                 if (value != -1) {
                     if (value == 0) {
                         view.dispose(); // close the home page
-                        gameController = GamePageController.getController("New Game"); // start new game
+                        GamePageController.getController("New Game"); // start new game
                     }
                 }
             }
         });
 
         buttonSound(view.getHomePanel().getLoadGameButton()); // add sound effect to button
-        view.getHomePanel().getLoadGameButton().addActionListener(new ActionListener() { // action listener for load game button
+        view.getHomePanel().getLoadGameButton().addActionListener(new ActionListener() { // action listener for load
+                                                                                         // game button
             @Override
             public void actionPerformed(ActionEvent e) {
                 // if game.txt exist then it will load the game, else show error dialog
                 if (new File("game.txt").exists()) {
                     view.dispose(); // close the home page
-                    gameController = GamePageController.getController("Load Game"); // load game
+                    GamePageController.getController("Load Game"); // load game
 
                 } else {
                     view.showLoadGameErrorDialog(); // show error dialog
@@ -88,7 +88,8 @@ public class HomePageController {
         });
 
         buttonSound(view.getHomePanel().getSettingsButton()); // add sound effect for setting button
-        view.getHomePanel().getSettingsButton().addActionListener(new ActionListener() { // action listener for setting button
+        view.getHomePanel().getSettingsButton().addActionListener(new ActionListener() { // action listener for setting
+                                                                                         // button
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.dispose(); // close the home page
@@ -97,8 +98,9 @@ public class HomePageController {
         });
 
         buttonSound(view.getHomePanel().getQuitGameButton()); // add sound effect for quiz game button
-        
-        view.getHomePanel().getQuitGameButton().addActionListener(new ActionListener() { // action listener for quit game button
+
+        view.getHomePanel().getQuitGameButton().addActionListener(new ActionListener() { // action listener for quit
+                                                                                         // game button
             @Override
             public void actionPerformed(ActionEvent e) {
                 settingController.checkSetting(); // check setting before exit
@@ -112,7 +114,7 @@ public class HomePageController {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) { // mouse hover to the button
-                button.setBackground(button.getBackground().darker()); //  button backgorund be darker when hover
+                button.setBackground(button.getBackground().darker()); // button backgorund be darker when hover
                 button.setForeground(Color.WHITE); // button text be white when hower
                 new BtnSound("hover", settingController).actionPerformed(null); // play hover sound
             }
@@ -124,6 +126,7 @@ public class HomePageController {
             }
         });
 
-        button.addActionListener(e -> new BtnSound("click", settingController).actionPerformed(null)); // play click sound
+        button.addActionListener(e -> new BtnSound("click", settingController).actionPerformed(null)); // play click
+                                                                                                       // sound
     }
 }

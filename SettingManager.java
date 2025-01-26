@@ -15,7 +15,8 @@ public class SettingManager {
     private static Color primaryColor = Color.WHITE; // default primary color
     private static Color secondaryColor = Color.BLACK; // default secondary color
 
-    // load settiing from setting.txt file, if don't exist create a default setting file
+    // load settiing from setting.txt file, if don't exist create a default setting
+    // file
     public static void loadSetting() {
         File file = new File(setting_file);
         if (file.exists()) { // check if the file exists
@@ -68,7 +69,8 @@ public class SettingManager {
         }
     }
 
-    // before quit the program, check the save as default value, if not save as default then it will auto change button & music sound be on
+    // before quit the program, check the save as default value, if not save as
+    // default then it will auto change button & music sound be on
     public static void checkBeforeQuit() {
         if (!saveSettingPermanently) {
             enabledButtonSound = true; // set the sound 'on'

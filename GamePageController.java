@@ -15,7 +15,8 @@ public class GamePageController
         gameModel = new GameBoard();
         gameModel.getGameType(gameType);
         navbarModel = new NavbarModel(gameModel);
-        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsButtonSoundEnabled(), navbarModel.getIsMusicSoundEnabled());
+        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsButtonSoundEnabled(),
+                navbarModel.getIsMusicSoundEnabled());
 
         initializeListener();
         view.setVisible(true);
@@ -28,7 +29,7 @@ public class GamePageController
             controller.gameModel.getGameType(gameType);
             controller.view.setVisible(true);
         }
-       
+
         return controller;
     }
 
@@ -42,7 +43,7 @@ public class GamePageController
         view.getNavigationBar().getButtonSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getRulesItem().addActionListener(this);
-        
+
         view.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -69,7 +70,8 @@ public class GamePageController
     @Override
     public void componentShown(ComponentEvent e) {
         view.getGameStatusPanel().setStatus(gameModel.getMove(), gameModel.getTurn());
-        view.getGameBoardPanel().setColors(Color.decode(gameModel.getPrimaryColor()), Color.decode(gameModel.getSecondaryColor()));
+        view.getGameBoardPanel().setColors(Color.decode(gameModel.getPrimaryColor()),
+                Color.decode(gameModel.getSecondaryColor()));
     }
 
     // MouseListener
@@ -109,7 +111,7 @@ public class GamePageController
                 HomePageController.getController(); // navigate to the landing page
             });
         }
-        
+
         view.getGameStatusPanel().setStatus(gameModel.getMove(), gameModel.getTurn());
     }
 

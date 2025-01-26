@@ -7,7 +7,7 @@ public class BtnSound implements ActionListener {
     private String actionType; // action type ("hover", "click")
     private SettingController settingController; // controller to check if button sound is enabled
 
-    /* 
+    /*
      * constructor for button sound
      * actionType = type of action ("hover", "click")
      * controller = setting controller to check if button sound is enabled
@@ -20,7 +20,7 @@ public class BtnSound implements ActionListener {
     // set the action btn sound
     @Override
     public void actionPerformed(ActionEvent e) {
-        //play sound if button sound is enabled in setting
+        // play sound if button sound is enabled in setting
         if (settingController.getIsButtonSoundEnabled()) {
             // play sound based on the action type
             if (actionType == "hover") {
@@ -37,7 +37,8 @@ public class BtnSound implements ActionListener {
         try {
             // load sound file
             java.io.File soundFile = new java.io.File(filePath);
-            javax.sound.sampled.AudioInputStream audioStream = javax.sound.sampled.AudioSystem.getAudioInputStream(soundFile);
+            javax.sound.sampled.AudioInputStream audioStream = javax.sound.sampled.AudioSystem
+                    .getAudioInputStream(soundFile);
 
             // create clip object
             javax.sound.sampled.Clip clip = javax.sound.sampled.AudioSystem.getClip();

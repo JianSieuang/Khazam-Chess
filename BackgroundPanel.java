@@ -5,8 +5,7 @@ import java.awt.image.BufferedImage;
 /*
  * custom JPanel to displaye the background image with change in accordingly to the timer
  */
-public class BackgroundPanel extends JPanel 
-{
+public class BackgroundPanel extends JPanel {
     private int imageIndex = 0; // track current backgroumnd image index
     private Timer imageTimer; // timer to change background image
     private String pageType; // type of page
@@ -14,8 +13,7 @@ public class BackgroundPanel extends JPanel
     // constructor for background panel
     // initialize the layout, border, and start the background image timer
     // type = home page or setting page
-    public BackgroundPanel(String type) 
-    {
+    public BackgroundPanel(String type) {
         super(); // call super constructor
         setLayout(new BorderLayout()); // set layout to border layout
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // add margin around the panel
@@ -24,8 +22,7 @@ public class BackgroundPanel extends JPanel
     }
 
     // start the timer to change the background image
-    private void startBackgroundImageTimer() 
-    {
+    private void startBackgroundImageTimer() {
         imageTimer = new Timer(5000, e -> { // timer with 5 seconds delay
             imageIndex++; // increase the image based on the current index and page type
             repaint(); // repaint the panel to update the background panel
@@ -34,14 +31,14 @@ public class BackgroundPanel extends JPanel
     }
 
     @Override
-    protected void paintComponent(Graphics g)
-    {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g); // call super paint component ro ensure the proper rendering
-        BufferedImage backgroundImage = BackgroundImage.getImageByIndex(imageIndex, pageType); // get the background image based on the index and page type
-        
+        BufferedImage backgroundImage = BackgroundImage.getImageByIndex(imageIndex, pageType); // get the background
+                                                                                               // image based on the
+                                                                                               // index and page type
+
         // if the background image is not null then draw the image
-        if (backgroundImage != null) 
-        {
+        if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this); // draw the image to the panel
         }
     }
