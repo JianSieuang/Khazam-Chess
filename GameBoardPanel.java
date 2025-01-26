@@ -142,7 +142,7 @@ public class GameBoardPanel extends JPanel {
                 int positionX = offsetX + capturableSteps[i][1] * cellSize;
                 int positionY = offsetY + capturableSteps[i][0] * cellSize;
 
-                if ((moveableSteps[i][1] + moveableSteps[i][0]) % 2 == 0) {
+                if ((capturableSteps[i][1] + capturableSteps[i][0]) % 2 == 0) {
                     // set the complementary colors based on primary color
                     g.setColor(primaryColor != null ? new Color(255 - primaryColor.getRed(), 255 - primaryColor.getGreen(), 255 - primaryColor.getBlue()) : Color.DARK_GRAY);
                 } else {
