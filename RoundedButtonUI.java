@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
+// Sim Boon Xun
 /*
 * View, a class that extends JButton to create a custom button with rounded corners
 * custom button UI

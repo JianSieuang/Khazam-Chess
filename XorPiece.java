@@ -1,8 +1,11 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// Chong Jian Sieuang
 /*
  * Model, this class is to manage the xor piece
+ * it can move at angle (bothe left & right) across the board
+ * move until blocked by another piece or the edge of the board
  */
 class XorPiece extends GamePiece {
     public XorPiece(int r, int c, String player) {

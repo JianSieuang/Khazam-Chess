@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Chong Jian Sieuang
 /* 
  * View, represents the main user interface for the game, including the game board,
  * navigation bar, and game status panel.

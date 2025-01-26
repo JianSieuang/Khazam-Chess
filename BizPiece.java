@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// Chong Jian Sieuang
 /* 
  * Model, this piece move in 'L’ shape, similiar to be a knight in chess
  * can both move and capture pieces with movement pattern

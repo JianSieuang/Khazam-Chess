@@ -1,8 +1,10 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// Chong Jian Sieuang
 /* 
- * Model, reporesent the Tor piece in game
+ * Model, reporesent the Tor piece in game, which can move and capture in any direction
+ * across any number of spaces until blocked by another piece or the edge of the board
  */
 class TorPiece extends GamePiece {
     public TorPiece(int r, int c, String player) {

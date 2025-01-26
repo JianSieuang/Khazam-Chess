@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+// Lew Kien Yew
 /*
  * utility class to get background image based on the index and page type
  */

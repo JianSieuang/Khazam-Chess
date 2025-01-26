@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Chong Jian Sieuang
 /*
  * View,displaying the game board.
  * handles visual representation of the board, pieces, and possible moves.

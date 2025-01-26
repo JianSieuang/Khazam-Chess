@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.io.*;
 import java.util.Scanner;
 
+// Lew Kien Yew
 /*
  Model, this class is to manage application settings such as button sound, music sound, and colors
  Settings are saved to and loaded from a file named "setting.txt"
@@ -9,32 +10,33 @@ import java.util.Scanner;
 public class SettingManager {
     // naming for setting file
     private static final String setting_file = "setting.txt";
-    
+
     // new field for button sound
     private static boolean enabledButtonSound = true;
-    
+
     // new field for music sound
     private static boolean enabledMusicSound = true;
-    
+
     // save setting default
     private static boolean saveSettingPermanently = false;
-    
+
     // default primary color
     private static Color primaryColor = Color.WHITE;
-    
+
     // default secondary color
     private static Color secondaryColor = Color.BLACK;
 
-    // load settiing from setting.txt file, if don't exist create a default setting file
+    // load settiing from setting.txt file, if don't exist create a default setting
+    // file
     public static void loadSetting() {
         File file = new File(setting_file);
-        
+
         // check if the file exists
         if (file.exists()) {
-            
+
             // open setting.txt file
             try (Scanner scanner = new Scanner(file)) {
-                
+
                 // read the file line by line
                 while (scanner.hasNextLine()) {
                     // read the line
@@ -86,14 +88,16 @@ public class SettingManager {
         }
     }
 
-    // before quit the program, check the save as default value, if not save as
-    // default then it will auto change button & music sound be on
+    /*
+     * before quit the program, check the save as default value
+     * if not save as default then it will auto change button & music sound be on
+     */
     public static void checkBeforeQuit() {
         if (!saveSettingPermanently) {
-            
+
             // set the sound 'on'
             enabledButtonSound = true;
-            
+
             // set the music 'on'
             enabledMusicSound = true;
             saveSetting();

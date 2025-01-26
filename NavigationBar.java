@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Gautam Gopi Venkatesan
 /*
  * custom navigation bar for the kwazam chess application
  * responsible for managing the navigation bar in the game

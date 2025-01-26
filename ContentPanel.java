@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Sim Boon Xun
 /* 
  * View, custom JPanel to display the content of the home page
  */

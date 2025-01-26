@@ -2,6 +2,7 @@ import java.awt.event.*;
 import javax.swing.SwingUtilities;
 import java.awt.Color;
 
+// Chong Jian Sieuang
 /* 
  * Controller, manage the game page.
  * handle interactions between the game model (GameBoard) and the view (GamePageView).

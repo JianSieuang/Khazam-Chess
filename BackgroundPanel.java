@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+// Lew Kien Yew
 /*
  * View, custom JPanel to displaye the background image with change in accordingly to the timer
  */
