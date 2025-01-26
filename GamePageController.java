@@ -12,56 +12,44 @@ public class GamePageController
     private int height = 600;
 
     private GamePageController(String gameType) {
-        gameModel = new GameBoard(gameType);
+        gameModel = new GameBoard();
+        gameModel.getGameType(gameType);
         navbarModel = new NavbarModel(gameModel);
-        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsButtonSoundEnabled(),
-                navbarModel.getIsMusicSoundEnabled());
+        view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsButtonSoundEnabled(), navbarModel.getIsMusicSoundEnabled());
 
-        view.addComponentListener(this);
-        view.getGameBoardPanel().addMouseListener(this);
-        view.getGameBoardPanel().addMouseMotionListener(this);
-        initializeMenuListener();
-        addWindowListener();
-        updatePanelColors();
+        initializeListener();
         view.setVisible(true);
     }
 
     public static GamePageController getController(String gameType) {
         if (controller == null) {
             controller = new GamePageController(gameType);
-        } else if (controller.view == null || !controller.view.isDisplayable()) {
-            controller.gameModel = new GameBoard(gameType);
-            controller.navbarModel = new NavbarModel(controller.gameModel);
-            controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
-                    controller.navbarModel.getIsButtonSoundEnabled(), controller.navbarModel.getIsMusicSoundEnabled());
-            controller.view.addComponentListener(controller);
-            controller.view.getGameBoardPanel().addMouseListener(controller);
-            controller.view.getGameBoardPanel().addMouseMotionListener(controller);
-            controller.initializeMenuListener();
-            controller.addWindowListener();
-            controller.updatePanelColors();
+        } else if (!controller.view.isDisplayable()) {
+            controller.gameModel.getGameType(gameType);
             controller.view.setVisible(true);
         }
+       
         return controller;
     }
 
-    private void initializeMenuListener() {
+    private void initializeListener() {
+        view.addComponentListener(this);
+        view.getGameBoardPanel().addMouseListener(this);
+        view.getGameBoardPanel().addMouseMotionListener(this);
         view.getNavigationBar().getNewGameItem().addActionListener(this);
         view.getNavigationBar().getSaveGameItem().addActionListener(this);
         view.getNavigationBar().getExitItem().addActionListener(this);
         view.getNavigationBar().getButtonSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getSoundMenuItem().addItemListener(this);
         view.getNavigationBar().getRulesItem().addActionListener(this);
-    }
-
-    public void updatePanelColors() {
-        String primaryColorStr = gameModel.getPrimaryColor();
-        String secondaryColorStr = gameModel.getSecondaryColor();
-
-        Color primaryColor = Color.decode(primaryColorStr);
-        Color secondaryColor = Color.decode(secondaryColorStr);
-
-        view.getGameBoardPanel().setColors(primaryColor, secondaryColor);
+        
+        view.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                new BtnSound("click", SettingController.getController()).actionPerformed(null);
+                navbarModel.exitGame(view.showConfirmExitDialog(), view);
+            }
+        });
     }
 
     // ComponentListener
@@ -81,6 +69,7 @@ public class GamePageController
     @Override
     public void componentShown(ComponentEvent e) {
         view.getGameStatusPanel().setStatus(gameModel.getMove(), gameModel.getTurn());
+        view.getGameBoardPanel().setColors(Color.decode(gameModel.getPrimaryColor()), Color.decode(gameModel.getSecondaryColor()));
     }
 
     // MouseListener
@@ -156,16 +145,6 @@ public class GamePageController
             default:
                 break;
         }
-    }
-
-    private void addWindowListener() {
-        view.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                new BtnSound("click", SettingController.getController()).actionPerformed(null);
-                navbarModel.exitGame(view.showConfirmExitDialog(), view);
-            }
-        });
     }
 
     // ItemListener

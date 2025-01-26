@@ -26,19 +26,27 @@ public class GameBoard
     private String primaryColor;
     private String secondaryColor;
 
-    public GameBoard(String gameType) 
+    public GameBoard() 
     {
+        // initialize the board
         board = new GamePiece[row][col];
-        if(gameType.equals("New Game")) {
+        
+        // differentiate the is it load game or new game
+        loadBoardColor();
+    }
+    
+    public void getGameType(String gameType)
+    {
+       if(gameType.equals("New Game")) {
             newGame();
         } else {
             loadGame();
-        }
-        loadBoardColor();
+        } 
     }
     
     public void newGame()
     {
+        // erase the board data
         for (GamePiece[] row : board) {
             Arrays.fill(row, null); 
         }
