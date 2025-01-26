@@ -319,6 +319,7 @@ public class SettingView {
         button.setForeground(Color.BLACK);
     }
 
+    
     public JButton getPrimaryColorButton() {
         return primaryColorButton;
     }

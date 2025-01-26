@@ -306,6 +306,7 @@ public class SettingController {
         return color.getRed() == 0 && color.getGreen() == 0 && color.getBlue() == 0;
     }
 
+    // Encapsulation
     public boolean getIsButtonSoundEnabled() {
         return SettingManager.isEnabledButtonSound();
     }

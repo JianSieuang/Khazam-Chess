@@ -100,6 +100,7 @@ public class SettingManager {
         }
     }
 
+    
     public static boolean isEnabledButtonSound() {
         return enabledButtonSound;
     }
