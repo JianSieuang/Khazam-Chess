@@ -48,32 +48,26 @@ public class GamePageView extends JFrame {
     }
 
     public void redrawBoard() {
+        // get the panel size
         width = GamePanel.getWidth();
         height = GamePanel.getHeight();
 
+        //  get the cell height and width
+        // i wanted to show a square cell, so will refer the smaller
         int widthSize = width / board[0].length;
         int heightSize = height / board.length;
-
+        // using math.min to get the smaller value
         int cellSize = Math.min(widthSize, heightSize);
 
+        // calculate the offset of the panal and the game board 
         int offsetX = (width - (board[0].length * cellSize)) / 2;
         int offsetY = (height - (board.length * cellSize)) / 2;
 
+        // update the info to the adapter (for click purpose)
         adapter.update(cellSize, offsetX, offsetY);
+        // update the info and redraw the board
         GamePanel.updateDimensions(cellSize, offsetX, offsetY);
         GamePanel.repaint();
-    }
-
-    public GameBoardPanel getGameBoardPanel() {
-        return GamePanel;
-    }
-
-    public NavigationBar getNavigationBar() {
-        return navbar;
-    }
-
-    public GameStatusPanel getGameStatusPanel() {
-        return statusPanel;
     }
 
     // dialog confirmation for exit game
@@ -99,5 +93,18 @@ public class GamePageView extends JFrame {
         tempFrame.dispose();
 
         return result;
+    }
+    
+    // Encapsulation below
+    public GameBoardPanel getGameBoardPanel() {
+        return GamePanel;
+    }
+
+    public NavigationBar getNavigationBar() {
+        return navbar;
+    }
+
+    public GameStatusPanel getGameStatusPanel() {
+        return statusPanel;
     }
 }
