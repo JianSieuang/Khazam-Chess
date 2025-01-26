@@ -13,19 +13,30 @@ public class HomePageView extends JFrame {
 
     // constructor for home page view
     public HomePageView() {
-        super("Kwazam Chess"); // set title
+        // set title
+        super("Kwazam Chess");
 
-        backgroundPanel = new BackgroundPanel("home_page"); // set background image
-        contentPanel = new ContentPanel(height, width); // set content panel size
-
-        backgroundPanel.add(contentPanel, BorderLayout.CENTER); // add content panel to background panel center
+        // set background image
+        backgroundPanel = new BackgroundPanel("home_page");
+        
+        // set content panel size
+        contentPanel = new ContentPanel(height, width);
+        
+        // add content panel to background panel center
+        backgroundPanel.add(contentPanel, BorderLayout.CENTER);
         add(backgroundPanel);
 
         setSize(height, width);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // center the frame
-        setVisible(true); // show the frame
-        setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set application icon
+        
+        // center the frame
+        setLocationRelativeTo(null);
+        
+        // show the frame
+        setVisible(true);
+        
+        // set application icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png"));
     }
 
     public ContentPanel getHomePanel() {

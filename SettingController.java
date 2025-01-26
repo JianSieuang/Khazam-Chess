@@ -10,15 +10,25 @@ import java.awt.event.WindowEvent;
  * control setting view and model
  */
 public class SettingController {
-    private static SettingController controller; // signleton design pattern, instance of SettingController
-    private SettingView view; // UI for setting page
+    // signleton design pattern, instance of SettingController
+    private static SettingController controller;
+    
+    // UI for setting page
+    private SettingView view;
 
     // constructor, to set up view, load setting, and initialize listeners
     private SettingController() {
-        this.view = new SettingView(this); // create new SettingView
-        AudioPlayer.setSettingController(this); // set setting controller for audio player
-        SettingManager.loadSetting(); // load setting from setting.txt
-        initializeListeners(); // initialize listeners for setting page
+        // create new SettingView
+        this.view = new SettingView(this);
+        
+        // set setting controller for audio player
+        AudioPlayer.setSettingController(this);
+        
+        // load setting from setting.txt
+        SettingManager.loadSetting();
+        
+        // initialize listeners for setting page
+        initializeListeners();
     }
 
     // Chong Jian Sieuang
@@ -32,26 +42,50 @@ public class SettingController {
 
     // navigate to setting page
     public void navigateToSettingPage(JFrame currentFrame) {
-        currentFrame.dispose(); // close the current page
-        view.updateButton(view.getButtonSoundButton(), SettingManager.isEnabledButtonSound()); // update button sound
-                                                                                               // button
-        view.updateButton(view.getMusicSoundButton(), SettingManager.isEnabledMusicSound()); // update music sound
-                                                                                             // button
-        view.showSetting(currentFrame); // display setting page
-        addWindowListener(); // handle window close action
+        // close the current page
+        currentFrame.dispose();
+        
+        // update button sound button
+        view.updateButton(view.getButtonSoundButton(), SettingManager.isEnabledButtonSound());
+        
+        // update music sound button
+        view.updateButton(view.getMusicSoundButton(), SettingManager.isEnabledMusicSound());
+        
+        // display setting page
+        view.showSetting(currentFrame);
+        
+        // handle window close action
+        addWindowListener();
     }
 
     // initialize listeners for setting page
     private void initializeListeners() {
-        view.getButtonSoundButton().addActionListener(createButtonSoundListener()); // button sound
-        view.getMusicSoundButton().addActionListener(createMusicSoundListener()); // music sound
-        view.getSaveSettingButton().addActionListener(createSaveSettingButtonListener()); // save as default setting
-        view.getPrimaryColorButton().addActionListener(createColorPickerListener(true)); // primary color picker
-        view.getSecondaryColorButton().addActionListener(createColorPickerListener(false)); // secondary color picker
-        view.getBackButton().addActionListener(e -> { // back button
-            view.getSettingFrame().dispose(); // get setting view to close setting page
-            new BtnSound("click", SettingController.this).actionPerformed(null); // play click sound
-            returnToLandingPage(); // return to landing page
+        // button sound
+        view.getButtonSoundButton().addActionListener(createButtonSoundListener());
+        
+        // music sound
+        view.getMusicSoundButton().addActionListener(createMusicSoundListener());
+        
+        // save as default setting
+        view.getSaveSettingButton().addActionListener(createSaveSettingButtonListener());
+        
+        // primary color picker
+        view.getPrimaryColorButton().addActionListener(createColorPickerListener(true));
+        
+        // secondary color picker
+        view.getSecondaryColorButton().addActionListener(createColorPickerListener(false));
+        
+        // back button
+        view.getBackButton().addActionListener(e -> {
+
+            // get setting view to close setting page
+            view.getSettingFrame().dispose();
+            
+            // play click sound
+            new BtnSound("click", SettingController.this).actionPerformed(null);
+            
+            // return to landing page
+            returnToLandingPage();
         });
 
         // add hover sound for all buttons
@@ -69,8 +103,12 @@ public class SettingController {
         return e -> {
             boolean newState = !SettingManager.isEnabledButtonSound();
             SettingManager.setEnabledButtonSound(newState);
-            view.updateButton(view.getButtonSoundButton(), newState); // update button sound button
-            SettingManager.saveSetting(); // call setting manager to save setting
+            
+            // update button sound button
+            view.updateButton(view.getButtonSoundButton(), newState);
+            
+            // call setting manager to save setting
+            SettingManager.saveSetting();
         };
     }
 
@@ -79,16 +117,23 @@ public class SettingController {
         return e -> {
             boolean newState = !SettingManager.isEnabledMusicSound();
             SettingManager.setEnabledMusicSound(newState);
-            view.updateButton(view.getMusicSoundButton(), newState); // update music sound button
+            
+            // update music sound button
+            view.updateButton(view.getMusicSoundButton(), newState);
 
             // play or stop background music
             if (newState) {
-                AudioPlayer.playBackgroundMusic(); // call audio player to play music
+
+                // call audio player to play music
+                AudioPlayer.playBackgroundMusic();
             } else {
-                AudioPlayer.stopBackgroundMusic(); // call audio player stop music
+
+                // call audio player stop music
+                AudioPlayer.stopBackgroundMusic();
             }
 
-            SettingManager.saveSetting(); // call setting manager to save setting
+            // call setting manager to save setting
+            SettingManager.saveSetting();
         };
     }
 
@@ -97,16 +142,22 @@ public class SettingController {
         return e -> {
             boolean newState = !SettingManager.isSaveSettingPermanently();
             SettingManager.setSaveSettingPermanently(newState);
+            
+            // update save setting button
+            view.updateButton(view.getSaveSettingButton(), newState);
 
-            view.updateButton(view.getSaveSettingButton(), newState); // update save setting button
-
-            new BtnSound("click", SettingController.this).actionPerformed(null); // play click sound
+            // play click sound
+            new BtnSound("click", SettingController.this).actionPerformed(null);
 
             // save file or delete file
             if (newState) {
-                SettingManager.saveSetting(); // call setitng manager to save setting
+                
+                // call setitng manager to save setting
+                SettingManager.saveSetting();
             } else {
-                SettingManager.deleteSettingFile(); // call setting manager to delete setting file
+                
+                // call setting manager to delete setting file
+                SettingManager.deleteSettingFile();
             }
         };
     }
@@ -114,20 +165,33 @@ public class SettingController {
     // add hover sound for button
     private void addHoverSound(JButton button) {
         button.addMouseListener(new MouseAdapter() {
+            
+            /*
+             * // when mouse entered, darken the color and play hover sound
+             * if condition isOn the butotn color be green else red
+             */
             @Override
-            public void mouseEntered(MouseEvent e) { // when mouse enter
+            public void mouseEntered(MouseEvent e) {
                 boolean isOn = button.getText().equals("ON");
-                button.setBackground(isOn ? new Color(144, 238, 144).darker() : new Color(240, 128, 128).darker()); // darken
-                                                                                                                    // color
+                
+                // darken color
+                button.setBackground(isOn ? new Color(144, 238, 144).darker() : new Color(240, 128, 128).darker());
                 button.setForeground(Color.WHITE);
-                new BtnSound("hover", SettingController.this).actionPerformed(null); // call button sound play sound
+
+                // call button sound play sound
+                new BtnSound("hover", SettingController.this).actionPerformed(null);
             }
 
+            /* 
+             * // when mouse exited, change the color back to normal
+             * if condition isOn the butotn color be green else red
+             */
             @Override
-            public void mouseExited(MouseEvent e) { // when mouse exit
+            public void mouseExited(MouseEvent e) {
                 boolean isOn = button.getText().equals("ON");
-                button.setBackground(isOn ? new Color(144, 238, 144) : new Color(240, 128, 128)); // change the color
-                                                                                                  // back to normal
+                
+                // change the color back to normal
+                button.setBackground(isOn ? new Color(144, 238, 144) : new Color(240, 128, 128));
                 button.setForeground(Color.BLACK);
             }
         });
@@ -141,9 +205,13 @@ public class SettingController {
                 Color currentColor = isPrimary ? getPrimaryColor() : getSecondaryColor();
 
                 if (isPureBlack(currentColor)) {
-                    button.setBackground(new Color(80, 80, 80)); // Gray if black
+                    
+                    // Gray if black
+                    button.setBackground(new Color(80, 80, 80));
                 } else {
-                    button.setBackground(currentColor.darker()); // Darken if not black
+                    
+                    // Darken if not black
+                    button.setBackground(currentColor.darker());
                 }
 
                 button.setForeground(Color.WHITE);
@@ -155,9 +223,13 @@ public class SettingController {
                 Color currentColor = isPrimary ? getPrimaryColor() : getSecondaryColor();
 
                 if (isPureBlack(currentColor)) {
-                    button.setBackground(new Color(0, 0, 0)); // Black if black
+                    
+                    // Black if black
+                    button.setBackground(new Color(0, 0, 0));
                 } else {
-                    button.setBackground(currentColor); // Original color if not black
+                    
+                    // Original color if not black
+                    button.setBackground(currentColor);
                 }
 
                 button.setForeground(Color.BLACK);
@@ -167,34 +239,64 @@ public class SettingController {
 
     // action listener for color picker
     private ActionListener createColorPickerListener(boolean isPrimary) {
-        new BtnSound("click", SettingController.this).actionPerformed(null); // play click sound
+        // play click sound
+        new BtnSound("click", SettingController.this).actionPerformed(null);
 
         return e -> {
-            Color initialColor = isPrimary ? SettingManager.getPrimaryColor() : SettingManager.getSecondaryColor(); // get initial color
-            Color newColor = JColorChooser.showDialog(view.getPrimaryColorButton(), "Choose a color", initialColor); // open color picker
+            // get initial color
+            Color initialColor = isPrimary ? SettingManager.getPrimaryColor() : SettingManager.getSecondaryColor();
+            
+            // open color picker
+            Color newColor = JColorChooser.showDialog(view.getPrimaryColorButton(), "Choose a color", initialColor);
+            
             // if have color, set the color
             if (newColor != null) {
-                if (isPrimary) { // set primary color
-                    SettingManager.setPrimaryColor(newColor); // call setting manager to set primary color
-                    view.getPrimaryColorButton().setBackground(newColor); // set primary color button background
+                
+                // set primary color
+                if (isPrimary) {
+                    
+                    // call setting manager to set primary color
+                    SettingManager.setPrimaryColor(newColor);
+                    
+                    // set primary color button background
+                    view.getPrimaryColorButton().setBackground(newColor);
                 } else {
-                    SettingManager.setSecondaryColor(newColor); // call setting manager to set secondary color
-                    view.getSecondaryColorButton().setBackground(newColor); // set secondary color button background
+                    
+                    // call setting manager to set secondary color
+                    SettingManager.setSecondaryColor(newColor);
+                    
+                    // set secondary color button background
+                    view.getSecondaryColorButton().setBackground(newColor);
                 }
-                SettingManager.saveSetting(); // call setting manager to save setting
+                // call setting manager to save setting
+                SettingManager.saveSetting();
             }
         };
     }
 
     // add window listener for setting page
     private void addWindowListener() {
-        JFrame settingsFrame = view.getSettingFrame(); // get setting frame
+        
+        // get setting frame
+        JFrame settingsFrame = view.getSettingFrame();
         settingsFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) { // when window is closing
-                new BtnSound("click", SettingController.this).actionPerformed(null); // play click sound
-                returnToLandingPage(); // return to landing page
-                settingsFrame.dispose(); // close setting page
+            /* 
+             * // when window closing, return to landing page
+             * play click sound
+             * return to landing page
+             * close setting page
+             */
+            @Override            
+            public void windowClosing(WindowEvent e) {
+                
+                // play click sound
+                new BtnSound("click", SettingController.this).actionPerformed(null);
+                
+                // return to landing page
+                returnToLandingPage();
+                
+                // close setting page
+                settingsFrame.dispose();
             }
         });
     }

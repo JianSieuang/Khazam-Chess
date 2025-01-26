@@ -28,10 +28,10 @@ public class GamePageView extends JFrame {
 
         setJMenuBar(navbar);
         add(panel);
-        
+
         GamePanel.setOpaque(false);
         statusPanel.setOpaque(false);
-        
+
         panel.setLayout(new BorderLayout());
         panel.add(GamePanel, BorderLayout.CENTER);
         panel.add(statusPanel, BorderLayout.WEST);
@@ -39,7 +39,9 @@ public class GamePageView extends JFrame {
         setMinimumSize(new Dimension(450, 450));
         setSize(width, height);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set application icon
+
+        // set application icon
+        setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png"));
 
         setLocationRelativeTo(null);
         redrawBoard();
@@ -76,10 +78,15 @@ public class GamePageView extends JFrame {
 
     // dialog confirmation for exit game
     public int showConfirmExitDialog() {
-        JFrame tempFrame = new JFrame(); // temporary frame as a parent for the dialog
+        // temporary frame as a parent for the dialog
+        JFrame tempFrame = new JFrame();
         tempFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        tempFrame.setUndecorated(true); // no UI for this frame
-        tempFrame.setVisible(false); // keep it invisible
+
+        // no UI for this frame
+        tempFrame.setUndecorated(true);
+
+        // keep it invisible
+        tempFrame.setVisible(false);
 
         int result = JOptionPane.showConfirmDialog(
                 tempFrame,
@@ -88,7 +95,8 @@ public class GamePageView extends JFrame {
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
 
-        tempFrame.dispose(); // dispose the temporary frame
+        // dispose the temporary frame
+        tempFrame.dispose();
 
         return result;
     }

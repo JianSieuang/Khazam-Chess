@@ -111,8 +111,11 @@ public class GamePageController
 
             // after the OK button is pressed, transition to the landing page
             SwingUtilities.invokeLater(() -> {
-                view.dispose(); // dispose of the current game window
-                HomePageController.getController(); // navigate to the landing page
+                // dispose of the current game window
+                view.dispose(); 
+
+                // navigate to the landing page
+                HomePageController.getController();
             });
         }
 
@@ -153,14 +156,22 @@ public class GamePageController
         }
     }
 
-    // ItemListener
+    /*
+     * ItemListener, handle the item state change event.
+     */
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == view.getNavigationBar().getButtonSoundMenuItem()) {
-            navbarModel.toogleButtonSound(); // Update button sound state
-            SettingManager.setEnabledButtonSound(navbarModel.getIsButtonSoundEnabled()); // sync the state
+            // Update button sound state
+            navbarModel.toogleButtonSound();
+
+            // sync the state
+            SettingManager.setEnabledButtonSound(navbarModel.getIsButtonSoundEnabled());
         } else if (e.getSource() == view.getNavigationBar().getSoundMenuItem()) {
-            navbarModel.toggleSound(); // Update music sound state
-            SettingManager.setEnabledMusicSound(navbarModel.getIsMusicSoundEnabled()); // sync the state
+            // update music sound state
+            navbarModel.toggleSound();
+
+            // sync the state
+            SettingManager.setEnabledMusicSound(navbarModel.getIsMusicSoundEnabled());
 
             if (navbarModel.getIsMusicSoundEnabled()) {
                 AudioPlayer.playBackgroundMusic();
@@ -168,7 +179,8 @@ public class GamePageController
                 AudioPlayer.stopBackgroundMusic();
             }
         }
-        SettingManager.saveSetting(); // save to setting.txt
+        // save to setting.txt
+        SettingManager.saveSetting();
 
         new BtnSound("click", SettingController.getController()).actionPerformed(null);
     }

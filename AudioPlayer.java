@@ -14,9 +14,14 @@ import java.util.Random;
  * settings.
  */
 public class AudioPlayer {
-    private static Clip currentClip; // keep track of the currently playing clip
-    private static final Random RANDOM = new Random(); // random number generator
-    private static SettingController settingController; // reference to the SettingController
+    // keep track of the currently playing clip
+    private static Clip currentClip;
+    
+    // random number generator
+    private static final Random RANDOM = new Random();
+
+    // reference to the SettingController
+    private static SettingController settingController;
 
     // array of 2 background music files
     private static final String[] MUSIC_FILES = {
@@ -24,10 +29,10 @@ public class AudioPlayer {
             "sources/background_music_2.wav"
     };
 
-    // registers the SettingController so the audio player can check if music is
-    // enabled.
+    // registers the SettingController so the audio player can check if music is enabled
     public static void setSettingController(SettingController controller) {
-        settingController = controller; // set the SettingController
+        // set the SettingController
+        settingController = controller; 
     }
 
     // play the background music
@@ -80,7 +85,9 @@ public class AudioPlayer {
         if (currentClip != null && currentClip.isRunning()) {
             currentClip.stop();
             currentClip.close();
-            currentClip = null; // clear clip
+            
+            // clear clip
+            currentClip = null;
         }
     }
 }
