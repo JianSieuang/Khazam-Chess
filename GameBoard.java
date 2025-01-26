@@ -57,6 +57,7 @@ public class GameBoard {
 
     private void initBoard() {
         // these are initialize data
+        winner = null;
         move = "Blue";
         turn = 0;
         board[0][0] = new TorPiece(0, 0, "Red");
