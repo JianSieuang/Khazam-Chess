@@ -11,8 +11,8 @@ public class GamePageController
     private int width = 600;
     private int height = 600;
 
-    private GamePageController(String gameType) {
-        gameModel = new GameBoard(gameType);
+    private GamePageController() {
+        gameModel = new GameBoard();
         navbarModel = new NavbarModel(gameModel);
         view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsButtonSoundEnabled(),
                 navbarModel.getIsMusicSoundEnabled());
@@ -26,11 +26,10 @@ public class GamePageController
         view.setVisible(true);
     }
 
-    public static GamePageController getController(String gameType) {
+    public static GamePageController getController() {
         if (controller == null) {
-            controller = new GamePageController(gameType);
+            controller = new GamePageController();
         } else if (controller.view == null || !controller.view.isDisplayable()) {
-            controller.gameModel = new GameBoard(gameType);
             controller.navbarModel = new NavbarModel(controller.gameModel);
             controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
                     controller.navbarModel.getIsButtonSoundEnabled(), controller.navbarModel.getIsMusicSoundEnabled());
@@ -116,7 +115,7 @@ public class GamePageController
 
             // after the OK button is pressed, transition to the landing page
             SwingUtilities.invokeLater(() -> {
-                getController("").view.dispose(); // dispose of the current game window
+                getController().view.dispose(); // dispose of the current game window
                 HomePageController.getController(); // navigate to the landing page
             });
         }
@@ -148,8 +147,7 @@ public class GamePageController
                 navbarModel.saveGame();
                 break;
             case "Exit":
-                checkConfirmExit(view.showConfirmExitDialog());
-
+                navbarModel.exitGame(view.showConfirmExitDialog(), view);
                 break;
             case "Rules":
                 view.getNavigationBar().showRulesDialog();
@@ -164,7 +162,7 @@ public class GamePageController
             @Override
             public void windowClosing(WindowEvent e) {
                 new BtnSound("click", SettingController.getController()).actionPerformed(null);
-                checkConfirmExit(view.showConfirmExitDialog());
+                navbarModel.exitGame(view.showConfirmExitDialog(), view);
             }
         });
     }
@@ -188,18 +186,8 @@ public class GamePageController
 
         new BtnSound("click", SettingController.getController()).actionPerformed(null);
     }
-
-    private void checkConfirmExit(int exitValue) {
-        new BtnSound("click", SettingController.getController()).actionPerformed(null);
-
-        if (exitValue != -1) {
-            if (exitValue == 0) {
-                navbarModel.saveGame();
-            }
-
-            view.dispose();
-            HomePageController.getController();
-            navbarModel.exitGame();
-        }
+    
+    public GameBoard getGameModel(){
+        return gameModel;
     }
 }

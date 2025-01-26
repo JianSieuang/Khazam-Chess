@@ -23,8 +23,17 @@ public class NavbarModel {
         gameBoard.saveGame();
     }
 
-    public void exitGame() {
+    public void exitGame(int exitValue, GamePageView view) {
+        new BtnSound("click", SettingController.getController()).actionPerformed(null);
 
+        if (exitValue != -1) {
+            if (exitValue == 0) {
+                this.saveGame();
+            }
+
+            view.dispose();
+            HomePageController.getController();
+        }
     }
 
     public void toogleButtonSound() {

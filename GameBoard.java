@@ -4,32 +4,32 @@ import java.util.Arrays;
 
 public class GameBoard
 {
+    // store gameboard size
     private int row = 8;
     private int col = 5;
     private GamePiece[][] board;
+    // store turn and move
     private static int turn;
     private String move;
+    // store winner
     private String winner;
-    
+    // store selected piece while click or drag
     private GamePiece selectedPiece;
     private int selectedRow = -1;
     private int selectedCol = -1;
     
+    // show the moveable and capturable steps for selected piece
     private int[][] moveableSteps;
     private int[][] capturableSteps;
     
+    // store board color
     private String primaryColor;
     private String secondaryColor;
 
-    public GameBoard(String gameType) 
+    public GameBoard() 
     {
         board = new GamePiece[row][col];
-        if(gameType.equals("New Game")) {
-            newGame();
-        } else {
-            loadGame();
-        }
-        loadBoardColor();
+        newGame();
     }
     
     public void newGame()
@@ -38,6 +38,7 @@ public class GameBoard
             Arrays.fill(row, null); 
         }
         initBoard();
+        loadBoardColor();
     }
     
     private void initBoard()
@@ -62,9 +63,7 @@ public class GameBoard
             board[6][i] = new RamPiece(6, i, "Blue");
         }
     }
-    
 
-    
     public void saveGame()
     {
         try (PrintWriter writer = new PrintWriter("game.txt")) 
@@ -158,10 +157,11 @@ public class GameBoard
         {
             e.printStackTrace();
         }
+        loadBoardColor();
     }
     
     private void loadBoardColor()
-    {  
+    {
         try (BufferedReader reader = new BufferedReader(new FileReader("setting.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {

@@ -46,7 +46,8 @@ public class HomePageController {
                 if (value != -1) {
                     if (value == 0) {
                         view.dispose();
-                        gameController = GamePageController.getController("New Game");
+                        gameController = GamePageController.getController();
+                        gameController.getGameModel().newGame();
                     }
                 }
             }
@@ -58,7 +59,8 @@ public class HomePageController {
             public void actionPerformed(ActionEvent e) {
                 if (new File("game.txt").exists()) {
                     view.dispose();
-                    gameController = GamePageController.getController("load Game");
+                    gameController = GamePageController.getController();
+                    gameController.getGameModel().loadGame();
                 } else {
                     view.showLoadGameErrorDialog();
                 }
