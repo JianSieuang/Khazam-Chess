@@ -328,6 +328,14 @@ public class GameBoard {
                                     file.delete();
                                 }
                             }
+                            
+                            // this is reach the end for the ram piece
+                            if(selectedPiece instanceof RamPiece && (r == 0 || r == 7))
+                            {
+                                // inside update position has flip the piece
+                                // so it i will flip and go another side
+                                selectedPiece.updatePosition(r,c);
+                            }
                             //replace the piece with selected piece
                             board[r][c] = selectedPiece;
                             // remove the selected piece from original place
@@ -345,6 +353,13 @@ public class GameBoard {
                     for (int i = 0; i < moveableSteps.length; i++) {
                         // check all moveavle step to determine is valid or not
                         if (moveableSteps[i][0] == r && moveableSteps[i][1] == c) {
+                            // this is reach the end for the ram piece
+                            if(selectedPiece instanceof RamPiece && (r == 0 || r == 7))
+                            {
+                                // inside update position has flip the piece
+                                // so it i will flip and go another side
+                                selectedPiece.updatePosition(r,c);
+                            }
                             //replace the piece with selected piece
                             board[r][c] = selectedPiece;
                             // remove the selected piece from original place

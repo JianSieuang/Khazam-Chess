@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * it can also flip its orientation when it reaches the end of the board.
  */
 class RamPiece extends GamePiece {
-    private boolean updated = false;
-
     public RamPiece(int r, int c, String player) {
         // use ArrayList to store multiple iamge string (not every piece have a same
         // quantity of picture)
@@ -91,21 +89,5 @@ class RamPiece extends GamePiece {
         this.col = c;
         // change the image
         this.currentImage = this.currentImage == 0 ? 1 : 0;
-        // check if is reach the end of the board
-        reachTheEndCheck();
-    }
-
-    private void reachTheEndCheck() {
-        // if reach the end, using change current image to show is turning back
-        // why i need updated, because ram piece will turning itself every turn if ram
-        // piece still at the end of the board
-        // so updated is for make sure that ram piece turn around one time, even not
-        // moving ram piece
-        if ((row == 7 || row == 0) && !updated) {
-            this.currentImage = this.currentImage == 0 ? 1 : 0;
-            updated = true;
-        } else if (row < 7 && row > 0) {
-            updated = false;
-        }
     }
 }
