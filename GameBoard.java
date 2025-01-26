@@ -362,7 +362,7 @@ public class GameBoard {
         return false;
     }
 
-    // all encapsulation below
+    // all Encapsulation below
     public String getWinner() {
         return winner;
     }

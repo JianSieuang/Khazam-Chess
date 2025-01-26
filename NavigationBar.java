@@ -169,6 +169,7 @@ public class NavigationBar extends JMenuBar {
         return new ImageIcon(resizedImage);
     }
 
+    // All Encapsulation below
     public JMenuItem getNewGameItem() {
         return newGameItem;
     }

@@ -9,14 +9,18 @@ public class GameStatusPanel extends JPanel {
     private JLabel turnLabel;
 
     public GameStatusPanel() {
+        // using box layout rather than using gridlayout, cus gridlayout does not look nice
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        // labels
         playerLabel = new JLabel("Player move: Blue");
         turnLabel = new JLabel("Turn: 0");
 
+        // add labels in the panel
         add(playerLabel);
         add(turnLabel);
     }
 
+    // set the status
     public void setStatus(String move, int turn) {
         turn++;
         playerLabel.setText("Player move: " + move);
