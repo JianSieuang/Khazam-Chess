@@ -26,9 +26,6 @@ public class SettingController {
     public static SettingController getController() {
         if (controller == null) {
             controller = new SettingController();
-        } else {
-            controller.view = new SettingView(controller);
-            controller.initializeListeners();
         }
         return controller;
     }
@@ -173,13 +170,8 @@ public class SettingController {
         new BtnSound("click", SettingController.this).actionPerformed(null); // play click sound
 
         return e -> {
-            Color initialColor = isPrimary ? SettingManager.getPrimaryColor() : SettingManager.getSecondaryColor(); // get
-                                                                                                                    // initial
-                                                                                                                    // color
-            Color newColor = JColorChooser.showDialog(view.getPrimaryColorButton(), "Choose a color", initialColor); // open
-                                                                                                                     // color
-                                                                                                                     // picker
-
+            Color initialColor = isPrimary ? SettingManager.getPrimaryColor() : SettingManager.getSecondaryColor(); // get initial color
+            Color newColor = JColorChooser.showDialog(view.getPrimaryColorButton(), "Choose a color", initialColor); // open color picker
             // if have color, set the color
             if (newColor != null) {
                 if (isPrimary) { // set primary color

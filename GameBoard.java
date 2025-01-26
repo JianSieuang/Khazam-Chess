@@ -32,12 +32,10 @@ public class GameBoard {
     public GameBoard() {
         // initialize the board
         board = new GamePiece[row][col];
-
-        // differentiate the is it load game or new game
-        loadBoardColor();
     }
 
     public void getGameType(String gameType) {
+        // differentiate the is it load game or new game
         if (gameType.equals("New Game")) {
             newGame();
         } else {
@@ -51,6 +49,7 @@ public class GameBoard {
             Arrays.fill(row, null);
         }
         initBoard();
+        loadBoardColor();
     }
 
     private void initBoard() {
@@ -148,6 +147,7 @@ public class GameBoard {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        loadBoardColor();
     }
 
     private void loadBoardColor() {

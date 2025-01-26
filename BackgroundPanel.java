@@ -33,9 +33,7 @@ public class BackgroundPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // call super paint component ro ensure the proper rendering
-        BufferedImage backgroundImage = BackgroundImage.getImageByIndex(imageIndex, pageType); // get the background
-                                                                                               // image based on the
-                                                                                               // index and page type
+        BufferedImage backgroundImage = BackgroundImage.getImageByIndex(imageIndex, pageType); // get the background image based on the index and page type
 
         // if the background image is not null then draw the image
         if (backgroundImage != null) {
