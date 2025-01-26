@@ -26,10 +26,15 @@ public class GameBoard
     private String primaryColor;
     private String secondaryColor;
 
-    public GameBoard() 
+    public GameBoard(String gameType) 
     {
         board = new GamePiece[row][col];
-        newGame();
+        if(gameType.equals("New Game")) {
+            newGame();
+        } else {
+            loadGame();
+        }
+        loadBoardColor();
     }
     
     public void newGame()
@@ -38,7 +43,6 @@ public class GameBoard
             Arrays.fill(row, null); 
         }
         initBoard();
-        loadBoardColor();
     }
     
     private void initBoard()
@@ -157,11 +161,10 @@ public class GameBoard
         {
             e.printStackTrace();
         }
-        loadBoardColor();
     }
     
     private void loadBoardColor()
-    {
+    {  
         try (BufferedReader reader = new BufferedReader(new FileReader("setting.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {

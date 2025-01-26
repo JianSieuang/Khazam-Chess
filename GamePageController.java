@@ -11,8 +11,8 @@ public class GamePageController
     private int width = 600;
     private int height = 600;
 
-    private GamePageController() {
-        gameModel = new GameBoard();
+    private GamePageController(String gameType) {
+        gameModel = new GameBoard(gameType);
         navbarModel = new NavbarModel(gameModel);
         view = new GamePageView(gameModel.getBoard(), width, height, navbarModel.getIsButtonSoundEnabled(),
                 navbarModel.getIsMusicSoundEnabled());
@@ -26,10 +26,11 @@ public class GamePageController
         view.setVisible(true);
     }
 
-    public static GamePageController getController() {
+    public static GamePageController getController(String gameType) {
         if (controller == null) {
-            controller = new GamePageController();
+            controller = new GamePageController(gameType);
         } else if (controller.view == null || !controller.view.isDisplayable()) {
+            controller.gameModel = new GameBoard(gameType);
             controller.navbarModel = new NavbarModel(controller.gameModel);
             controller.view = new GamePageView(controller.gameModel.getBoard(), controller.width, controller.height,
                     controller.navbarModel.getIsButtonSoundEnabled(), controller.navbarModel.getIsMusicSoundEnabled());
@@ -115,7 +116,7 @@ public class GamePageController
 
             // after the OK button is pressed, transition to the landing page
             SwingUtilities.invokeLater(() -> {
-                getController().view.dispose(); // dispose of the current game window
+                view.dispose(); // dispose of the current game window
                 HomePageController.getController(); // navigate to the landing page
             });
         }
@@ -185,9 +186,5 @@ public class GamePageController
         SettingManager.saveSetting(); // save to setting.txt
 
         new BtnSound("click", SettingController.getController()).actionPerformed(null);
-    }
-    
-    public GameBoard getGameModel(){
-        return gameModel;
     }
 }
