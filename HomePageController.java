@@ -40,8 +40,7 @@ public class HomePageController {
         if (controller == null) {
             controller = new HomePageController();
         } else {
-            controller.view = new HomePageView();
-            controller.initializeListeners();
+            controller.view.setVisible(true);
         }
         return controller;
     }
@@ -80,7 +79,6 @@ public class HomePageController {
                 if (new File("game.txt").exists()) {
                     view.dispose(); // close the home page
                     GamePageController.getController("Load Game"); // load game
-
                 } else {
                     view.showLoadGameErrorDialog(); // show error dialog
                 }
