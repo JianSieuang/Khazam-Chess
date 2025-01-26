@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+// Lew Kien Yew
 /* 
  * model class for the nevigation bar in the gamem responsible to manage setting
  * game action (new game, save game, exit game) and sound setting

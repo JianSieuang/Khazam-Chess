@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.awt.event.MouseAdapter;
 
+// Sim Boon Xun
 /* 
  * controller for home page, responsible for manage interaction between view and model
  * from the home page to other part of the application

@@ -1,5 +1,6 @@
 import javax.swing.*;
 
+// Chong Jian Sieuang
 /*
  * View, for game status panel.
  * displays the current player's turn and the total number of turns taken in the game

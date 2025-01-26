@@ -6,8 +6,17 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+// Lew Kien Yew
 /*
  * control setting view and model
+ * implement singleton design pattern
+ * manage interaction between setting view (UI) and setting model (SettingManager)
+ * handle setting page navigation and setting changes
+ * pass setting changes to SettingManager to save setting
+ * get data from setting manager to other othe class
+ * - btnsound -> manage button sound based on the setting manager (button sound value)
+ * - audio player -> manage background music based on the setting manager (music sound value) 
+ * - primary & secondary color -> get the value from setting manager and send to setting view
  */
 public class SettingController {
     // signleton design pattern, instance of SettingController
@@ -167,7 +176,7 @@ public class SettingController {
         button.addMouseListener(new MouseAdapter() {
             
             /*
-             * // when mouse entered, darken the color and play hover sound
+             * when mouse entered, darken the color and play hover sound
              * if condition isOn the butotn color be green else red
              */
             @Override
@@ -183,7 +192,7 @@ public class SettingController {
             }
 
             /* 
-             * // when mouse exited, change the color back to normal
+             * when mouse exited, change the color back to normal
              * if condition isOn the butotn color be green else red
              */
             @Override
@@ -281,7 +290,7 @@ public class SettingController {
         JFrame settingsFrame = view.getSettingFrame();
         settingsFrame.addWindowListener(new WindowAdapter() {
             /* 
-             * // when window closing, return to landing page
+             * when window closing, return to landing page
              * play click sound
              * return to landing page
              * close setting page

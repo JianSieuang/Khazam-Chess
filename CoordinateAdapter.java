@@ -1,3 +1,4 @@
+// Chong Jian Sieuang
 /**
  * Adapter, it is responsible for converting screen (pixel) coordinates
  * to 2D array grid coordinates (row, column). This is useful in applications like

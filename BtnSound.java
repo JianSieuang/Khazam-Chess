@@ -1,5 +1,6 @@
 import java.awt.event.*;
 
+// Lew Kien Yew
 /*
  * class to handle button sound effect for hover and click function
  */
@@ -40,8 +41,9 @@ public class BtnSound implements ActionListener {
         try {
             // load sound file
             java.io.File soundFile = new java.io.File(filePath);
-            javax.sound.sampled.AudioInputStream audioStream = javax.sound.sampled.AudioSystem
-                    .getAudioInputStream(soundFile);
+
+            // create audio stream object from the sound file path
+            javax.sound.sampled.AudioInputStream audioStream = javax.sound.sampled.AudioSystem.getAudioInputStream(soundFile);
 
             // create clip object
             javax.sound.sampled.Clip clip = javax.sound.sampled.AudioSystem.getClip();

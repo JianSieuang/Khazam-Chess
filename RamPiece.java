@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+// Chong Jian Sieuang
 /*
  * Model, Ram piece can move forward or backward only (depending on its current image state).
  * it can also flip its orientation when it reaches the end of the board.

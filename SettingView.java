@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Lew Kien Yew
 /*
  * view class for the setting page
+ * handle UI and layout for the setting page, include buttons, labels, and color picker
  */
 public class SettingView {
     // main frame

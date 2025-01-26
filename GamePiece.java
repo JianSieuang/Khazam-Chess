@@ -2,6 +2,13 @@ import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
+// Chong Jian Sieuang
+/*
+ * Abstract class, represent the game piece
+ * store the position, player, and image of the piece
+ * provide the method to get the image, player, and piece name
+ * provide the abstract method for move and capture for different piece
+ */
 abstract class GamePiece {
     protected int row;
     protected int col;

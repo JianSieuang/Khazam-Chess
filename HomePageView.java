@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Sim Boon Xun
 /* 
  * View, reperesent the home page view
  * this class extend JFrame and include UI component (background panel, content panel, and dialogs)

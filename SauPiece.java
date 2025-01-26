@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// Chong Jian Sieuang
 /*
  * Model, Sau piece can move or capture one step in any direction.
  * also supports flipping its orientation to show different images based on the current state.

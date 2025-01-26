@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Arrays;
 
+// Chong Jian Sieuang
 /*
  * Model, manage the game board
  * handles game initialization, piece movement, saving/loading game state and determining the winner.
