@@ -62,9 +62,8 @@ class SauPiece extends GamePiece {
                     continue;
                 r = row + i;
                 c = col + ii;
-
                 // check is in the board or not
-                if (r >= 0 && r < 8 && c >= 0 && c < 8) {
+                if (r >= 0 && r < 8 && c >= 0 && c < 5) {
                     // this is moveable, so only for empty space then store the position that can
                     // move
                     if (board[r][c] == null) {
@@ -107,7 +106,7 @@ class SauPiece extends GamePiece {
                 c = col + ii;
 
                 // check is in the board or not
-                if (r >= 0 && r < 8 && c >= 0 && c < 8) {
+                if (r >= 0 && r < 8 && c >= 0 && c < 5) {
                     // this is capturable, so need to make sure that have piece and is another side
                     // piece
                     // != null is make sure that have a piece
