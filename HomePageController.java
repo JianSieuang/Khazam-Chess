@@ -118,13 +118,13 @@ public class HomePageController {
             }
 
             @Override
-            public void mouseExited(MouseEvent e) { // mouse exit from the button
+            public void mouseExited(MouseEvent e) { 
+                // mouse exit from the button
                 button.setBackground(button.getBackground().brighter()); // button background be brighter when exit
                 button.setForeground(Color.BLACK); // text be back color back when the mouse exit the button
             }
         });
 
-        button.addActionListener(e -> new BtnSound("click", settingController).actionPerformed(null)); // play click
-                                                                                                       // sound
+        button.addActionListener(e -> new BtnSound("click", settingController).actionPerformed(null)); // play click sound
     }
 }
