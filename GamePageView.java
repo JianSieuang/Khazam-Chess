@@ -16,16 +16,21 @@ public class GamePageView extends JFrame {
         this.width = w;
         this.height = h;
 
+        BackgroundPanel panel = new BackgroundPanel("setting_page");
         adapter = new CoordinateAdapter();
         navbar = new NavigationBar(initialSoundState, initialMusicState);
         GamePanel = new GameBoardPanel(board);
         statusPanel = new GameStatusPanel();
 
-        setLayout(new BorderLayout());
         setJMenuBar(navbar);
-
-        add(GamePanel, BorderLayout.CENTER);
-        add(statusPanel, BorderLayout.WEST);
+        add(panel);
+        
+        GamePanel.setOpaque(false);
+        statusPanel.setOpaque(false);
+        
+        panel.setLayout(new BorderLayout());
+        panel.add(GamePanel, BorderLayout.CENTER);
+        panel.add(statusPanel, BorderLayout.WEST);
 
         setMinimumSize(new Dimension(450, 450));
         setSize(width, height);

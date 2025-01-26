@@ -17,7 +17,11 @@ public class BackgroundImage {
             "Picture/setting_page_bg_image_1.png",
             "Picture/setting_page_bg_image_2.png",
     };
-
+    
+    private static final String[] gameImagePaths = {
+            "Picture/landing_page_bg_image_1.png",
+            "Picture/landing_page_bg_image_2.png",
+    };
     // get image by index
     // index = index of the image to retrieve.
     // pageType = type of page ("home_page", "setting_page") to determine which set
@@ -29,6 +33,7 @@ public class BackgroundImage {
         String[] imagePaths = switch (pageType.toLowerCase()) {
             case "home_page" -> landingImagePaths; // use landing page images
             case "setting_page" -> settingImagePaths; // use setting page images
+            case "game_page" -> gameImagePaths;
             default -> landingImagePaths; // default to landing page images
         };
 
