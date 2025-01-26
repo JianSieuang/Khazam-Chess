@@ -27,7 +27,7 @@ public class NavigationBar extends JMenuBar {
         soundMenuItem = new JCheckBoxMenuItem("Sound");
         soundMenuItem.setState(initialSoundState); // set initialSoundState for sound
         musicMenuItem = new JCheckBoxMenuItem("Music");
-        musicMenuItem.setState(initialMusicState); // set initialMusicState for music 
+        musicMenuItem.setState(initialMusicState); // set initialMusicState for music
         rulesItem = new JMenuItem("Rules");
 
         // add item to menu
@@ -51,7 +51,9 @@ public class NavigationBar extends JMenuBar {
         rulesDialog.setSize(400, 550); // set dialog size
         rulesDialog.setLocationRelativeTo(null); // center the dialog
         rulesDialog.setModal(true);
-        rulesDialog.setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set application icon
+        rulesDialog.setIconImage(Toolkit.getDefaultToolkit().getImage("Picture/application_icon.png")); // set
+                                                                                                        // application
+                                                                                                        // icon
         rulesDialog.setResizable(false); // disable resize
 
         JPanel rulesPanel = new JPanel();
