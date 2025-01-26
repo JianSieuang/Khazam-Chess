@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/*
+ * Model, Ram piece can move forward or backward only (depending on its current image state).
+ * it can also flip its orientation when it reaches the end of the board.
+ */
 class RamPiece extends GamePiece {
     private boolean updated = false;
 

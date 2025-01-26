@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Arrays;
 
+/*
+ * Model, manage the game board
+ * handles game initialization, piece movement, saving/loading game state and determining the winner.
+ */
 public class GameBoard {
     // store gameboard size
     private int row = 8;

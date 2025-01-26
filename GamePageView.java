@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+/* 
+ * View, represents the main user interface for the game, including the game board,
+ * navigation bar, and game status panel.
+ */
 public class GamePageView extends JFrame {
     private GamePiece[][] board;
     private int width;

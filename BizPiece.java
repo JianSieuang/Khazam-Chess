@@ -1,6 +1,10 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+/* 
+ * Model, this piece move in 'L’ shape, similiar to be a knight in chess
+ * can both move and capture pieces with movement pattern
+ */
 class BizPiece extends GamePiece {
     public BizPiece(int r, int c, String player) {
         // use ArrayList to store multiple iamge string (not every piece have a same

@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+/*
+ * View,displaying the game board.
+ * handles visual representation of the board, pieces, and possible moves.
+ */
 public class GameBoardPanel extends JPanel {
     private GamePiece[][] board;
     private int cellSize;

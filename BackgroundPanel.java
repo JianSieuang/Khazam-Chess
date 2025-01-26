@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /*
- * custom JPanel to displaye the background image with change in accordingly to the timer
+ * View, custom JPanel to displaye the background image with change in accordingly to the timer
  */
 public class BackgroundPanel extends JPanel {
     private int imageIndex = 0; // track current backgroumnd image index

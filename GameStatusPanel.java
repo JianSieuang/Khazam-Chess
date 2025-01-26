@@ -1,5 +1,9 @@
 import javax.swing.*;
 
+/*
+ * View, for game status panel.
+ * displays the current player's turn and the total number of turns taken in the game
+ */
 public class GameStatusPanel extends JPanel {
     private JLabel playerLabel;
     private JLabel turnLabel;

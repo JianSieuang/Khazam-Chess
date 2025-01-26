@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+/*
+ * Model, this class is to manage the xor piece
+ */
 class XorPiece extends GamePiece {
     public XorPiece(int r, int c, String player) {
         // use ArrayList to store multiple iamge string (not every piece have a same

@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+/* 
+ * Model, reporesent the Tor piece in game
+ */
 class TorPiece extends GamePiece {
     public TorPiece(int r, int c, String player) {
         // use ArrayList to store multiple iamge string (not every piece have a same

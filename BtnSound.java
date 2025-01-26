@@ -4,8 +4,11 @@ import java.awt.event.*;
  * class to handle button sound effect for hover and click function
  */
 public class BtnSound implements ActionListener {
-    private String actionType; // action type ("hover", "click")
-    private SettingController settingController; // controller to check if button sound is enabled
+    // action type ("hover", "click")
+    private String actionType;
+    
+    // controller to check if button sound is enabled
+    private SettingController settingController;
 
     /*
      * constructor for button sound
@@ -43,10 +46,14 @@ public class BtnSound implements ActionListener {
             // create clip object
             javax.sound.sampled.Clip clip = javax.sound.sampled.AudioSystem.getClip();
 
-            clip.open(audioStream); // open the audio stream
-            clip.start(); // start play the sound
+            // open the audio stream
+            clip.open(audioStream);
+             
+            // start play the sound
+            clip.start();
         } catch (Exception ex) {
-            ex.printStackTrace(); // print error message
+            // print error message
+            ex.printStackTrace(); 
         }
     }
 }

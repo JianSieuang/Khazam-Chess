@@ -1,12 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 
+/* 
+ * View, reperesent the home page view
+ * this class extend JFrame and include UI component (background panel, content panel, and dialogs)
+ */
 public class HomePageView extends JFrame {
     private ContentPanel contentPanel;
     private BackgroundPanel backgroundPanel;
     private int height = 600;
     private int width = 600;
 
+    // constructor for home page view
     public HomePageView() {
         super("Kwazam Chess"); // set title
 

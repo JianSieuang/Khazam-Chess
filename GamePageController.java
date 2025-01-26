@@ -2,6 +2,10 @@ import java.awt.event.*;
 import javax.swing.SwingUtilities;
 import java.awt.Color;
 
+/* 
+ * Controller, manage the game page.
+ * handle interactions between the game model (GameBoard) and the view (GamePageView).
+ */
 public class GamePageController
         implements ComponentListener, MouseListener, MouseMotionListener, ActionListener, ItemListener {
     private static GamePageController controller;

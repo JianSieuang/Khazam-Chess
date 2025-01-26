@@ -1,6 +1,10 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
+/*
+ * Model, Sau piece can move or capture one step in any direction.
+ * also supports flipping its orientation to show different images based on the current state.
+ */
 class SauPiece extends GamePiece {
     public SauPiece(int r, int c, String player) {
         // use ArrayList to store multiple iamge string (not every piece have a same
