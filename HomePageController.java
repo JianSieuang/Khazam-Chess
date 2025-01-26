@@ -152,6 +152,16 @@ public class HomePageController {
                 new BtnSound("hover", settingController).actionPerformed(null);
             }
 
+            // mouse release the button
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // button backgorund be darker when realease
+                button.setBackground(button.getBackground().brighter());
+                
+                // button text be black when release
+                button.setForeground(Color.BLACK);
+            }
+
             // mouse exit from the button
             @Override
             public void mouseExited(MouseEvent e) { 

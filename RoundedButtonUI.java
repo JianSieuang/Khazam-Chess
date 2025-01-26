@@ -22,12 +22,12 @@ public class RoundedButtonUI extends BasicButtonUI {
         
         // use a darker color to shot the button is pressed
         g2.setColor(b.getBackground().darker());
-        
+
         // draw a rounded retangle
         g2.fillRoundRect(0, 0, b.getWidth(), b.getHeight(), BORDER_RADIUS, BORDER_RADIUS);
     }
 
-    /* paint the button in notmal state */
+    /* paint the button in normal state */
     @Override
     public void paint(Graphics g, JComponent c) {
         // convert to Graphics2D for better control over drawing
