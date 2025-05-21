@@ -1,24 +1,16 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all they need to know. The comments should usually include at least:
-------------------------------------------------------------------------
+# Kwazam Chess
+- PURPOSE OF PROJECT: OOAD Assignment
+- VERSION or DATE: January 26, 2025 
+- AUTHORS: Chong Jian Sieuang, Lew Kien Yew (Cresswell)
 
-PROJECT TITLE:Kwazam Chess
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS: Player 1 , Player 2
-USER INSTRUCTIONS:
-
-MVC Breakdown
-Model
+## MVC Breakdown
+### Model
 - GameBoard
 - GamePiece and its subclasses: BizPiece, SauPiece, RamPiece, TorPiece, XorPiece
 - NavbarModel
 - SettingManager
 
-View
+### View
 - GamePageView
 - HomePageView
 - SettingView
@@ -27,7 +19,7 @@ View
 - GameBoardPanel
 - GameStatusPanel
 
-Controller
+### Controller
 - GamePageController
 - HomePageController
 - SettingController
